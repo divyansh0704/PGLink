@@ -17,44 +17,49 @@ const Home = ({ setShowLogin }) => {
   const [allLoaded, setAllLoaded] = useState(false);
 
 
-  // useEffect(() => {
-  //   API.get('/pgs')
-  //     .then(res => {
-  //       setPgList(res.data);
-  //       setFilteredPgs(res.data);
-
-  //     })
-  //     .catch(err => console.error("PG fetch error", err));
-
-  //   API.get('/users/me') // this hits the protected route
-  //     .then(res => setUser(res.data))
-  //     .catch(err => console.error("User fetch error", err));
-
-  // }, [])
+ 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
 
-    API.get('/pgs/limited')
+      API.get('/pgs/limited')
+        .then(res => {
+          // console.log("First PG city:", res.data[0]?.city);
+          setPgList(res.data);
+          setFilteredPgs(res.data);
+          setAllLoaded(false);
+        })
+        .catch(err => console.error("PG fetch error", err));
+
+      API.get('/users/me')
+        .then(res => setUser(res.data))
+        .catch(err => console.error("User fetch error", err));
+
+
+      API.get('/pgs/all')
+        .then(res => {
+          setPgList(res.data);
+          //  setAllLoaded(true); 
+        })
+        .catch(err => console.error("All PGs fetch error", err));
+
+    }else{
+      fetchPGs();
+    }
+
+
+  }, []);
+  const fetchPGs = () => {
+
+    API.get('/pgs/')
       .then(res => {
-        // console.log("First PG city:", res.data[0]?.city);
         setPgList(res.data);
         setFilteredPgs(res.data);
         setAllLoaded(false);
       })
       .catch(err => console.error("PG fetch error", err));
 
-    API.get('/users/me')
-      .then(res => setUser(res.data))
-      .catch(err => console.error("User fetch error", err));
-
-
-    API.get('/pgs/all')
-      .then(res => {
-        setPgList(res.data);
-        //  setAllLoaded(true); 
-      })
-      .catch(err => console.error("All PGs fetch error", err));
-  }, []);
-
+  }
   const fetchAllPGs = () => {
     API.get('/pgs/all')
       .then(res => {
@@ -65,32 +70,7 @@ const Home = ({ setShowLogin }) => {
       .catch(err => console.error("Fetch all PGs error", err));
   };
 
-  //   const handleTogglePGs = () => {
-  //   if (!allLoaded) {
-  //     // Save scroll position before expanding
-  //     setScrollY(window.scrollY);
-
-  //     API.get('/pgs/all')
-  //       .then(res => {
-  //         setPgList(res.data);
-  //         setFilteredPgs(res.data);
-  //         setAllLoaded(true);
-  //       })
-  //       .catch(err => console.error("Fetch all PGs error", err));
-  //   } else {
-  //     // Collapse back to 12 PGs and scroll to old position
-  //     API.get('/pgs/limited')
-  //       .then(res => {
-  //         setPgList(res.data);
-  //         setFilteredPgs(res.data);
-  //         setAllLoaded(false);
-  //         setTimeout(() => {
-  //           window.scrollTo({ top: scrollY, behavior: 'smooth' });
-  //         }, 100);
-  //       })
-  //       .catch(err => console.error("Fetch limited PGs error", err));
-  //   }
-  // };
+  
 
 
 
