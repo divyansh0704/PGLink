@@ -1,0 +1,392 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  padding: 0.2rem 1rem;
+}
+
+/* .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: white;
+  
+} */
+
+.navbar {
+  background-color: var(--primary-bg);
+  padding: 1rem;
+  color: var(--primary-text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--button-text);
+  transition: margin-left 0.3s ease;
+
+  /* position: relative; */
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* subscribe  */
+
+#subscribeBtn {
+  background: linear-gradient(135deg, #20c997, #17a2b8); /* Teal shades */
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 128, 128, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#subscribeBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 128, 128, 0.5);
+}
+
+#subscribeBtn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 128, 128, 0.3);
+}
+
+
+
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 20;
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  color: var(--primary-text);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* sidebar */
+
+.main-content {
+  transition: margin-left 0.3s ease;
+  margin-left: 50px;
+  /* collapsed default */
+}
+
+.main-content.shifted {
+  margin-left: 200px;
+  /* when sidebar open */
+}
+
+
+
+.navbar.shifted {
+  margin-left: 10px;
+}
+
+@media (max-width:600px) {
+
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 1rem;
+    width: 45%;
+    max-width: 200px;
+    background-color: var(--primary-bg);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+
+  .nav-links.open {
+    display: flex;
+
+  }
+
+
+  .nav-links a {
+    padding: 0.5rem 0;
+    width: 100%;
+    color: var(--button-text);
+  }
+}
+
+
+.pg-card {
+  background-color: var(--primary-bg);
+  border: 1px solid var(--button-text);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: top 0.2s ease;
+  width: 92%;
+  max-width: 50vw;
+}
+
+.pg-card:hover {
+  transform: translateY(-4px);
+}
+.show-rect{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 3rem;
+}
+.btn-show-all {
+  background-color: var(--accenter-color);
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-show-all:hover {
+  background-color: var(--button-bg);
+  /* transform: scale(1.05);  */
+}
+
+
+
+.pg-card img {
+  width: 100%;
+  height: 200px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  object-position: center 45%;
+}
+
+.pg-listing-container {
+  /* display: flex; */
+  /* flex-wrap: wrap;
+  justify-content: center; */
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem; */
+}
+
+
+
+.pg-card h3 {
+  font-size: 1.88rem;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pg-card p {
+  font-size: 0.9rem;
+  margin: 4px 0;
+  color: var(--small-text);
+
+
+}
+
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.amenities span {
+  background-color: var(--blur-bg);
+  color: var(--primary-text);
+  padding: 4px 8px;
+  margin-right: 5px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+}
+
+.phone-emoji {
+  color: #024e4e;
+}
+
+.pg-card .amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  height: 4rem;
+}
+
+.pg-card .amenity {
+  background-color: var(--blur-bg);
+  color: var(--some-text);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 1.6rem;
+}
+
+.contact-box {
+  margin-top: 1rem;
+
+  background-color: #e5f0ee;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.contact {
+  font-weight: bold;
+}
+
+.unlock-actions {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.unlock-actions a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.half-button {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.half-button:hover {
+  transform: scale(1.05);
+}
+
+.whatsapp {
+  background-color: var(--whats-bg);
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.call {
+  background-color: var(--button-bg);
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.fade-in,
+.fade-in-split {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: fadeUp 0.3s forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.blurred {
+  filter: blur(3px);
+  color: var(--small-text);
+}
+
+
+.unlock-btn {
+  margin-top: 0.8rem;
+  background-color: var(--button-bg);
+  color: white;
+  width: 100%;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.unlock-btn:hover {
+  transform: scale(1.03);
+}
+
+.pg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+
+@media (max-width: 600px) {
+  .pg-card {
+    font-size: 0.95rem;
+  }
+
+  .unlock-btn {
+    width: 100%;
+  }
+}

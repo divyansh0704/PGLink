@@ -1,0 +1,25 @@
+/* :root {
+  --primary-bg: #FFFBEB;
+  --primary-text: #3B1F1F;
+  --accent-color: #7C2D12;
+  --button-text: #FFFFFF;
+  --card-bg: #FFF7DC;
+  --blur-bg: #E2C9B0;
+  --border-color: #D97706;
+} */
+:root {
+  --primary-bg: #F0F4F4;         /* light grayish background */
+  --primary-text: #003f3f;       /* deep teal text */
+  --accent-color: #14B8A6; 
+  --accenter-color: #0a524c;      /* vibrant teal accent */
+  --button-text: #FFFFFF;        /* white button text */
+  --card-bg: #E0F2F1;            /* light teal for cards */
+  --blur-bg: #B2DFDB;            /* soft teal blur background */
+  --border-color: #64748B;
+  --small-text:#444;       /* muted gray for borders */
+  --call-bg:#214369;
+  --whats-bg:#0c8d3c;
+  --button-bg:#024e4e;
+  --navbar-bg:#2d6b65;
+}
+

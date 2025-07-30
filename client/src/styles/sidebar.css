@@ -1,0 +1,70 @@
+/* sidebar.css */
+.sidebar-container {
+    /* position: relative; */
+}
+
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--navbar-bg);
+    color: var(--primary-bg);
+    overflow-x: hidden;
+    transition: width 0.3s ease;
+    padding-top: 13px;
+    border-right: 2px solid var(--button-text);
+    z-index: 1000;
+
+
+
+}
+
+.opt {
+    padding-top: 3rem;
+
+}
+
+.sidebar.collapsed {
+    width: 50px;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar.open {
+    width: 200px;
+}
+
+.sidebar .toggle-icon {
+    position: fixed;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 10px;
+    transition: left 0.3s ease;
+
+}
+
+.toggle-icon.shifted {
+    left: 160px;
+    /* Just a bit more than sidebar width */
+}
+
+.sidebar-item {
+    padding: 11px 6px;
+    display: flex;
+    align-items: center;
+    /* gap: 10px; */
+    justify-content: center;
+}
+.hifted{
+     padding: 11px 16px;
+    gap: 10px;
+    justify-content:left;
+
+}
+
+.log-color{
+    color:#d23827;
+}

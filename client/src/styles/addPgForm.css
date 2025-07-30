@@ -1,0 +1,95 @@
+.addpg-form {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.addpg-form div{
+  display: flex;
+  gap: 4px;
+  display: flex;
+  justify-content: center;
+ 
+}
+.addpg-form div textarea{
+  resize: none;
+  font-size: 1rem;
+  padding: 0.7rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  /* width: 47%; */
+}
+
+
+#spl{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.addpg-form input,
+.addpg-form fieldset,
+.addpg-form button{
+  font-size: 1rem;
+  padding: 0.7rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  /* width: 47%; */
+}
+
+.addpg-form fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 86%;
+}
+
+.addpg-form button {
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.addpg-form button:hover {
+  /* background-color: var(--accenter-color); */
+  transform: scale(1.01);
+}
+.addbox-content {
+  position: relative;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: transparent;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
