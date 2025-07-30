@@ -16,6 +16,9 @@ const Home = ({ setShowLogin }) => {
   const [filteredPgs, setFilteredPgs] = useState([]);
   const [allLoaded, setAllLoaded] = useState(false);
 
+  const tok =localStorage.getItem('token');
+  
+
 
  
   useEffect(() => {
@@ -147,7 +150,7 @@ const Home = ({ setShowLogin }) => {
 
         </div>
         <div style={{ textAlign: 'center', marginTop: '20px' }} className='show-rect'>
-          {!allLoaded && (
+          {tok && !allLoaded && (
             <button onClick={fetchAllPGs} className="btn-show-all">
               Show all PGs
             </button>)}
