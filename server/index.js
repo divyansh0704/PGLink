@@ -8,26 +8,14 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3009;
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://pg-link.vercel.app"
-];
+
 
 
 const app = express();
 
 require("dotenv").config();
 app.use(express.json())
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true
-}))
+app.use(cors())
 
 initDB();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
