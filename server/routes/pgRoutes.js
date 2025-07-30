@@ -22,7 +22,7 @@ router.get("/my-pgs",protect,getPGByOwner);
 router.get('/unlocked', protect,unlockedPG) ;
 
 router.get('/limited',protect,limited)
-router.get('/all', protect,allPGs)
+router.get('/all',protect,allPGs)
 
 router.delete("/:id",protect,deletePG);
 router.get("/:id",protect,getPGById);
