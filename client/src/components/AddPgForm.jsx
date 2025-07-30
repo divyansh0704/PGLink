@@ -122,8 +122,8 @@ const AddPgForm = ({ onClosePg }) => {
 
                     <input
                         type="text"
-                        name="collegeName/other_Identity"
-                        placeholder="Nearby College"
+                        name="collegeName"
+                        placeholder="Nearby College/Other_Identity"
                         value={form.collegeName}
                         onChange={handleChange}
                         required
