@@ -74,13 +74,7 @@
   justify-content: space-between;
 }
 
-.actions button {
-  /* font-size: 13px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer; */
-}
+
 
 .half-button {
   flex: 1;
