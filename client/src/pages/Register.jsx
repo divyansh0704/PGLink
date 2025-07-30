@@ -25,7 +25,8 @@ const Register = ({ onClose, openLogin }) => {
       });
       setTimeout(() => {
         // navigate('/');
-         window.location.reload();
+        //  window.location.reload();
+        window.location.href = "/";
       }, 2000);
 
 

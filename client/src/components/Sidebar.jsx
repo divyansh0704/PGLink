@@ -25,7 +25,8 @@ const Sidebar = ({ isOpen, setIsOpen, openDashboard }) => {
 
     setTimeout(() => {
       // navigate("/login");
-      window.location.reload();
+      // window.location.reload();
+      window.location.href = "/";
 
     }, 2000);
 

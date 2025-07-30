@@ -31,8 +31,9 @@ const ProfileMenu = () => {
         });
 
         setTimeout(() => {
-            // navigate("/login");
-            window.location.reload();
+            // navigate("/login");'
+            // window.location.reload("/");
+            window.location.href = "/";
 
         }, 2000);
 
