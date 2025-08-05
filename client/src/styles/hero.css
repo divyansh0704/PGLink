@@ -44,7 +44,7 @@
    /* border: 1px solid var(--border-color); */
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .hero-title {
     font-size: 1.5rem;
   }
@@ -57,5 +57,23 @@
   .hero-search-bar input,
   .hero-search-bar button {
     width: 100%;
+  }
+} */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero input {
+    width: 90%;
   }
 }
