@@ -106,9 +106,9 @@ const AddPgForm = ({ onClosePg }) => {
         }
     };
     return (
-        <div className="modal-overlay">
+        <div className="addpg-form-wrapper">
             <form className="addpg-form addbox-content" onSubmit={handleSubmit}>
-                <div className="close-btn" onClick={onClosePg}>×</div>
+                {/* <div className="close-btn" onClick={onClosePg}>×</div> */}
                 <h2>List Your PG</h2>
                 <div>
                     <input
@@ -235,7 +235,7 @@ const AddPgForm = ({ onClosePg }) => {
                     </label>
                 </div>
                 <div>
-                    <fieldset>
+                    <fieldset id='amen'>
                         <legend>Amenities:</legend>
                         {Object.keys(form.amenities).map((amenity) => (
                             <label key={amenity}>

@@ -55,7 +55,7 @@ const Sidebar = ({ isOpen, setIsOpen, openDashboard }) => {
           <Link to="/" className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <FaHome size={18} /> {isOpen && "Home"}</Link>
           {user?.role === 'owner' && (
             <>
-              <Link onClick={openDashboard} className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <FaPlus size={18} /> {isOpen && "Add PG"}</Link>
+              <Link to="/dashboard"  className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <FaPlus size={18} /> {isOpen && "Add PG"}</Link>
               <Link to="/my-listings" className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <Building2 size={19} /> {isOpen && "My Listings"}</Link>
             </>
           )}

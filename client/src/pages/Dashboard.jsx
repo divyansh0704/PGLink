@@ -22,8 +22,11 @@ const Dashboard = ({onClosePg}) => {
     }, [navigate])
 
     return (
+
         <div>
-            {/* <h2>Dashboard</h2> */}
+            {/* <h2 style={{
+                paddingLeft:"2%"
+            }}>Dashboard</h2> */}
            
             {/* {user ? (
                 user.role === 'owner' ? (
