@@ -24,28 +24,36 @@ const Navbar = ({ isSidebarOpen,openLogin,setIsOpen }) => {
     
     return (
         <div className={`navbar ${isSidebarOpen ? 'shifted' : ''}`}>
+            <div className="partition1">
             <div
                 className="menu-toggle"
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                <LayoutPanelLeft size={24} />
+                <LayoutPanelLeft size={22} />
             </div>
 
             <h1 className='logo'>PGLink</h1>
+
+            </div>
+
+            <div className="partition2">
             
             <nav className={`nav-links ${menuOpen ? 'open' : ''}`}>
+
                 {isLoggedIn && !isSubscribe && (<button id='subscribeBtn' onClick={() => loadRazorpay('subscription', null, user.id)}>
                     Subscribe ₹10
                 </button>)}
 
-
+                {/* <div id="profile"> */}
                 {!isLoggedIn && <Link onClick={openLogin} >Login</Link>}
                 {isLoggedIn && <ProfileMenu />}
+                {/* </div> */}
                
 
 
 
             </nav>
+            </div>
 
         </div>
     )

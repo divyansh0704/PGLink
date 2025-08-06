@@ -18,7 +18,9 @@ a {
 
 .navbar {
   background-color: var(--primary-bg);
-  padding: 1rem;
+  /* padding: 1rem; */
+  padding: 0.80rem;
+    padding-top: 1rem;
   color: var(--primary-text);
   display: flex;
   justify-content: space-between;
@@ -28,6 +30,25 @@ a {
 
 
 }
+.navbar .partition1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4%;
+}
+.navbar .partition2{
+  display: flex;
+
+}
+/* #profile{
+ 
+} */
+/* .partition2 .profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+} */
 
 .logo {
   font-size: 1.8rem;

@@ -1,8 +1,9 @@
 .profile-container {
   position: relative;
   display: inline-block;
-  float: right;
+  /* float: right; */
   margin-right: 1rem;
+  
 }
 
 .avatar {
