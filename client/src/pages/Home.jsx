@@ -1,5 +1,6 @@
 import React from 'react'
 import "../styles/global.css"
+
 import API from '../utils/api';
 import PGCard from '../components/PGCard';
 import bed from '../assets/bed.png';
@@ -9,7 +10,7 @@ import Hero from '../components/Hero';
 import PGFilter from '../components/PGFilter';
 import Footer from '../components/Footer';
 
-const Home = ({ setShowLogin }) => {
+const Home = ({ setShowLogin,isSidebarOpen }) => {
 
   const [pgList, setPgList] = useState([]);
   const [user, setUser] = useState(null);
@@ -137,13 +138,7 @@ const Home = ({ setShowLogin }) => {
       <PGFilter onFilter={handleFilter} />
       <div className="container">
         <div className="pg-grid">
-          {/* {filteredPgs.length > 0 ? (
-            filteredPgs.map(pg => (
-              <PGCard key={pg.id} pg={pg} user={user} setShowLogin={setShowLogin} />
-            ))
-          ) : (
-            <p style={{ textAlign: 'center' }}>No PGs found.</p>
-          )} */}
+         
           {filteredPgs.map(pg => (
             <PGCard key={pg.id} pg={pg} user={user} setShowLogin={setShowLogin} />
           ))}
@@ -156,6 +151,8 @@ const Home = ({ setShowLogin }) => {
             </button>)}
 
         </div>
+        {isSidebarOpen && <div className="backdrop" ></div>}
+
 
       </div>
       <Footer />

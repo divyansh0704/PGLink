@@ -3,7 +3,7 @@ import { useState } from 'react'
 import "../styles/addPgForm.css"
 import API from '../utils/api'
 import { toast } from 'react-toastify'
-const AddPgForm = ({ onClosePg }) => {
+const AddPgForm = () => {
     const [form, setForm] = useState({
         title: '',
         collegeName: '',

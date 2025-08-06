@@ -6,7 +6,7 @@ import { Pencil, Trash2, Eye, Plus } from 'lucide-react'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const MyListings = ({ openDashboard }) => {
+const MyListings = () => {
     const [listings, setListings] = useState([]);
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const MyListings = ({ openDashboard }) => {
             })
             setTimeout(() => {
                 // navigate("/my-listings");
-                window.location.reload("/my-listings");
+                window.location.href="/my-listings";
             }, 2000)
 
 
@@ -62,7 +62,7 @@ const MyListings = ({ openDashboard }) => {
                     <p>You haven't listed any PGs yet.</p>
                 ) : (
                     listings.map(pg => (
-                        <div key={pg.id} className="pg-card">
+                        <div key={pg.id} className="pg-card2">
                             <img src={`http://localhost:3009${pg.imageUrl || '/uploads/default.png'}`} alt="noimage" onError={(e) => {
                                 e.target.src = '/uploads/default.png';
                             }}
@@ -103,6 +103,7 @@ const MyListings = ({ openDashboard }) => {
 
                 )}
             </div>
+           
         </div>
     )
 }

@@ -4,6 +4,7 @@ import API from '../utils/api'
 import AddPgForm from '../components/AddPgForm';
 import { useNavigate } from 'react-router-dom';
 
+
 const Dashboard = ({onClosePg}) => {
     const [user, setUser] = useState(null);
     // const [showAddPG,setShowAddPG]=useState(false);
@@ -38,6 +39,7 @@ const Dashboard = ({onClosePg}) => {
                 <p>Loading user data...</p>
             )} */}
             <AddPgForm user={user} onClosePg={onClosePg} />
+            
         </div>
     )
 }
