@@ -65,3 +65,35 @@
 .log-color{
     color:#d23827;
 }
+
+@media (max-width: 767px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 200px;
+  }
+
+  .sidebar.open {
+    transform: translateX(0%);
+  }
+}
+
+.opt {
+  padding-top: 3rem;
+}
+
+.sidebar-item {
+  padding: 11px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hifted {
+  padding: 11px 16px;
+  gap: 10px;
+  justify-content: left;
+}
+
+.log-color {
+  color: #d23827;
+}

@@ -2,12 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 import "../styles/global.css"
 import { Link } from 'react-router-dom';
+import {LayoutPanelLeft } from 'lucide-react';
 import ProfileMenu from './ProfileMenu';
 
 import loadRazorpay from '../utils/razorpay';
 import "../styles/logout.css"
 
-const Navbar = ({ isSidebarOpen,openLogin }) => {
+const Navbar = ({ isSidebarOpen,openLogin,setIsOpen }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const isLoggedIn = !!localStorage.getItem("token");
     // const navigate = useNavigate();
@@ -23,14 +24,15 @@ const Navbar = ({ isSidebarOpen,openLogin }) => {
     
     return (
         <div className={`navbar ${isSidebarOpen ? 'shifted' : ''}`}>
-
-            <h1 className='logo'>PGLink</h1>
             <div
                 className="menu-toggle"
-                onClick={() => setMenuOpen((prev) => !prev)}
+                onClick={() => setIsOpen((prev) => !prev)}
             >
-                ☰
+                <LayoutPanelLeft size={24} />
             </div>
+
+            <h1 className='logo'>PGLink</h1>
+            
             <nav className={`nav-links ${menuOpen ? 'open' : ''}`}>
                 {isLoggedIn && !isSubscribe && (<button id='subscribeBtn' onClick={() => loadRazorpay('subscription', null, user.id)}>
                     Subscribe ₹10

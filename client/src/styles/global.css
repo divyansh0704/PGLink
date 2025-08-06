@@ -335,6 +335,20 @@ a {
 }
 
 @media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+    /* font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 20; */
+  }
+
+  .main-content {
+    /* transition: margin-left 0.3s ease; */
+    margin-left: 0px;
+
+  }
+
   .main-content.shifted {
     margin-left: 50px;
 
@@ -342,7 +356,7 @@ a {
 
 
 
-  
+
 
 
   .pg-grid {
@@ -365,14 +379,20 @@ a {
 
   .pg-card {
     display: flex;
-    flex-direction:column;
-    height: 120px;
+    flex-direction: column;
+    height: 220px;
     width: 100vw;
     max-width: 90%;
     padding: 4px;
     margin: 4px;
   }
-  .updated-box{
+  .card-info {
+  display: flex;
+  /* justify-content: space-between; */
+  flex-direction: column;
+}
+
+  .updated-box {
     display: flex;
   }
 
@@ -392,20 +412,24 @@ a {
 
   .pg-card h3 {
     font-size: 1rem;
-    margin-bottom: 0.3rem;
+    /* margin-bottom: 0.3rem; */
+    margin: 1px -1px;
   }
 
   .pg-card p {
-    font-size: 0.85rem;
+    font-size: 70%;
   }
 
-  .amenities {
+  .pg-card .amenities {
     gap: 4px;
+    height: 1rem;
   }
 
-  .amenity {
-    font-size: 0.75rem;
-    padding: 3px 6px;
+  .pg-card .amenity {
+    font-size: 72%;
+    /* padding: 3px 6px; */
+    padding: 0px 9px;
+    border-radius: 6px;
   }
 
   .unlock-btn,
