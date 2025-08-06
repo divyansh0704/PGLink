@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import API from '../utils/api';
-import '../styles/MyListings.css'
+import '../styles/myListings.css'
 import { Pencil, Trash2, Eye, Plus } from 'lucide-react'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';

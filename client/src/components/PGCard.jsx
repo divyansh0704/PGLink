@@ -32,48 +32,52 @@ const PGCard = ({ pg, user, setShowLogin }) => {
     return (
 
         <div className="pg-card">
+            <div className="updated-box">
 
-            <img src={`http://localhost:3009${pg.imageUrl || '/uploads/default.png'}`} alt="noimage" onError={(e) => {
-                e.target.src = '/uploads/default.png';
-            }}
-            />
+                <img src={`http://localhost:3009${pg.imageUrl || '/uploads/default.png'}`} alt="noimage" onError={(e) => {
+                    e.target.src = '/uploads/default.png';
+                }}
+                />
 
-            <div className="pg-card-content">
+                <div className="pg-card-content">
 
-                <h3>{pg.title}</h3>
-                <p>{pg.address},{pg.city}</p>
-                <div className="card-info">
-                    <p>{pg.collegeName} ({pg.distanceKm} Km)</p>
-                    <p> ₹{pg.rent}/month</p>
+                    <h3>{pg.title}</h3>
+                    <p>{pg.address},{pg.city}</p>
+                    <div className="card-info">
+                        <p>{pg.collegeName} ({pg.distanceKm} Km)</p>
+                        <p> ₹{pg.rent}/month</p>
+                    </div>
+                    <div className="amenities">
+
+                        {Object.entries(pg.amenities).map(([key, value]) => {
+                            if (!value) return null;
+
+                            const labels = {
+                                wifi: 'WiFi',
+                                laundry: 'Laundry',
+                                food: 'Food',
+                                ac: 'AC',
+                                waterCooler: 'Water Cooler',
+                                studyTable: 'Study Table',
+                            };
+
+
+                            return <span key={key} className="amenity">{labels[key] || key}</span>;
+                        })}
+                    </div>
+                    <div className="contact-box">
+                        {isUnlocked ? (
+                            <p className="contact">  <Phone color="black" size={16} style={{ marginRight: '6px' }} /> {pg.contactNumber}</p>
+                        ) : (
+                            <>
+                                <p className="contact blurred"><Phone color="black" size={16} style={{ marginRight: '6px' }} /> +91-XXXXXXX</p>
+
+                            </>
+                        )}
+                    </div>
                 </div>
-                <div className="amenities">
-
-                    {Object.entries(pg.amenities).map(([key, value]) => {
-                        if (!value) return null;
-
-                        const labels = {
-                            wifi: 'WiFi',
-                            laundry: 'Laundry',
-                            food: 'Food',
-                            ac: 'AC',
-                            waterCooler: 'Water Cooler',
-                            studyTable: 'Study Table',
-                        };
-
-
-                        return <span key={key} className="amenity">{labels[key] || key}</span>;
-                    })}
-                </div>
-                <div className="contact-box">
-                    {isUnlocked ? (
-                        <p className="contact">  <Phone color="black" size={16} style={{ marginRight: '6px' }} /> {pg.contactNumber}</p>
-                    ) : (
-                        <>
-                            <p className="contact blurred"><Phone color="black" size={16} style={{ marginRight: '6px' }} /> +91-XXXXXXX</p>
-
-                        </>
-                    )}
-                </div>
+            </div>
+            <div className="updated-box2">
                 {/* <button className="unlock-btn" onClick={handleUnlock}>Unlock ₹1</button> */}
                 {isUnlocked ? (
                     <div className="unlock-actions fade-in-split">
@@ -101,6 +105,8 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                 )}
 
             </div>
+
+
         </div>
 
     )
