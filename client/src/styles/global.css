@@ -386,11 +386,12 @@ a {
     padding: 4px;
     margin: 4px;
   }
+
   .card-info {
-  display: flex;
-  /* justify-content: space-between; */
-  flex-direction: column;
-}
+    display: flex;
+    /* justify-content: space-between; */
+    flex-direction: column;
+  }
 
   .updated-box {
     display: flex;
@@ -432,9 +433,24 @@ a {
     border-radius: 6px;
   }
 
-  .unlock-btn,
-  .unlock-actions {
+  .updated-box2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .unlock-btn {
     font-size: 0.85rem;
     padding: 8px;
+  }
+
+  .unlock-actions {
+    font-size: 0.85rem;
+    padding: 0px;
+
+  }
+
+  .pg-card .half-button {
+    padding: 7.6px;
   }
 }
