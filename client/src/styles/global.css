@@ -422,6 +422,7 @@ a {
 
   .updated-box {
     display: flex;
+    gap: 1%;
   }
 
   .pg-card img {

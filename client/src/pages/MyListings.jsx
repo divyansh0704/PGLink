@@ -56,7 +56,7 @@ const MyListings = () => {
         <div className='my-listings-container'>
             <h2>My PG Listings</h2>
             <p className="subheading">Manage your PGs listed on PGLink</p>
-            <button className="add-pg-btn" onClick={openDashboard}><Plus size={18} /> Add New PG</button>
+            <button className="add-pg-btn" ><Plus size={18} /> Add New PG</button>
             <div className="pg-listings-grid">
                 {listings.length === 0 ? (
                     <p>You haven't listed any PGs yet.</p>

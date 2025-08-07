@@ -58,7 +58,9 @@
   color: #555;
   margin: 3px 0;
 }
-
+.pg-card2 .amenities{
+  height: 40px;
+}
 .amenities span {
   background-color: #e0f7f7;
   padding: 3px 6px;
