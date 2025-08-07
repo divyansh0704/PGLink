@@ -15,7 +15,7 @@ const {storage} = require("../utils/cloudinary");
 //     },
 // })
 
-const upload = multer(storage);
+const upload = multer({storage});
 
 router.post("/",protect,upload.single('photo'),createPG);
 router.get("/",getAllPGs);
