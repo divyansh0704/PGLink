@@ -4,15 +4,19 @@ const { PG, User, UserUnlockedPGs } = require("../models");
 
 exports.createPG = async (req, res) => {
     try {
+
+        //      console.log("Request received");
+        // console.log("Body:", req.body);
+        // console.log("File:", req.file);
         // let imageUrl;
         // if (req.file) {
         //     imageUrl = `/uploads/${req.file.filename}`;
         // } else {
         //     imageUrl = `/uploads/default.png`;
         // }
-        // let imageUrl = "/uploads/default.png";
+        let imageUrl = "/uploads/default.png";
 
-        if (req.file && req.file.path) {
+        if (req.file) {
             imageUrl = req.file.path; 
         }
         // console.log("Uploaded to Cloudinary:", req.file?.path);

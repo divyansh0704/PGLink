@@ -9,7 +9,7 @@ const storage = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: `pg_images`,
-        public_id: `${Date.now()}`,
+        // public_id: `${Date.now()}`,
         allowed_formats: ['jpg', 'png', 'jpeg'],
     }
 });
