@@ -35,7 +35,8 @@ const MyListings = () => {
             })
             setTimeout(() => {
                 // navigate("/my-listings");
-                window.location.href="/my-listings";
+                window.location.reload();
+                // window.location.href="/my-listings";
             }, 2000)
 
 
@@ -63,9 +64,7 @@ const MyListings = () => {
                 ) : (
                     listings.map(pg => (
                         <div key={pg.id} className="pg-card2">
-                            <img src={`http://localhost:3009${pg.imageUrl || '/uploads/default.png'}`} alt="noimage" onError={(e) => {
-                                e.target.src = '/uploads/default.png';
-                            }}
+                            <img src={`${pg.imageUrl}`} alt="noimage" 
                             />
                             <h3>{pg.title}</h3>
                             <p className="location">{pg.city}</p>

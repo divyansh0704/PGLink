@@ -1,6 +1,6 @@
 const { PG, User, UserUnlockedPGs } = require("../models");
 
-
+const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dkieieuoi/image/upload/v1754577522/pg_images/fpykb0ldzl9ce6wofc4m.png";
 
 exports.createPG = async (req, res) => {
     try {
@@ -14,7 +14,7 @@ exports.createPG = async (req, res) => {
         // } else {
         //     imageUrl = `/uploads/default.png`;
         // }
-        let imageUrl = "/uploads/default.png";
+        let imageUrl = "https://res.cloudinary.com/dkieieuoi/image/upload/v1754577522/pg_images/default_2_mne233";
 
         if (req.file) {
             imageUrl = req.file.path; 
