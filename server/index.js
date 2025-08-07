@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(cors())
 
 initDB();
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/api/users", userRoutes);
 app.use("/api/pgs", pgRoutes);
 app.use('/api/payment', paymentRoutes);

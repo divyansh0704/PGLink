@@ -3,18 +3,19 @@ const router = express.Router();
 const {protect}= require("../middleware/authMiddleware");
 const {createPG,getPGById,getAllPGs,getPGByOwner, deletePG, updatePG, unlockedPG, allPGs, limited}=require("../controllers/pgController");
 const multer = require('multer');
-const path = require("path")
+const path = require("path");
+const {storage} = require("../utils/cloudinary");
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null,Date.now()+path.extname(file.originalname));
-    },
-})
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads/');
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null,Date.now()+path.extname(file.originalname));
+//     },
+// })
 
-const upload = multer({storage});
+const upload = multer(storage);
 
 router.post("/",protect,upload.single('photo'),createPG);
 router.get("/",getAllPGs);

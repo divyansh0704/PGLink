@@ -34,9 +34,8 @@ const PGCard = ({ pg, user, setShowLogin }) => {
         <div className="pg-card">
             <div className="updated-box">
 
-                <img src={`http://localhost:3009${pg.imageUrl || '/uploads/default.png'}`} alt="noimage" onError={(e) => {
-                    e.target.src = '/uploads/default.png';
-                }}
+                <img src={`${pg.imageUrl}`} alt="noimage" 
+                // onError={(e) => {e.target.src = '/uploads/default.png'}}
                 />
 
                 <div className="pg-card-content">
