@@ -83,10 +83,10 @@
 
 @media (max-width: 767px) {
     .sidebar {
-        transform: translateX(-78%);
+        transform: translateX(-76%);
         height: 30vh;
         position: fixed;
-        top: 68px;
+        top: 72px;
         /* left: 10px; */
         border-radius: 8px;
         width: 200px;
@@ -94,8 +94,8 @@
     .menu-toggleN{
         position: fixed;
         top: 10%;
-        height: 40px;
-        width: 40px;
+        height: 47px;
+        width: 42px;
         z-index: 2000;
         left: -4%;
         color: var(--button-text);
