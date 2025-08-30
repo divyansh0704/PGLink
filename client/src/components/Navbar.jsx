@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import "../styles/global.css"
 import { Link } from 'react-router-dom';
-import {LayoutPanelLeft } from 'lucide-react';
+import {Menu } from 'lucide-react';
 import ProfileMenu from './ProfileMenu';
 
 import loadRazorpay from '../utils/razorpay';
@@ -25,12 +25,12 @@ const Navbar = ({ isSidebarOpen,openLogin,setIsOpen }) => {
     return (
         <div className={`navbar ${isSidebarOpen ? 'shifted' : ''}`}>
             <div className="partition1">
-            <div
+            {/* <div
                 className="menu-toggle"
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                <LayoutPanelLeft size={22} />
-            </div>
+                <Menu size={22} />
+            </div> */}
 
             <h1 className='logo'>PGLink</h1>
 
