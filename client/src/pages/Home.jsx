@@ -151,7 +151,7 @@ const Home = ({ setShowLogin,isSidebarOpen }) => {
             </button>)}
 
         </div>
-        {isSidebarOpen && <div className="backdrop" ></div>}
+        {/* {isSidebarOpen && <div className="backdrop" ></div>} */}
 
 
       </div>
