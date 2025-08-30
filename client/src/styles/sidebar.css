@@ -74,7 +74,9 @@
 .log-color {
     color: #d23827;
 }
-
+.menu-toggleN{
+    display: none;
+}
 
 @media (max-width: 767px) {
     .sidebar {
