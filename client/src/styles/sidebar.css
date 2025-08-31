@@ -96,9 +96,11 @@
     }
     .menu-toggleN{
         position: fixed;
-        top: 12%;
-        height: 40px;
-        width: 40px;
+        
+        top: 13%;
+        height: 55px;
+        width: 47px;
+        padding-right: 2px;
         z-index: 2000;
         left: -20px;
         color: var(--button-text);
