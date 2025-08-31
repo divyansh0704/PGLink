@@ -6,7 +6,7 @@
     background: var(--navbar-bg);
     color: var(--primary-bg);
     overflow-x: hidden;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
     padding-top: 13px;
     border-right: 2px solid var(--button-text);
     z-index: 1000;
@@ -37,7 +37,7 @@
     cursor: pointer;
     padding: 10px;
     font-size: 10px;
-    transition: left 0.4s ease;
+    transition: left 0.5s ease;
 
 }
 
@@ -56,8 +56,8 @@
     justify-content: center;
     color: inherit;
     text-decoration: none;
-    transition: all 0.4s ease;
-    font-size: 15px;
+    transition: all 0.5s ease;
+    font-size: 15.4px;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -87,7 +87,7 @@
     .sidebar {
 
          transform: translateX(-79%);
-        height: 46vh;
+        height: 50vh;
         position: fixed;
         top: 72px;
         /* left: 10px; */
@@ -119,7 +119,7 @@
         /* top: 60px; */
         /* left: 10px; */
         border-radius: 8px;
-        width: 186px;
+        width: 212px;
     }
 
     .opt {
@@ -127,7 +127,7 @@
     }
 
     .toggle-icon.shifted {
-        left: 146px;
+        left: 160px;
 
     }
 
