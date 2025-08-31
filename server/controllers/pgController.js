@@ -1,19 +1,26 @@
 const { PG, User, UserUnlockedPGs } = require("../models");
 
+const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dkieieuoi/image/upload/v1754643154/pg_images/jag8zcpg1t1cm63r59uj.png";
 
 
 exports.createPG = async (req, res) => {
     try {
+
+        //      console.log("Request received");
+        // console.log("Body:", req.body);
+        // console.log("File:", req.file);
         // let imageUrl;
         // if (req.file) {
         //     imageUrl = `/uploads/${req.file.filename}`;
         // } else {
         //     imageUrl = `/uploads/default.png`;
         // }
-        // let imageUrl = "/uploads/default.png";
+        let imageUrl;
 
-        if (req.file && req.file.path) {
-            imageUrl = req.file.path; 
+        if (req.file) {
+            imageUrl = req.file.path;
+        } else {
+            imageUrl = DEFAULT_IMAGE_URL;
         }
         // console.log("Uploaded to Cloudinary:", req.file?.path);
 

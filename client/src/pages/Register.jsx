@@ -22,7 +22,6 @@ const Register = ({ onClose, openLogin }) => {
       toast.success("Logged in successfully!", {
         position: "top-right",
         autoClose: 2000,
-        className:"my-toast",
       });
       setTimeout(() => {
         // navigate('/');

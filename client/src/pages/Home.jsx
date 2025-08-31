@@ -1,6 +1,6 @@
 import React from 'react'
 import "../styles/global.css"
-import ShimmerCard from '../components/ShimmerCard';
+
 import API from '../utils/api';
 import PGCard from '../components/PGCard';
 import bed from '../assets/bed.png';
@@ -139,14 +139,9 @@ const Home = ({ setShowLogin,isSidebarOpen }) => {
       <div className="container">
         <div className="pg-grid">
          
-          {/* {filteredPgs.map(pg => (
+          {filteredPgs.map(pg => (
             <PGCard key={pg.id} pg={pg} user={user} setShowLogin={setShowLogin} />
-          ))} */}
-           {filteredPgs.length === 0
-    ? [...Array(6)].map((_, i) => <ShimmerCard key={i} />) // Show shimmer until data
-    : filteredPgs.map(pg => (
-        <PGCard key={pg.id} pg={pg} user={user} setShowLogin={setShowLogin} />
-      ))}
+          ))}
 
         </div>
         <div style={{ textAlign: 'center', marginTop: '20px' }} className='show-rect'>

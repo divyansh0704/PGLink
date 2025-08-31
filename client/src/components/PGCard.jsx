@@ -16,7 +16,6 @@ const PGCard = ({ pg, user, setShowLogin }) => {
             toast.success("Please login to unlock PG", {
                 position: "top-right",
                 autoClose: 2000,
-                className:"my-toast",
             })
             setTimeout(() => {
                 // navigate("/login");
