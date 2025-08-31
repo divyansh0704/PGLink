@@ -32,6 +32,7 @@ const MyListings = () => {
             toast.success("PG deleted successfully!", {
                 position: 'top-right',
                 autoClose: 2000,
+                className:"my-toast",
             })
             setTimeout(() => {
                 // navigate("/my-listings");

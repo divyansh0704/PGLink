@@ -73,6 +73,7 @@ const AddPgForm = () => {
             toast.success("PG listed successfully!'", {
                 position: "top-right",
                 autoClose: 2000,
+                className:"my-toast",
             });
             setTimeout(() => {
                 // navigate('/');

@@ -24,6 +24,7 @@ const Sidebar = ({ isOpen, setIsOpen, openDashboard }) => {
     toast.success("Logged out successfully!", {
       position: "top-center",
       autoClose: 2000,
+      className:"my-toast",
     });
 
     setTimeout(() => {
