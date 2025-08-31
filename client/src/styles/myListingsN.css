@@ -125,4 +125,13 @@
   color: white;
 }
 
+@media (max-width: 768px){
+  #listHeading{
+    padding-left: 10px;
+    margin-bottom: -8px;
+  }
+  #listBH{
+    padding-left: 10px;
+  }
+}
  

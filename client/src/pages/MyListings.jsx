@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import API from '../utils/api';
 import "../styles/myListingsN.css";
-
+import { Link } from 'react-router-dom';
 import { Pencil, Trash2, Eye, Plus } from 'lucide-react'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import ShimmerCard from '../components/ShimmerCard';
 
 const MyListings = () => {
     const [listings, setListings] = useState([]);
+      const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const fetchListings = async () => {
@@ -17,6 +19,8 @@ const MyListings = () => {
             console.log("fetched data:", res.data);
         } catch (err) {
             console.error('Error fetching listings:', err);
+        }finally{
+            setLoading(false);
         }
     }
     const handleEdit = (pgId) => {
@@ -55,11 +59,22 @@ const MyListings = () => {
     }, [])
     return (
         <div className='my-listings-container'>
-            <h2>My PG Listings</h2>
+            <h2 id='listHeading'>My PG Listings</h2>
+            <div id='listBH'>
             <p className="subheading">Manage your PGs listed on PGLink</p>
+            <Link to="/dashboard" >
             <button className="add-pg-btn" ><Plus size={18} /> Add New PG</button>
+            </Link>
+            
+            </div>
             <div className="pg-listings-grid">
-                {listings.length === 0 ? (
+                {loading ?(
+                    <>
+                     <ShimmerCard/>
+                     <ShimmerCard/>
+                     <ShimmerCard/>
+                    </>
+                ):listings.length === 0 ? (
                     <p>You haven't listed any PGs yet.</p>
                 ) : (
                     listings.map(pg => (
