@@ -378,6 +378,13 @@ a {
     margin-left: 5px;
 
   }
+     .Toastify__toast {
+  font-size: 13px !important;     
+  min-height: 36px !important; 
+  width: 246px !important;    
+  padding: 6px 10px !important;     
+  border-radius: 6px!important;    
+}
 
 
 
