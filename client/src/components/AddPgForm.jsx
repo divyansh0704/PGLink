@@ -76,7 +76,8 @@ const AddPgForm = () => {
             });
             setTimeout(() => {
                 // navigate('/');
-                window.location.reload();
+                // window.location.reload();
+                window.location.href = "/"
             }, 2000);
             // alert('PG listed successfully!');
             setForm({
