@@ -125,7 +125,7 @@ h3 {
   text-decoration: underline;
 }
 
-/* ============ RESPONSIVE ============ */
+
 @media (min-width: 768px) {
   .pg-detailD {
     flex-direction: row;
@@ -157,6 +157,6 @@ h3 {
 
   .card-infoD {
     flex-direction: column;
-    gap: 10px;
+    gap: 1px;
   }
 }
