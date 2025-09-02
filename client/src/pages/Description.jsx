@@ -1,10 +1,10 @@
-// src/pages/PGDescription.jsx
+
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import API from "../utils/api";
 import "../styles/pgDescription.css";
 
-const PGDescription = () => {
+const Description = () => {
   const { id } = useParams();
   const [pg, setPg] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -85,4 +85,4 @@ const PGDescription = () => {
   );
 };
 
-export default PGDescription;
+export default Description;
