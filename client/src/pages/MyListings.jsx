@@ -39,8 +39,8 @@ const MyListings = () => {
             })
             setTimeout(() => {
                 // navigate("/my-listings");
-                window.location.reload();
-                // window.location.href="/my-listings";
+                // window.location.reload();
+                window.location.href="/my-listings";
             }, 2000)
 
 

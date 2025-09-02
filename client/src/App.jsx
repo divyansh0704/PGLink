@@ -9,11 +9,11 @@ import Dashboard from "./pages/Dashboard"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+import PGDescription from "./pages/PgDescription"
 import Sidebar from "./components/Sidebar"
 import MyListings from "./pages/MyListings"
 import UnlockedPGs from "./pages/UnlockedPGs"
-import PGDescription from "./pages/PGDescription"
+
 
 
 function App() {
@@ -33,9 +33,9 @@ function App() {
           <Route path="/" element={<Home setShowLogin={() => setShowLogin(true)} isSidebarOpen={isSidebarOpen} />} />
           <Route path="/my-listings"  element={<MyListings />} />
           <Route path="/dashboard"   element={<Dashboard />} />
-          {/* <Route path="/edit/:id" element={<Dashboard   />} /> */}
-          <Route path="/unlocked" element={<UnlockedPGs />} />
           <Route path="/pg/:id" element={<PGDescription />} />
+          <Route path="/unlocked" element={<UnlockedPGs />} />
+          
 
 
         </Routes>
