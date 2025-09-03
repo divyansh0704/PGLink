@@ -234,6 +234,22 @@ const AddPgForm = () => {
                         Upload PG Photo:
                         <input type="file" accept="image/*" onChange={handlePhotoChange} />
                     </label>
+                    {photo && (
+                        <div className="preview-container">
+                            <img
+                                src={URL.createObjectURL(photo)}
+                                alt="Preview"
+                                style={{
+                                    width: "80px",
+                                    height: "75px",
+                                    objectFit: "cover",
+                                    marginTop: "10px",
+                                    borderRadius: "10px",
+                                    border: "2px solid #ddd"
+                                }}
+                            />
+                        </div>
+                    )}
                 </div>
                 <div>
                     <fieldset id='amen'>

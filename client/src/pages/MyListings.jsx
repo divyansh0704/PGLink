@@ -41,6 +41,7 @@ const MyListings = () => {
                 // navigate("/my-listings");
                 // window.location.reload();
                 window.location.href="/my-listings";
+                // window.location.href = "/"
             }, 2000)
 
 
