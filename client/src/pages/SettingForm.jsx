@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
 import { toast } from "react-toastify";
 
-const SettingsForm = ({ onclose }) => {
+const SettingsForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     oldPassword: "",
-    
+
     newPassword: "",
   });
 
@@ -22,7 +24,7 @@ const SettingsForm = ({ onclose }) => {
       await API.put("/users/update", form);
 
       toast.success("Profile updated successfully!");
-      onclose(); 
+      
     } catch (err) {
       console.error(err);
       toast.error("Error updating profile");
@@ -51,7 +53,7 @@ const SettingsForm = ({ onclose }) => {
             required
           />
           <button type="submit">Update</button>
-          <button type="button" onClick={onclose}>
+          <button type="button" onClick={() => navigate("/")}>
             Cancel
           </button>
         </form>

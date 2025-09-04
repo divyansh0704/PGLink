@@ -60,9 +60,9 @@ const ProfileMenu = () => {
                     <p className='name'>{user?.name}</p>
                     <p className='email'>{user?.email}</p>
                     <button className="logout" onClick={handleLogout}>Logout</button>
-                    <Link to="/setting" >
-                    <button  className="setting">Settings</button>
-                    </Link>
+                    {/* <Link to="/setting" > */}
+                    <button  className="setting" onClick={()=>navigate("/setting")}>Settings</button>
+                    {/* </Link> */}
                 </div>
             )}
         </div>
