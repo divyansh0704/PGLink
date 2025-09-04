@@ -3,6 +3,7 @@ import "../styles/profileMenu.css"
 import { useNavigate } from 'react-router-dom';
 import { getAvatarColor } from '../utils/getcolor';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 
 
@@ -59,7 +60,9 @@ const ProfileMenu = () => {
                     <p className='name'>{user?.name}</p>
                     <p className='email'>{user?.email}</p>
                     <button className="logout" onClick={handleLogout}>Logout</button>
-                    <button className="setting">Settings</button>
+                    <Link to="/setting" >
+                    <button  className="setting">Settings</button>
+                    </Link>
                 </div>
             )}
         </div>
