@@ -65,8 +65,10 @@ exports.verifyPaymentAndUnlock = async (req, res) => {
         } else if (type === 'single') {
             const alreadyUnlocked = await UserUnlockedPGs.findOne({ where: { userId, pgId } })
             if (!alreadyUnlocked) {
-                await UserUnlockedPGs.create({ userId, pgId });
-
+                // Set expiration date to 30 days from now
+                const expiresAt = new Date();
+                expiresAt.setDate(expiresAt.getDate() + 30);
+                await UserUnlockedPGs.create({ userId, pgId, expiresAt });
             }
         }
         res.json({ success: true })

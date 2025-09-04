@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
 import { toast } from "react-toastify";
 
+import "../styles/settingForm.css"
+
 const SettingsForm = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -32,8 +34,8 @@ const SettingsForm = () => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className="modals">
+      <div className="modal-contents">
         <h2>Update Profile</h2>
         <form onSubmit={handleSubmit}>
           <input

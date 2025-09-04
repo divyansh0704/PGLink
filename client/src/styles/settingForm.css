@@ -1,0 +1,89 @@
+
+/* Page form container */
+.modals {
+  max-width: 480px;
+  margin: 3rem auto 4rem auto;
+  padding: 2rem 2.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Modal content box */
+.modal-contents {
+  /* No additional styles needed for page form */
+}
+
+/* Heading */
+.modal-contents h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Input fields */
+input[type="password"] {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+input[type="password"]:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+}
+
+/* Buttons container */
+form > button {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: inherit;
+}
+
+/* Submit button */
+form > button[type="submit"] {
+  background-color: #4a90e2;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+form > button[type="submit"]:hover {
+  background-color: #357abd;
+}
+
+/* Cancel button */
+form > button[type="button"] {
+  background-color: #e0e0e0;
+  color: #555;
+}
+
+form > button[type="button"]:hover {
+  background-color: #c6c6c6;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .modals {
+    padding: 1.5rem 1.8rem;
+    width: 70%;
+    max-width: 70%;
+  }
+}

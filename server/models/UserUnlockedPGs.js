@@ -11,6 +11,10 @@ const UserUnlockedPGs = sequelize.define('UserUnlockedPGs', {
   pgId: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  expiresAt: {
+    type: DataTypes.DATE,
+    allowNull: true
   }
 }, { timestamps: true });
 

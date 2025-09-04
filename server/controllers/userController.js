@@ -55,7 +55,14 @@ exports.getCurrentUser = async (req, res) => {
             include: {
                 model: PG,
                 as: "pgs",
-                through: { attributes: [] }
+                through: {
+                    attributes: [],
+                    where: {
+                        expiresAt: {
+                            [require('sequelize').Op.gt]: new Date() // Only include non-expired unlocks
+                        }
+                    }
+                }
             }
         })
         const unlockedPGs = user.pgs.map(pg => pg.id);

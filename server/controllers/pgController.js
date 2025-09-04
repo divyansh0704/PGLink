@@ -141,9 +141,15 @@ exports.updatePG = async (req, res) => {
 exports.unlockedPG = async (req, res) => {
     try {
         const userId = req.user.id;
+        const currentDate = new Date();
 
         const unlocked = await UserUnlockedPGs.findAll({
-            where: { userId },
+            where: {
+                userId,
+                expiresAt: {
+                    [require('sequelize').Op.gt]: currentDate // Only get unlocks that haven't expired
+                }
+            },
             include: [PG]
         });
 
