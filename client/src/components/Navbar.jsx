@@ -8,7 +8,7 @@ import ProfileMenu from './ProfileMenu';
 import loadRazorpay from '../utils/razorpay';
 import "../styles/logout.css"
 
-const Navbar = ({ isSidebarOpen,openLogin,setIsOpen }) => {
+const Navbar = ({ isSidebarOpen,openLogin,setIsOpen,openSetting }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const isLoggedIn = !!localStorage.getItem("token");
     // const navigate = useNavigate();
@@ -46,7 +46,7 @@ const Navbar = ({ isSidebarOpen,openLogin,setIsOpen }) => {
 
                 {/* <div id="profile"> */}
                 {!isLoggedIn && <Link onClick={openLogin} >Login</Link>}
-                {isLoggedIn && <ProfileMenu />}
+                {isLoggedIn && <ProfileMenu openSetting={openSetting} />}
                 {/* </div> */}
                
 
