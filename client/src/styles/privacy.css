@@ -1,0 +1,78 @@
+.privacy-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--primary-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.privacy-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.privacy-container h2 {
+  font-size: 2.5rem;
+  color: var(--primary-text);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  position: relative;
+}
+
+.privacy-container h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, #20c997, #17a2b8);
+  margin: 0.5rem auto;
+  border-radius: 2px;
+}
+
+.privacy-container p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--primary-text);
+  margin-bottom: 1rem;
+  text-align: justify;
+  transition: color 0.3s ease;
+}
+
+.privacy-container p:hover {
+  color: var(--accenter-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .privacy-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .privacy-container h2 {
+    font-size: 2rem;
+  }
+
+  .privacy-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .privacy-container {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+
+  .privacy-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .privacy-container p {
+    font-size: 0.95rem;
+  }
+}

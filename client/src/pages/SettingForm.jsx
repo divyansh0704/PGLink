@@ -37,7 +37,7 @@ const SettingsForm = () => {
     <div className="modals">
       <div className="modal-contents">
         <h2>Update Profile</h2>
-        <form onSubmit={handleSubmit}>
+        <form className="kform" onSubmit={handleSubmit}>
           <input
             type="password"
             name="oldPassword"
@@ -54,8 +54,8 @@ const SettingsForm = () => {
             onChange={handleChange}
             required
           />
-          <button type="submit">Update</button>
-          <button type="button" onClick={() => navigate("/")}>
+          <button id="s-button" type="submit">Update</button>
+          <button id="s-button1"type="button" onClick={() => navigate("/")}>
             Cancel
           </button>
         </form>

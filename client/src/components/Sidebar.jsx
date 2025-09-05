@@ -13,7 +13,7 @@ import { LogOut } from 'lucide-react'
 const Sidebar = ({ isOpen, setIsOpen, openDashboard }) => {
   // const[isMobile,setIsMobile]=useState(window.innerWidth<=768)
   const user = JSON.parse(localStorage.getItem('user')) || {};
-  console.log("role:", user.role)
+  // console.log("role:", user.role)
 
   const navigate = useNavigate();
   const handleLogout = () => {

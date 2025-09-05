@@ -11,9 +11,7 @@
 }
 
 /* Modal content box */
-.modal-contents {
-  /* No additional styles needed for page form */
-}
+
 
 /* Heading */
 .modal-contents h2 {
@@ -24,14 +22,14 @@
 }
 
 /* Form styles */
-form {
+.kform {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
 /* Input fields */
-input[type="password"] {
+.kform input[type="password"] {
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 2px solid #ddd;
@@ -41,13 +39,13 @@ input[type="password"] {
   font-family: inherit;
 }
 
-input[type="password"]:focus {
+.kform input[type="password"]:focus {
   border-color: #4a90e2;
   box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
 }
 
 /* Buttons container */
-form > button {
+.kform button {
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -58,28 +56,28 @@ form > button {
   font-family: inherit;
 }
 
-/* Submit button */
-form > button[type="submit"] {
+
+#s-button {
   background-color: #4a90e2;
   color: white;
   margin-bottom: 0.5rem;
 }
 
-form > button[type="submit"]:hover {
+#s-button:hover {
   background-color: #357abd;
 }
 
-/* Cancel button */
-form > button[type="button"] {
+
+#s-button1{
   background-color: #e0e0e0;
   color: #555;
 }
 
-form > button[type="button"]:hover {
+#s-button1:hover {
   background-color: #c6c6c6;
 }
 
-/* Responsive */
+
 @media (max-width: 767px) {
   .modals {
     padding: 1.5rem 1.8rem;

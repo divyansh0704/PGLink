@@ -33,7 +33,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
         loadRazorpay('single', pg.id, user.id);
     }
     // console.log("Amenities Data:", pg.amenities);
-    console.log("PG Data:", pg);
+    // console.log("PG Data:", pg);
 
     return (
 

@@ -15,7 +15,7 @@ const Navbar = ({ isSidebarOpen,openLogin,setIsOpen,openSetting }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     const isSubscribe = !!user?.isSubscribed;
     // console.log("user:",user.isSubscribed);
-    console.log("user:",isSubscribe);
+    // console.log("user:",isSubscribe);
     
 
     

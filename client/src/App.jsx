@@ -13,6 +13,10 @@ import MyListings from "./pages/MyListings"
 import UnlockedPGs from "./pages/UnlockedPGs"
 import Description from "./pages/Description"
 import SettingsForm from "./pages/SettingForm"
+import Terms from "./pages/Terms"
+import Services from "./pages/Services"
+import Privacy from "./pages/Privacy"
+import Contact from "./pages/Contact"
 
 
 
@@ -38,6 +42,10 @@ function App() {
           <Route path="/pg/:id" element={ <Description/> } />
           <Route path="/unlocked" element={<UnlockedPGs />} />
           <Route path="/setting" element={<SettingsForm/>} />
+          <Route path="/terms" element={<Terms/>} />
+          <Route path="/services" element={<Services/>} />
+          <Route path="/privacy" element={<Privacy/>} />
+          <Route path="/contact" element={<Contact/>} />
           
 
 
