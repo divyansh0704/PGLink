@@ -13,9 +13,19 @@ const PGCard = ({ pg, user, setShowLogin }) => {
 
 
 
-  const handleCardClick = () => {
-    navigate(`/pg/${pg.id}`);
-  }
+    const handleCardClick = () => {
+        if (!user) {
+            toast.info("Please login to view PG details", {
+                position: "top-right",
+                autoClose: 2000,
+            });
+            setTimeout(() => {
+                setShowLogin(true); 
+            }, 2000);
+            return;
+        }
+        navigate(`/pg/${pg.id}`);
+    }
 
     const handleUnlock = () => {
         if (!user) {
@@ -38,83 +48,83 @@ const PGCard = ({ pg, user, setShowLogin }) => {
     return (
 
         <div className="pg-card" onClick={handleCardClick}>
-            
-                <div className="updated-box">
 
-                    <img src={`${pg.imageUrl}`} alt="noimage"
-                    // onError={(e) => {e.target.src = '/uploads/default.png'}}
-                    />
+            <div className="updated-box">
 
-                    <div className="pg-card-content">
+                <img src={`${pg.imageUrl}`} alt="noimage"
+                // onError={(e) => {e.target.src = '/uploads/default.png'}}
+                />
 
-                        <h3>{pg.title}</h3>
-                        <p>{pg.address},{pg.city}</p>
-                        <div className="card-info">
-                            <p>{pg.collegeName} ({pg.distanceKm} Km)</p>
-                            <p> ₹{pg.rent}/month</p>
-                        </div>
-                        <div className="amenities">
+                <div className="pg-card-content">
 
-                            {Object.entries(pg.amenities).map(([key, value]) => {
-                                if (!value) return null;
+                    <h3>{pg.title}</h3>
+                    <p>{pg.address},{pg.city}</p>
+                    <div className="card-info">
+                        <p>{pg.collegeName} ({pg.distanceKm} Km)</p>
+                        <p> ₹{pg.rent}/month</p>
+                    </div>
+                    <div className="amenities">
 
-                                const labels = {
-                                    wifi: 'WiFi',
-                                    laundry: 'Laundry',
-                                    food: 'Food',
-                                    ac: 'AC',
-                                    waterCooler: 'Water Cooler',
-                                    studyTable: 'Study Table',
-                                };
+                        {Object.entries(pg.amenities).map(([key, value]) => {
+                            if (!value) return null;
+
+                            const labels = {
+                                wifi: 'WiFi',
+                                laundry: 'Laundry',
+                                food: 'Food',
+                                ac: 'AC',
+                                waterCooler: 'Water Cooler',
+                                studyTable: 'Study Table',
+                            };
 
 
-                                return <span key={key} className="amenity">{labels[key] || key}</span>;
-                            })}
-                        </div>
-                        <div className="contact-box">
-                            {isUnlocked ? (
-                                <p className="contact">  <Phone color="black" size={16} style={{ marginRight: '6px' }} /> {pg.contactNumber}</p>
-                            ) : (
-                                <>
-                                    <p className="contact blurred"><Phone color="black" size={16} style={{ marginRight: '6px' }} /> +91-XXXXXXX</p>
+                            return <span key={key} className="amenity">{labels[key] || key}</span>;
+                        })}
+                    </div>
+                    <div className="contact-box">
+                        {isUnlocked ? (
+                            <p className="contact">  <Phone color="black" size={16} style={{ marginRight: '6px' }} /> {pg.contactNumber}</p>
+                        ) : (
+                            <>
+                                <p className="contact blurred"><Phone color="black" size={16} style={{ marginRight: '6px' }} /> +91-XXXXXXX</p>
 
-                                </>
-                            )}
-                        </div>
+                            </>
+                        )}
                     </div>
                 </div>
-                <div className="updated-box2">
-                    {/* <button className="unlock-btn" onClick={handleUnlock}>Unlock ₹1</button> */}
-                    {isUnlocked ? (
-                        <div className="unlock-actions fade-in-split">
-                            <button
-                               
-                                onClick={() => window.open(`https://wa.me/${sanitizedNumber}`, '_blank')}
-                                className="half-button whatsapp"
-                                type='button'
-                            >
-                                <MessageCircle size={20} />
-                                WhatsApp
-                            </button>
-                            <button
-                                
-                                onClick={() => { window.location.href = `tel:${sanitizedNumber}`; }}
-                                className="half-button call"
-                                type='button'
-                            >
-                                <Phone size={20} />
-                                Call
-                            </button>
-                        </div>
-                    ) : (
-                        <button className="unlock-btn fade-in" onClick={handleUnlock}>
-                            Unlock ₹1
+            </div>
+            <div className="updated-box2">
+                {/* <button className="unlock-btn" onClick={handleUnlock}>Unlock ₹1</button> */}
+                {isUnlocked ? (
+                    <div className="unlock-actions fade-in-split">
+                        <button
+
+                            onClick={() => window.open(`https://wa.me/${sanitizedNumber}`, '_blank')}
+                            className="half-button whatsapp"
+                            type='button'
+                        >
+                            <MessageCircle size={20} />
+                            WhatsApp
                         </button>
-                    )}
+                        <button
 
-                </div>
+                            onClick={() => { window.location.href = `tel:${sanitizedNumber}`; }}
+                            className="half-button call"
+                            type='button'
+                        >
+                            <Phone size={20} />
+                            Call
+                        </button>
+                    </div>
+                ) : (
+                    <button className="unlock-btn fade-in" onClick={handleUnlock}>
+                        Unlock ₹1
+                    </button>
+                )}
 
-            
+            </div>
+
+
         </div>
 
 

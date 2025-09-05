@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import API from "../utils/api";
 import "../styles/pgDescription.css";
+import SubscriptionBanner from "../components/SubscriptionBanner";
+import Footer from "../components/Footer";
 
 const Description = () => {
   const { id } = useParams();
@@ -57,6 +59,8 @@ const Description = () => {
   }
 
   return (
+    <>
+    
     <div className="pg-descD containerD">
       <div className="pg-detailD">
         <img className="pg-detail-image" src={pg.imageUrl} alt={pg.title} onError={(e)=>{e.target.src='/uploads/default.png'}} />
@@ -79,9 +83,15 @@ const Description = () => {
           <div style={{ marginTop: 16 }}>
             <Link to="/">← Back</Link>
           </div>
+          
         </div>
+        
       </div>
+      
     </div>
+    <SubscriptionBanner/>
+    {/* <Footer/> */}
+    </>
   );
 };
 

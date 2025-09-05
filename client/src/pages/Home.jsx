@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 import Hero from '../components/Hero';
 import PGFilter from '../components/PGFilter';
 import Footer from '../components/Footer';
+import SubscriptionBanner from '../components/SubscriptionBanner';
+import AdBanner from '../components/AdBanner';
 
 const Home = ({ setShowLogin, isSidebarOpen }) => {
 
@@ -133,8 +135,9 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
 
   return (
     <>
-
+     
       <Hero onFilter={handleSearch} />
+      
       <PGFilter onFilter={handleFilter} />
       <div className="container">
         <div className="pg-grid">
@@ -161,6 +164,8 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
 
 
       </div>
+      <AdBanner/>
+      {/* <SubscriptionBanner/> */}
       <Footer />
 
     </>

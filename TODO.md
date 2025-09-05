@@ -1,0 +1,3 @@
+- [x] Import Unlock icon from lucide-react in AdBanner.jsx
+- [x] Replace 🔓 emoji with <Unlock size={16} /> in the p tag
+- [ ] Add yellow color to the Unlock icon

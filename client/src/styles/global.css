@@ -472,6 +472,7 @@ a {
   .pg-card .amenities {
     gap: 4px;
     height: 1.6rem;
+    width: 98%;
     margin-top: 2px;
 
   }
