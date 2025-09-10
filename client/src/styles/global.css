@@ -472,7 +472,7 @@ a {
 
   .pg-card .amenities {
     gap: 4px;
-    height: 1.6rem;
+    height: 30px;
     width: 96%;
     margin-top: 2px;
 
@@ -483,6 +483,9 @@ a {
     /* padding: 3px 6px; */
     padding: 0px 9px;
     border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .updated-box2 {
