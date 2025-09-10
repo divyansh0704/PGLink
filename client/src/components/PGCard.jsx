@@ -47,9 +47,9 @@ const PGCard = ({ pg, user, setShowLogin }) => {
 
     return (
 
-        <div className="pg-card" onClick={handleCardClick}>
+        <div className="pg-card" >
 
-            <div className="updated-box">
+            <div className="updated-box" onClick={handleCardClick}>
 
                 <img src={`${pg.imageUrl}`} alt="noimage"
                 // onError={(e) => {e.target.src = '/uploads/default.png'}}
