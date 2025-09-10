@@ -457,6 +457,7 @@ a {
 
   .contact-box {
     margin-top: 4px;
+    max-width: 87%;
   }
 
   .pg-card h3 {
@@ -472,7 +473,7 @@ a {
   .pg-card .amenities {
     gap: 4px;
     height: 1.6rem;
-    width: 98%;
+    width: 96%;
     margin-top: 2px;
 
   }
