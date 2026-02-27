@@ -6,7 +6,7 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const cors = require('cors');
 const path = require("path");
 
-const PORT = process.env.PORT || 3009;
+const PORT = 3009;
 
 
 

@@ -10,17 +10,13 @@ exports.register = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
         }
-        const user = await User.create({ name, email, password, role });
+        const hashedPassword = await bcrypt.hash(password,10);
+        const user = await User.create({ name, email, password: hashedPassword, role });
         const token = generateToken(user.id);
         res.status(201).json({ message: "User created successfully", user, token });
     } catch (err) {
         res.status(500).json({ message: "Error creating user", err });
-        // console.error("❌ Error creating user:", err.message, err);  // Add this
-        // res.status(500).json({
-        //     message: "Error creating user",
-        //     errorMessage: err.message,
-        //     stack: err.stack // optional: helpful while debugging
-        // });
+        
     }
 }
 
@@ -34,8 +30,8 @@ exports.login = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: "User not found" });
         }
-
-        if (user.password !== password) {
+        const isPasswordValid = await bcrypt.compare(password,user.password);
+        if (!isPasswordValid) {
             return res.status(401).json({ message: "Incorrect password" });
         }
         const token = generateToken(user.id);
@@ -91,12 +87,12 @@ exports.updateUser = async (req, res) => {
 
         const user = await User.findByPk(req.user.id);
         if (!user) return res.status(404).json({ message: "User not found" });
-
-        if (oldPassword !== user.password) {
+        const isOldPasswordValid = await bcrypt.compare(oldPassword,user.password);
+        if (!isOldPasswordValid) {
             return res.status(400).json({ message: "Old password is incorrect" });
         }
-
-        user.password = newPassword;
+        const hashedNewPassword = await bcrypt.hash(newPassword,10);
+        user.password = hashedNewPassword;
 
         await user.save();
         res.json({ message: "Profile updated successfully!" });

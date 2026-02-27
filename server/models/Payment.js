@@ -7,18 +7,18 @@ const Payment = sequelize.define('Payment', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  amount: DataTypes.INTEGER, // stored in paise
+  amount: DataTypes.INTEGER, 
   status: {
     type: DataTypes.STRING,
-    defaultValue: 'pending' // 'pending', 'success', 'failed'
+    defaultValue: 'pending' 
   },
   type: {
-    type: DataTypes.STRING, // 'single' or 'subscription'
+    type: DataTypes.STRING, 
     allowNull: false
   },
   pgId: {
     type: DataTypes.INTEGER,
-    allowNull: true // Only needed if 'single'
+    allowNull: true 
   }
 }, { timestamps: true });
 

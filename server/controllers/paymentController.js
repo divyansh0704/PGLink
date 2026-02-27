@@ -18,12 +18,7 @@ exports.createOrder = async (req, res) => {
             currency: "INR",
             receipt: `rcpt_${Math.random()}`,
         })
-        // console.log("🧾 Payment values:");
-        // console.log("🔐 razorpayOrderId:", order.id);
-        // console.log("👤 userId:", req.user?.id);
-        // console.log("💰 amount:", order.amount);
-        // console.log("📦 type:", type);
-        // console.log("🏠 pgId:", type === 'single' ? req.body.pgId : null);
+
         await Payment.create({
             razorpayOrderId: order.id,
             userId: req.user.id,
