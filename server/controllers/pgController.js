@@ -42,13 +42,31 @@ exports.createPG = async (req, res) => {
 }
 // {include:User}
 exports.getAllPGs = async (req, res) => {
-    const pgs = await PG.findAll({
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 9;
+    const offset = (page - 1) * limit;
+
+    const { count, rows } = await PG.findAndCountAll({
+        limit,
+        offset,
         include: {
             model: User,
             attributes: ['id', 'name', 'email']
         }
-    });
-    res.json(pgs)
+    })
+    res.json({
+        totalItems: count,                    // total PGs in database
+        totalPages: Math.ceil(count / limit), // how many pages exist
+        currentPage: page,                    // which page we're on
+        pgs: rows                             // the actual PG data for this page
+    })
+     // const pgs = await PG.findAll({
+    //     include: {
+    //         model: User,
+    //         attributes: ['id', 'name', 'email']
+    //     }
+    // });
+    // res.json(pgs)
 };
 
 exports.getPGById = async (req, res) => {

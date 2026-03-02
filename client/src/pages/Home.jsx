@@ -17,64 +17,68 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
   const [pgList, setPgList] = useState([]);
   const [user, setUser] = useState(null);
   const [filteredPgs, setFilteredPgs] = useState([]);
-  const [allLoaded, setAllLoaded] = useState(false);
+  // const [allLoaded, setAllLoaded] = useState(false);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(9);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
+
 
   const tok = localStorage.getItem('token');
+  const fetchPGs = (pageToLoad = 1) => {
+    setLoading(true);
+    API.get(`/pgs/`, { params: { page: pageToLoad, limit } })
+      .then(res => {
+        const { pgs, totalPages: tp } = res.data;
 
-
-
-
+        setPgList(prev => pageToLoad === 1 ? pgs : [...prev, ...pgs]);
+        setFilteredPgs(prev => pageToLoad === 1 ? pgs : [...prev, ...pgs]);
+        setTotalPages(tp);
+        setPage(pageToLoad);
+      })
+      .catch(err => console.error("All PGs fetch error", err))
+      .finally(() => setLoading(false));
+  }
   useEffect(() => {
+    fetchPGs(1);
+
+
     const token = localStorage.getItem('token');
     if (token) {
-
-      API.get('/pgs/limited')
-        .then(res => {
-          // console.log("First PG city:", res.data[0]?.city);
-          setPgList(res.data);
-          setFilteredPgs(res.data);
-          setAllLoaded(false);
-        })
-        .catch(err => console.error("PG fetch error", err));
-
-      API.get('/users/me')
-        .then(res => setUser(res.data))
-        .catch(err => console.error("User fetch error", err));
-
-
-      API.get('/pgs/all')
-        .then(res => {
-          setPgList(res.data);
-          //  setAllLoaded(true); 
-        })
-        .catch(err => console.error("All PGs fetch error", err));
-
-    } else {
-      fetchPGs();
+      API.get('/users/me').then(r => setUser(r.data))
+        .catch(e => console.error(e));
     }
 
 
   }, []);
-  const fetchPGs = () => {
 
-    API.get('/pgs/')
-      .then(res => {
-        setPgList(res.data);
-        setFilteredPgs(res.data);
-        setAllLoaded(false);
-      })
-      .catch(err => console.error("PG fetch error", err));
+  useEffect(() => {
+    if (page > 1) {
+      fetchPGs(page);
+    }
+  }, [page])
 
-  }
-  const fetchAllPGs = () => {
-    API.get('/pgs/all')
-      .then(res => {
-        setPgList(res.data);
-        setFilteredPgs(res.data);
-        setAllLoaded(true);
-      })
-      .catch(err => console.error("Fetch all PGs error", err));
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 200
+      ) {
+
+        if (!loading && page < totalPages) {
+          setPage(prev => prev + 1);
+        }
+      }
+    };
+
+
+    window.addEventListener('scroll', handleScroll);
+
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [loading, page, totalPages]);
+
 
 
 
@@ -135,37 +139,37 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
 
   return (
     <>
-     
+
       <Hero onFilter={handleSearch} />
-      
+
       <PGFilter onFilter={handleFilter} />
       <div className="container">
         <div className="pg-grid">
 
 
-          {/* {filteredPgs.map(pg => (
-            <PGCard key={pg.id} pg={pg} user={user} setShowLogin={setShowLogin} />
-          ))} */}
-          {filteredPgs.length === 0
+
+          {/* {filteredPgs.length === 0
             ? [...Array(6)].map((_, i) => <ShimmerCard key={i} />) // Show shimmer until data
+            : filteredPgs.map(pg => (
+              <PGCard key={pg.id} pg={pg} user={user} setShowLogin={setShowLogin} />
+            ))} */}
+
+          {loading && filteredPgs.length === 0
+            ? [...Array(6)].map((_, i) => <ShimmerCard key={i} />)
             : filteredPgs.map(pg => (
               <PGCard key={pg.id} pg={pg} user={user} setShowLogin={setShowLogin} />
             ))}
 
-        </div>
-        <div style={{ textAlign: 'center', marginTop: '20px' }} className='show-rect'>
-          {tok && !allLoaded && (
-            <button onClick={fetchAllPGs} className="btn-show-all">
-              Show all PGs
-            </button>)}
+          {loading && filteredPgs.length > 0 && (
+            [...Array(3)].map((_, i) => <ShimmerCard key={`loading-${i}`} />)
+          )}
 
         </div>
-        {/* {isSidebarOpen && <div className="backdrop" ></div>} */}
 
 
       </div>
-      <AdBanner/>
-      {/* <SubscriptionBanner/> */}
+      <AdBanner />
+
       <Footer />
 
     </>
