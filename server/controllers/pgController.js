@@ -1,4 +1,5 @@
 const { PG, User, UserUnlockedPGs } = require("../models");
+const { Op } = require("sequelize");
 
 const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dkieieuoi/image/upload/v1754643154/pg_images/jag8zcpg1t1cm63r59uj.png";
 
@@ -45,8 +46,19 @@ exports.getAllPGs = async (req, res) => {
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 9;
     const offset = (page - 1) * limit;
+    const search = req.query.q;
+    const where = {};
+    if (search) {
+        where[Op.or] = [
+            { title: { [Op.iLike]: `%${search}%` } },
+            { address: { [Op.iLike]: `%${search}%` } },
+            { city: { [Op.iLike]: `%${search}%` } },
+            { collegeName: { [Op.iLike]: `%${search}%` } },
+        ]
 
+    }
     const { count, rows } = await PG.findAndCountAll({
+        where,
         limit,
         offset,
         include: {
@@ -60,7 +72,7 @@ exports.getAllPGs = async (req, res) => {
         currentPage: page,                    // which page we're on
         pgs: rows                             // the actual PG data for this page
     })
-     // const pgs = await PG.findAll({
+    // const pgs = await PG.findAll({
     //     include: {
     //         model: User,
     //         attributes: ['id', 'name', 'email']

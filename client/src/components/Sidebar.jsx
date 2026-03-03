@@ -86,11 +86,11 @@ const Sidebar = ({ isOpen, setIsOpen, openDashboard }) => {
 
 
 
-          {localStorage.getItem("token") && (
+          {/* {localStorage.getItem("token") && (
             <Link className={`sidebar-item log-color ${isOpen ? 'hifted' : ''}`} onClick={handleLogout}>
               <LogOut size={21.6} />{isOpen && "Logout"}
             </Link>
-          )}
+          )} */}
 
         </div>
 

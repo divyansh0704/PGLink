@@ -22,12 +22,13 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
   const [limit] = useState(9);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [currentSearch, setCurrentSearch] = useState('');
 
 
   const tok = localStorage.getItem('token');
-  const fetchPGs = (pageToLoad = 1) => {
+  const fetchPGs = (pageToLoad = 1,search = '') => {
     setLoading(true);
-    API.get(`/pgs/`, { params: { page: pageToLoad, limit } })
+    API.get(`/pgs/`, { params: { page: pageToLoad, limit, q:search } })
       .then(res => {
         const { pgs, totalPages: tp } = res.data;
 
@@ -54,9 +55,9 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
 
   useEffect(() => {
     if (page > 1) {
-      fetchPGs(page);
+      fetchPGs(page,currentSearch);
     }
-  }, [page])
+  }, [page,currentSearch])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,33 +86,16 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
 
 
   const handleSearch = (searchText) => {
-    const lowerCaseSearch = searchText.toLowerCase();
-    const filtered = pgList.filter(pg =>
-      pg.title?.toLowerCase().includes(lowerCaseSearch) ||
-      pg.address?.toLowerCase().includes(lowerCaseSearch) ||
-      pg.city?.toLowerCase().includes(lowerCaseSearch) ||
-      pg.collegeName?.toLowerCase().includes(lowerCaseSearch)
-
-    )
-
-    setFilteredPgs(filtered);
+   
+    setCurrentSearch(searchText);
+    setPage(1);
+    fetchPGs(1, searchText);
   }
 
-  const handleFilter = ({ college, maxRent, sortBy }) => {
+  const handleFilter = ({ sortBy }) => {
 
     let results = [...pgList];
-    // let results = filteredPgs.length ? [...filteredPgs] : [...pgList];
-
-
-    if (college) {
-      results = results.filter(pg =>
-        pg.collegeName.toLowerCase().includes(college.toLowerCase())
-      );
-    }
-
-    if (maxRent) {
-      results = results.filter(pg => pg.rent <= Number(maxRent));
-    }
+    
 
 
     if (sortBy === 'college') {

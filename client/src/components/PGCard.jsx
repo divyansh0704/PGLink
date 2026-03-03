@@ -5,6 +5,7 @@ import loadRazorpay from '../utils/razorpay'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
+import { capitalize } from '../utils/capitalize'
 
 const PGCard = ({ pg, user, setShowLogin }) => {
     const sanitizedNumber = pg.contactNumber.replace(/[^\d]/g, '');
@@ -57,8 +58,8 @@ const PGCard = ({ pg, user, setShowLogin }) => {
 
                 <div className="pg-card-content">
 
-                    <h3>{pg.title}</h3>
-                    <p>{pg.address},{pg.city}</p>
+                    <h3>{capitalize(pg.title)}</h3>
+                    <p>{capitalize(pg.address)},{capitalize(pg.city)}</p>
                     <div className="card-info">
                         <p>{pg.collegeName} ({pg.distanceKm} Km)</p>
                         <p> ₹{pg.rent}/month</p>
