@@ -3,17 +3,16 @@ const { initDB } = require("./models");
 const userRoutes = require("./routes/userRoutes");
 const pgRoutes = require("./routes/pgRoutes")
 const paymentRoutes = require('./routes/paymentRoutes');
+const compression = require('compression');
 const cors = require('cors');
 const path = require("path");
 
 const PORT = 3009;
-
-
-
-
 const app = express();
 
 require("dotenv").config();
+app.use(compression());
+
 app.use(express.json())
 app.use(cors())
 
