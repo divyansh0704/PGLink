@@ -23,6 +23,12 @@ app.use("/api/users", userRoutes);
 app.use("/api/pgs", pgRoutes);
 app.use('/api/payment', paymentRoutes);
 
+app.use((req,res,next)=>{
+    res.status(404).json({error:'not found'})
+})
+
+const errorHandler = require("./middleware/errorHandler");
+app.use(errorHandler)
 
 
 app.get("/", (req, res) => {

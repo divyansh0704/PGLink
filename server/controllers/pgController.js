@@ -1,21 +1,13 @@
 const { PG, User, UserUnlockedPGs } = require("../models");
 const { Op } = require("sequelize");
+const asyncHandler = require("../utils/asyncHandler");
+
 
 const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dkieieuoi/image/upload/v1754643154/pg_images/jag8zcpg1t1cm63r59uj.png";
 
 
-exports.createPG = async (req, res) => {
-    try {
+exports.createPG = asyncHandler( async (req, res) => {
 
-        //      console.log("Request received");
-        // console.log("Body:", req.body);
-        // console.log("File:", req.file);
-        // let imageUrl;
-        // if (req.file) {
-        //     imageUrl = `/uploads/${req.file.filename}`;
-        // } else {
-        //     imageUrl = `/uploads/default.png`;
-        // }
         let imageUrl;
 
         if (req.file) {
@@ -37,12 +29,10 @@ exports.createPG = async (req, res) => {
             imageUrl
         });
         res.status(201).json({ message: "PG created successfully", pg });
-    } catch (err) {
-        res.status(500).json({ message: "Error creating PG", error: err });
-    }
-}
+
+})
 // {include:User}
-exports.getAllPGs = async (req, res) => {
+exports.getAllPGs =asyncHandler( async (req, res) => {
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 9;
     const offset = (page - 1) * limit;
@@ -67,10 +57,10 @@ exports.getAllPGs = async (req, res) => {
         }
     })
     res.json({
-        totalItems: count,                    // total PGs in database
-        totalPages: Math.ceil(count / limit), // how many pages exist
-        currentPage: page,                    // which page we're on
-        pgs: rows                             // the actual PG data for this page
+        totalItems: count,                    
+        totalPages: Math.ceil(count / limit), 
+        currentPage: page,                    
+        pgs: rows                             
     })
     // const pgs = await PG.findAll({
     //     include: {
@@ -79,20 +69,20 @@ exports.getAllPGs = async (req, res) => {
     //     }
     // });
     // res.json(pgs)
-};
+});
 
-exports.getPGById = async (req, res) => {
+exports.getPGById =asyncHandler( async (req, res) => {
     // console.log("Request URL:", req.url);
     const pgId = req.params.id;
     console.log("pgid : ", pgId);
     const pg = await PG.findByPk(pgId);
 
     res.json(pg);
-};
+});
 
-exports.getPGByOwner = async (req, res) => {
+exports.getPGByOwner =asyncHandler( async (req, res) => {
 
-    try {
+    
         // console.log("Fetching PGs for ownerId:", req.user.id);
         const pgs = await PG.findAll({
             where: { ownerId: req.user.id }
@@ -102,14 +92,11 @@ exports.getPGByOwner = async (req, res) => {
 
         res.json(pgs);
 
-    } catch (err) {
-        res.status(500).json({ message: "Error fetching PGs by owner", error: err });
+    
 
-    }
-
-}
-exports.deletePG = async (req, res) => {
-    try {
+})
+exports.deletePG =asyncHandler( async (req, res) => {
+    
         const pgId = req.params.id;
         console.log(pgId);
         const pg = await PG.findByPk(pgId);
@@ -125,16 +112,12 @@ exports.deletePG = async (req, res) => {
         res.json({ message: 'PG deleted successfully' });
 
 
-    } catch (err) {
-        console.error('Delete PG Error:', err);
-        res.status(500).json({ message: 'Server error' });
+    
 
-    }
+})
 
-}
-
-exports.updatePG = async (req, res) => {
-    try {
+exports.updatePG =asyncHandler( async (req, res) => {
+    
         const pgId = req.params.id;
         const existingPG = await PG.findByPk(pgId);
 
@@ -162,14 +145,11 @@ exports.updatePG = async (req, res) => {
         await existingPG.save();
 
         res.json(existingPG);
-    } catch (err) {
-        console.error('Update PG Error:', err);
-        res.status(500).json({ message: 'Server error' });
-    }
-};
+   
+});
 
-exports.unlockedPG = async (req, res) => {
-    try {
+exports.unlockedPG =asyncHandler( async (req, res) => {
+   
         const userId = req.user.id;
         const currentDate = new Date();
 
@@ -185,32 +165,24 @@ exports.unlockedPG = async (req, res) => {
 
         const pgList = unlocked.map(entry => entry.PG);
         res.json(pgList);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server Error' });
-    }
-};
-exports.limited = async (req, res) => {
-    try {
+   
+});
+exports.limited =asyncHandler( async (req, res) => {
         const pgs = await PG.findAll({
             limit: 12,
             order: [['createdAt', 'DESC']],
         });
         res.json(pgs);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch PGs' });
-    }
-};
-exports.allPGs = async (req, res) => {
-    try {
+    
+});
+exports.allPGs =asyncHandler( async (req, res) => {
+    
         const allPgs = await PG.findAll({
             order: [['createdAt', 'DESC']],
         });
         res.json(allPgs);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch all PGs' });
-    }
-};
+    
+});
 
 
 

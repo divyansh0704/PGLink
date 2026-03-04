@@ -3,16 +3,17 @@ const { User } = require("../models");
 const { UserUnlockedPGs } = require("../models")
 const { Payment } = require("../models")
 const {Op} = require("sequelize");
+const asyncHandler = require("../utils/asyncHandler");
 
 
-exports.createOrder = async (req, res) => {
+exports.createOrder =asyncHandler( async (req, res) => {
 
     const { type } = req.body;
     const amount = type === "single" ? 100 : 1000;
 
 
 
-    try {
+   
         const order = await razorpay.orders.create({
             amount: amount,
             currency: "INR",
@@ -29,16 +30,14 @@ exports.createOrder = async (req, res) => {
         res.status(201).json({ orderId: order.id, amount: order.amount });
 
 
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to create Razorpay order' });
-    }
-}
+   
+})
 
-exports.verifyPaymentAndUnlock = async (req, res) => {
+exports.verifyPaymentAndUnlock =asyncHandler( async (req, res) => {
     const {  pgId, type } = req.body;
     const userId = req.user.id;
 
-    try {
+    
         const user = await User.findByPk(userId);
         const payment = await Payment.findOne({
             where: {
@@ -68,8 +67,5 @@ exports.verifyPaymentAndUnlock = async (req, res) => {
         }
         res.json({ success: true })
 
-    } catch (err) {
-        // res.status(500).json({ error: 'Failed to verify payment' });
-        res.status(500).json({ error: 'Failed to verify payment', message: err.message });
-    }
-}
+    
+})

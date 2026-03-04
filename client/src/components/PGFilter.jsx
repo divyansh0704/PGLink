@@ -4,8 +4,7 @@ import "../styles/filter.css"
 
 const PGFilter = ({ onFilter }) => {
 
-    // const [college, setCollege] = useState('');
-    // const [maxRent, setMaxRent] = useState('');
+   
     const [sortBy, setSortBy] = useState('college');
 
     const handleApplyFilters = () => {
@@ -14,21 +13,7 @@ const PGFilter = ({ onFilter }) => {
     return (
 
         <div className="filter-bar">
-            {/* <div className="filter-group">
-                <label>Filters:</label>
-                <input
-                    type="text"
-                    placeholder="College name"
-                    value={college}
-                    onChange={e => setCollege(e.target.value)}
-                />
-                <input
-                    type="number"
-                    placeholder="Max Rent"
-                    value={maxRent}
-                    onChange={e => setMaxRent(e.target.value)}
-                />
-            </div> */}
+            
 
             <div className="sort-group">
                 <label>Sort by:</label>

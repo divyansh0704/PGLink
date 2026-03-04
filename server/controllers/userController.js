@@ -1,10 +1,12 @@
 const { User, PG } = require("../models");
 const generateToken = require("../utils/generateToken");
 const bcrypt = require('bcrypt');
+const asyncHandler = require("../utils/asyncHandler");
 
 
-exports.register = async (req, res) => {
-    try {
+
+exports.register =asyncHandler( async (req, res) => {
+    
         const { name, email, password, role } = req.body;
         const existingUser = await User.findOne({ where: { email } });
         if (existingUser) {
@@ -14,19 +16,14 @@ exports.register = async (req, res) => {
         const user = await User.create({ name, email, password: hashedPassword, role });
         const token = generateToken(user.id);
         res.status(201).json({ message: "User created successfully", user, token });
-    } catch (err) {
-        res.status(500).json({ message: "Error creating user", err });
-        
-    }
-}
+   
+})
 
-exports.login = async (req, res) => {
-    try {
+exports.login =asyncHandler( async (req, res) => {
+  
         const { email, password } = req.body;
         const user = await User.findOne({ where: { email } });
-        // if (!user || user.password !== password) {
-        //     return res.status(401).json({ message: "Invalid email or password" });
-        // }
+        
         if (!user) {
             return res.status(401).json({ message: "User not found" });
         }
@@ -40,13 +37,11 @@ exports.login = async (req, res) => {
             user,
             token
         });
-    } catch (err) {
-        res.status(500).json({ message: "Error logging in user", err });
-    }
-}
+   
+})
 
-exports.getCurrentUser = async (req, res) => {
-    try {
+exports.getCurrentUser =asyncHandler( async (req, res) => {
+    
         const user = await User.findByPk(req.user.id, {
             include: {
                 model: PG,
@@ -73,13 +68,11 @@ exports.getCurrentUser = async (req, res) => {
         console.log("User from token:", req.user); // see what's coming
         // res.json(req.user);
 
-    } catch (err) {
-        res.status(500).json({ message: "Error getting current user", err });
-    }
-}
+    
+})
 
-exports.updateUser = async (req, res) => {
-    try {
+exports.updateUser =asyncHandler( async (req, res) => {
+    
         const { oldPassword, newPassword } = req.body;
         if (!oldPassword || !newPassword) {
             return res.status(400).json({ message: "Both old and new password required" });
@@ -97,7 +90,5 @@ exports.updateUser = async (req, res) => {
         await user.save();
         res.json({ message: "Profile updated successfully!" });
 
-    } catch (err) {
-        res.status(500).json({ error: "Server error" });
-    }
-}
+    
+})
