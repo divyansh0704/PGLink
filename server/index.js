@@ -7,7 +7,7 @@ const compression = require('compression');
 const cors = require('cors');
 const path = require("path");
 
-const PORT = 3009;
+const PORT =  process.env.PORT || 3009;
 const app = express();
 
 require("dotenv").config();
