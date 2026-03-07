@@ -39,7 +39,16 @@ const PG = sequelize.define('PG', {
             key: 'id'
         }
     }
-}, { timestamps: true });
+}, { timestamps: true,
+    indexes:[
+        {fields:['city']},
+        {fields:['collegeName']},
+        {fields:['rent']},
+        {fields:['ownerId']},
+        {fields:['distanceKm']},
+        {fields:['createdAt']}
+    ]
+ });
 
 
 PG.belongsTo(User, { foreignKey: 'ownerId' }); 

@@ -16,7 +16,13 @@ const UserUnlockedPGs = sequelize.define('UserUnlockedPGs', {
     type: DataTypes.DATE,
     allowNull: true
   }
-}, { timestamps: true });
+}, { timestamps: true ,
+  indexes:[
+    {fields:['userId']},
+    {fields:['pgId']},
+    {fields:['userId','expiresAt']}
+  ]
+});
 
 User.belongsToMany(PG, { through: UserUnlockedPGs, foreignKey: 'userId',as: 'pgs' });
 PG.belongsToMany(User, { through: UserUnlockedPGs, foreignKey: 'pgId',as: 'users' });
