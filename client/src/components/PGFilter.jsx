@@ -21,7 +21,6 @@ const PGFilter = ({ onFilter }) => {
                     value={sortBy}
                     onChange={e => {
                         setSortBy(e.target.value);
-                        handleApplyFilters();
                     }}
                 >
                     <option value="college">College</option>

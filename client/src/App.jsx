@@ -1,22 +1,23 @@
 import { Routes, Route } from "react-router-dom"
-import { useState } from "react"
+import { useState,lazy,Suspense } from "react"
 import Navbar from "./components/Navbar"
-import Home from "./pages/Home"
-import Register from "./pages/Register"
-import Login from "./pages/Login"
+const Home =lazy(()=>import( "./pages/Home"));
+const Register =lazy(()=>import( "./pages/Register"));
+const Login =lazy(()=>import( "./pages/Login"));
 import "./styles/variable.css"
-import Dashboard from "./pages/Dashboard"
+const Dashboard =lazy(()=>import( "./pages/Dashboard"));
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from "./components/Sidebar"
-import MyListings from "./pages/MyListings"
-import UnlockedPGs from "./pages/UnlockedPGs"
-import Description from "./pages/Description"
-import SettingsForm from "./pages/SettingForm"
-import Terms from "./pages/Terms"
-import Services from "./pages/Services"
-import Privacy from "./pages/Privacy"
-import Contact from "./pages/Contact"
+const MyListings =lazy(()=>import( "./pages/MyListings"));
+const UnlockedPGs =lazy(()=>import( "./pages/UnlockedPGs"));
+const Description =lazy(()=>import( "./pages/Description"));
+const SettingsForm =lazy(()=>import( "./pages/SettingForm"));
+const Terms =lazy(()=>import( "./pages/Terms"));
+const Services =lazy(()=>import( "./pages/Services"));
+const Privacy =lazy(()=>import( "./pages/Privacy"));
+const Contact =lazy(()=>import( "./pages/Contact"));
+import Spinner from "./components/Spinner";
 
 
 
@@ -35,6 +36,8 @@ function App() {
       <div className={`main-content ${isSidebarOpen ? 'shifted' : ''}`}>
         <Navbar isSidebarOpen={isSidebarOpen} openLogin={() => setShowLogin(true)} setIsOpen={setIsSidebaropen} 
            />
+          <Suspense fallback={<Spinner />}>
+          
         <Routes>
           <Route path="/" element={<Home setShowLogin={() => setShowLogin(true)} isSidebarOpen={isSidebarOpen} />} />
           <Route path="/my-listings"  element={<MyListings />} />
@@ -50,6 +53,7 @@ function App() {
 
 
         </Routes>
+        </Suspense>
         {showRegister && (
           <Register
             onClose={() => setShowRegister(false)}
@@ -60,7 +64,7 @@ function App() {
 
           />
         )}
-        {/* {showSettings && (<SettingsForm onclose={()=>setShowSettings(false)}/>)} */}
+    
         
         {showLogin && (
           <Login

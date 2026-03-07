@@ -23,12 +23,13 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [currentSearch, setCurrentSearch] = useState('');
+  const [currentSort, setCurrentSort] = useState('');
 
 
   const tok = localStorage.getItem('token');
-  const fetchPGs = (pageToLoad = 1,search = '') => {
+  const fetchPGs = (pageToLoad = 1, search = '', sortBy = '') => {
     setLoading(true);
-    API.get(`/pgs/`, { params: { page: pageToLoad, limit, q:search } })
+    API.get(`/pgs/`, { params: { page: pageToLoad, limit, q: search, sortBy } })
       .then(res => {
         const { pgs, totalPages: tp } = res.data;
 
@@ -55,9 +56,9 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
 
   useEffect(() => {
     if (page > 1) {
-      fetchPGs(page,currentSearch);
+      fetchPGs(page, currentSearch, currentSort);
     }
-  }, [page,currentSearch])
+  }, [page, currentSearch, currentSort])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -86,39 +87,17 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
 
 
   const handleSearch = (searchText) => {
-   
+
     setCurrentSearch(searchText);
     setPage(1);
-    fetchPGs(1, searchText);
+    fetchPGs(1, searchText, currentSort);
   }
 
   const handleFilter = ({ sortBy }) => {
 
-    let results = [...pgList];
-    
-
-
-    if (sortBy === 'college') {
-
-      results.sort((a, b) => {
-        const clgA = (a.collegeName || '').toLowerCase();
-        const clgB = (b.collegeName || '').toLowerCase();
-        return clgA.localeCompare(clgB)
-      });
-    } else if (sortBy === 'city') {
-      results.sort((a, b) => {
-        const cityA = (a.city || '').toLowerCase();
-        const cityB = (b.city || '').toLowerCase();
-        return cityA.localeCompare(cityB);
-      });
-
-    } else if (sortBy === 'rentAsc') {
-      results.sort((a, b) => a.rent - b.rent);
-    } else if (sortBy === 'rentDesc') {
-      results.sort((a, b) => b.rent - a.rent);
-    }
-
-    setFilteredPgs(results);
+    setCurrentSort(sortBy);
+    setPage(1);
+    fetchPGs(1, currentSearch, sortBy);
   };
 
   return (
@@ -130,13 +109,6 @@ const Home = ({ setShowLogin, isSidebarOpen }) => {
       <div className="container">
         <div className="pg-grid">
 
-
-
-          {/* {filteredPgs.length === 0
-            ? [...Array(6)].map((_, i) => <ShimmerCard key={i} />) // Show shimmer until data
-            : filteredPgs.map(pg => (
-              <PGCard key={pg.id} pg={pg} user={user} setShowLogin={setShowLogin} />
-            ))} */}
 
           {loading && filteredPgs.length === 0
             ? [...Array(6)].map((_, i) => <ShimmerCard key={i} />)

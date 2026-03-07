@@ -37,6 +37,7 @@ exports.getAllPGs =asyncHandler( async (req, res) => {
     const limit = parseInt(req.query.limit, 10) || 9;
     const offset = (page - 1) * limit;
     const search = req.query.q;
+    const sortBy = req.query.sortBy || "college";
     const where = {};
     if (search) {
         where[Op.or] = [
@@ -47,10 +48,26 @@ exports.getAllPGs =asyncHandler( async (req, res) => {
         ]
 
     }
+    let order;
+    switch (sortBy) {
+        case 'rentAsc':
+            order = [['rent', 'ASC']];
+            break;
+        case 'rentDesc':
+            order = [['rent', 'DESC']];
+            break;
+        case 'city':
+            order = [['city', 'ASC']];
+            break;
+        default:
+            order = [['collegeName', 'ASC']];
+            break;
+    }
     const { count, rows } = await PG.findAndCountAll({
         where,
         limit,
         offset,
+        order,
         include: {
             model: User,
             attributes: ['id', 'name', 'email']
