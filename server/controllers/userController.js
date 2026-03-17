@@ -65,7 +65,7 @@ exports.getCurrentUser =asyncHandler( async (req, res) => {
             isSubscribed: user.isSubscribed,
             unlockedPGs
         });
-        console.log("User from token:", req.user); // see what's coming
+        // console.log("User from token:", req.user); 
         // res.json(req.user);
 
     

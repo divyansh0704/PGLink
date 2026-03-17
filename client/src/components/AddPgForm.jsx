@@ -3,16 +3,17 @@ import { useState } from 'react'
 import "../styles/addPgForm.css"
 import API from '../utils/api'
 import { toast } from 'react-toastify'
+// import LocationPicker from './LocationPicker'
 const AddPgForm = () => {
     const [form, setForm] = useState({
         title: '',
-        collegeName: '',
+        // collegeName: '',
         district: '',
         pincode: '',
         state: '',
         city: '',
         address: '',
-        distanceKm: '',
+        // distanceKm: '',
         rent: '',
         contactNumber: '',
         amenities: {
@@ -24,8 +25,9 @@ const AddPgForm = () => {
             studyTable: false,
         },
     })
-
+    const [location, setLocation] = useState({ lat: null, lng: null });
     const [photo, setPhoto] = useState(null)
+    const [isFetchingLocation, setIsFetchingLocation] = useState(false);
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         if (name in form.amenities) {
@@ -43,6 +45,7 @@ const AddPgForm = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+       
 
         try {
             const token = localStorage.getItem('token');
@@ -51,15 +54,21 @@ const AddPgForm = () => {
             const formData = new FormData();
 
             formData.append('title', form.title);
-            formData.append('collegeName', form.collegeName);
+            // formData.append('collegeName', form.collegeName);
             formData.append('district', form.district);
             formData.append('pincode', form.pincode);
             formData.append('state', form.state);
             formData.append('city', form.city);
             formData.append('address', form.address);
-            formData.append('distanceKm', form.distanceKm);
+            // formData.append('distanceKm', form.distanceKm);
             formData.append('rent', form.rent);
             formData.append('contactNumber', contact);
+            if (location.lat && location.lng) {
+                formData.append('latitude', location.lat);
+                formData.append('longitude', location.lng);
+
+            }
+
 
 
             formData.append('amenities', JSON.stringify(form.amenities));
@@ -82,13 +91,13 @@ const AddPgForm = () => {
             // alert('PG listed successfully!');
             setForm({
                 title: '',
-                collegeName: '',
+                // collegeName: '',
                 district: '',
                 pincode: '',
                 state: '',
                 city: '',
                 address: '',
-                distanceKm: '',
+                // distanceKm: '',
                 rent: '',
                 contactNumber: '',
                 amenities: {
@@ -101,15 +110,57 @@ const AddPgForm = () => {
                 },
             });
             setPhoto(null);
+            setLocation({ lat: null, lng: null });
         } catch (err) {
             console.error(err);
             alert('Error listing PG');
         }
     };
+    // const handleLocationChange = (loc) => {
+    //     setLocation(loc);
+    // }
+    const handleFetchLocation = () => {
+        if (!navigator.geolocation) {
+            toast.error("Geolocation is not supported by your browser.");
+            return;
+        }
+
+        setIsFetchingLocation(true);
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude, longitude } = position.coords;
+            setLocation({ lat: latitude, lng: longitude });
+
+
+            try {
+                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                const data = await response.json();
+                if (data && data.address) {
+                    setForm(prevForm => ({
+                        ...prevForm,
+                        address: data.display_name || prevForm.address,
+                        city: data.address.city || data.address.town || prevForm.city,
+                        state: data.address.state || prevForm.state,
+                        pincode: data.address.postcode || prevForm.pincode,
+                        district: data.address.county || prevForm.district,
+                    }));
+                    toast.success("Location fetched and address fields populated!");
+                }
+            } catch (error) {
+                toast.error("Could not fetch address details for the location.");
+                console.error("Reverse geocoding error:", error);
+            } finally {
+                setIsFetchingLocation(false);
+            }
+        }, (error) => {
+            toast.error("Unable to retrieve your location. Please grant permission or enter manually.");
+            console.error("Geolocation error:", error);
+            setIsFetchingLocation(false);
+        });
+    }
     return (
         <div className="addpg-form-wrapper">
             <form className="addpg-form addbox-content" onSubmit={handleSubmit}>
-                {/* <div className="close-btn" onClick={onClosePg}>×</div> */}
+                
                 <h2>List Your PG</h2>
                 <div>
                     <input
@@ -121,22 +172,36 @@ const AddPgForm = () => {
                         required
                     />
 
-                    <input
-                        type="text"
-                        name="collegeName"
-                        placeholder="Nearby College/Other_Identity"
-                        value={form.collegeName}
-                        onChange={handleChange}
-                        required
-                    />
+                    
                     <input
                         type="number"
-                        name="distanceKm"
-                        placeholder="Distance from college (in KM)"
-                        value={form.distanceKm}
+                        name="rent"
+                        placeholder="Monthly Rent (₹)"
+                        value={form.rent}
                         onChange={handleChange}
                         required
                     />
+
+
+                    <input
+                        type="text"
+                        name="contactNumber"
+
+                        placeholder="Enter 10-digit number"
+                        maxLength={10}
+                        pattern="[0-9]{10}"
+                        value={form.contactNumber}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="location-group">
+                    <button type="button" onClick={handleFetchLocation} disabled={isFetchingLocation} className="location-btn">
+                        {isFetchingLocation ? 'Fetching...' : ' Use My Current Location'}
+                    </button>
+                    <p className="location-info">
+                        {location.lat ? `Coordinates set: Lat: ${location.lat.toFixed(4)}, Lng: ${location.lng.toFixed(4)}` : 'Or, fill in the address manually below.'}
+                    </p>
                 </div>
                 <div>
                     <textarea
@@ -196,40 +261,10 @@ const AddPgForm = () => {
                     </div>
                 </div>
 
+                
+               
                 <div>
-
-                    <input
-                        type="number"
-                        name="rent"
-                        placeholder="Monthly Rent (₹)"
-                        value={form.rent}
-                        onChange={handleChange}
-                        required
-                    />
-
-
-                    <input
-                        type="text"
-                        name="contactNumber"
-
-                        placeholder="Enter 10-digit number"
-                        maxLength={10}
-                        pattern="[0-9]{10}"
-                        value={form.contactNumber}
-                        onChange={handleChange}
-                        required
-                    />
-
-                </div>
-                <div>
-
-
-
-
-
-                </div>
-                <div>
-                    {/* <input type="file" onChange={handlePhotoChange} accept="image/*" /> */}
+                   
                     <label>
                         Upload PG Photo:
                         <input type="file" accept="image/*" onChange={handlePhotoChange} />
