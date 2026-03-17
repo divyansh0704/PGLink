@@ -24,9 +24,11 @@ const PG = sequelize.define('PG', {
         type: DataTypes.TEXT,
         allowNull: true
     },
-
-    collegeName: DataTypes.STRING,
-    distanceKm: DataTypes.FLOAT,
+    location:{
+        type:DataTypes.GEOMETRY('POINT'),
+        allowNull:true
+    },
+   
     rent: DataTypes.FLOAT,
     amenities: DataTypes.JSON,
     imageUrl: DataTypes.STRING,
@@ -41,11 +43,9 @@ const PG = sequelize.define('PG', {
     }
 }, { timestamps: true,
     indexes:[
-        {fields:['city']},
-        {fields:['collegeName']},
+        {fields:['city']},      
         {fields:['rent']},
         {fields:['ownerId']},
-        {fields:['distanceKm']},
         {fields:['createdAt']}
     ]
  });

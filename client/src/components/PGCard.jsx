@@ -21,7 +21,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                 autoClose: 2000,
             });
             setTimeout(() => {
-                setShowLogin(true); 
+                setShowLogin(true);
             }, 2000);
             return;
         }
@@ -61,8 +61,13 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                     <h3>{capitalize(pg.title)}</h3>
                     <p>{capitalize(pg.address)},{capitalize(pg.city)}</p>
                     <div className="card-info">
-                        <p>{pg.collegeName} ({pg.distanceKm} Km)</p>
-                        <p> ₹{pg.rent}/month</p>
+                        {/* <p>{pg.collegeName} ({pg.distanceKm} Km)</p>
+                        <p> ₹{pg.rent}/month</p> */}
+                        {pg.collegeName && pg.distanceKm != null ? (
+                            <p>{capitalize(pg.collegeName)} ({Number(pg.distanceKm).toFixed(1)} Km)</p>
+                        ) : null}
+                        <p>₹{pg.rent}/month</p>
+
                     </div>
                     <div className="amenities">
 

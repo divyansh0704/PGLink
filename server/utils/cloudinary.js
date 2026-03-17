@@ -17,7 +17,7 @@ const storage = new CloudinaryStorage({
 async function checkCloudinaryConnection() {
     try {
         const result = await cloudinary.api.ping();
-        console.log("✅ Cloudinary connected:", result);
+        // console.log("✅ Cloudinary connected:", result);
     } catch (error) {
         console.error("❌ Cloudinary connection failed:", error.message);
     }

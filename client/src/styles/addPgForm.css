@@ -1,5 +1,3 @@
-
-
 /* ============ Main Wrapper ============ */
 .addpg-form-wrapper {
   display: flex;
@@ -7,7 +5,7 @@
   padding: 2rem 1rem;
 }
 
-/* ============ Form Container ============ */
+
 .addpg-form {
   width: 100%;
   max-width: 900px;
@@ -20,7 +18,7 @@
   gap: 1.5rem;
 }
 
-/* ============ Headings ============ */
+
 .addpg-form h2 {
   text-align: center;
   font-size: 1.8rem;
@@ -28,14 +26,14 @@
 }
 
 /* ============ Input Groups ============ */
-.addpg-form > div {
+.addpg-form>div {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   width: 100%;
 }
 
-.addpg-form input{
+.addpg-form input {
   font-size: 1rem;
   padding: 0.7rem;
   border: 1px solid var(--border-color);
@@ -43,9 +41,42 @@
   flex: 1;
   width: 200px;
 }
-#amen input{
+
+#amen input {
   width: auto;
 }
+
+.location-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 0.5rem;
+  background-color: #f9f9f9;
+  margin-bottom: 1rem;
+  /* Add some space below */
+}
+
+.location-btn {
+  background-color: #2c6eaf;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.location-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .addpg-form textarea {
   font-size: 1rem;
   padding: 0.7rem;
@@ -56,11 +87,11 @@
 }
 
 .addpg-form textarea {
-  resize:none;
+  resize: none;
   width: 100%;
 }
 
-/* ============ Special Vertical Groups ============ */
+
 #spl {
   display: flex;
   flex: 1;
@@ -68,7 +99,7 @@
   flex-wrap: wrap;
 }
 
-/* ============ File Upload ============ */
+
 .addpg-form label input[type="file"] {
   display: block;
   margin-top: 0.5rem;
@@ -91,7 +122,7 @@
   font-weight: bold;
 }
 
-/* ============ Submit Button ============ */
+
 .addpg-form button {
   background-color: var(--button-bg);
   color: white;
@@ -119,7 +150,7 @@
     font-size: 1.5rem;
   }
 
-  .addpg-form > div {
+  .addpg-form>div {
     flex-direction: column;
   }
 
@@ -143,5 +174,3 @@
     width: 100%;
   }
 }
-
-
