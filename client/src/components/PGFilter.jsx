@@ -23,7 +23,7 @@ const PGFilter = ({ onFilter }) => {
                         setSortBy(e.target.value);
                     }}
                 >
-                    <option value="college">College</option>
+                    {/* <option value="college">College</option> */}
                     <option value="city">City</option>
                     <option value="rentAsc">Rent: Low to High</option>
                     <option value="rentDesc">Rent: High to Low</option>

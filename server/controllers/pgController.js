@@ -66,31 +66,38 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
     const limit = parseInt(req.query.limit, 10) || 9;
     const offset = (page - 1) * limit;
     const search = req.query.q;
+    const collegeId = req.query.collegeId;
     const sortBy = req.query.sortBy || "createdAt";
     const where = {};
     
     let order;
-    if (search) {
-        const college = await College.findOne({
-        // const colleges = await College.findAll({
+
+    let targetCollege = null;
+
+    
+    if (collegeId) {
+        targetCollege = await College.findByPk(collegeId);
+    } 
+    
+    else if (search) {
+        const colleges = await College.findAll({
             where: { name: { [Op.iLike]: `%${search}%` } }
         });
-        if(college){
-        // If multiple colleges match, ask the user to be more specific.
-        // if (colleges.length > 1) {
-        //     return res.json({
-        //         disambiguation: true,
-        //         colleges: colleges.map(c => ({ id: c.id, name: c.name, city: c.city, state: c.state }))
-        //     });
-        // }
 
-        // // If exactly one college matches, perform the distance search.
-        // if (colleges.length === 1) {
-        //     const college = colleges[0];
-            const collegeLocation = college.location;
+        if (colleges.length > 1) {
+            return res.json({
+                disambiguation: true,
+                colleges: colleges.map(c => ({ id: c.id, name: c.name, city: c.city, state: c.state }))
+            });
+        } else if (colleges.length === 1) {
+            targetCollege = colleges[0];
+        }
+    }
 
-            // FIX: Swap coordinates. Database likely has College as [Lat, Long], but PostGIS needs POINT(Long Lat).
-            // coordinates[1] is Longitude, coordinates[0] is Latitude.
+    if (targetCollege) {
+            const collegeLocation = targetCollege.location;
+
+            
             const collegeWkt = `POINT(${collegeLocation.coordinates[1]} ${collegeLocation.coordinates[0]})`;
 
             const { count, rows } = await PG.findAndCountAll({
@@ -115,7 +122,7 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
             })
             const pgsWithCollege = rows.map(pg => {
                 const pgJson = pg.toJSON();
-                pgJson.collegeName = college.name;
+                pgJson.collegeName = targetCollege.name;
                 return pgJson;
             });
 
@@ -125,9 +132,7 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
                 currentPage: page,
                 pgs: pgsWithCollege
             });
-        } 
-        // If no college matches, fall back to a general text search.
-        else {
+    } else if (search) {
             where[Op.or] = [
                 { title: { [Op.iLike]: `%${search}%` } },
                 { address: { [Op.iLike]: `%${search}%` } },
@@ -135,7 +140,7 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
             ];
         }
 
-    }
+    
 
     switch (sortBy) {
         case 'rentAsc':
@@ -168,7 +173,9 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
         pgs: rows
     })
 
-});
+
+
+})
 
 exports.getPGById = asyncHandler(async (req, res) => {
     // console.log("Request URL:", req.url);
