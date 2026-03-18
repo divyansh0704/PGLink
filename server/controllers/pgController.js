@@ -180,7 +180,7 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
 exports.getPGById = asyncHandler(async (req, res) => {
     // console.log("Request URL:", req.url);
     const pgId = req.params.id;
-    console.log("pgid : ", pgId);
+    // console.log("pgid : ", pgId);
     const pg = await PG.findByPk(pgId);
 
     res.json(pg);
