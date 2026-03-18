@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import API from "../utils/api";
 import "../styles/pgDescription.css";
 import SubscriptionBanner from "../components/SubscriptionBanner";
+import { capitalize } from "../utils/capitalize";
 import Footer from "../components/Footer";
 
 const Description = () => {
@@ -65,24 +66,24 @@ const Description = () => {
       <div className="pg-detailD">
         <img className="pg-detail-image" src={pg.imageUrl} alt={pg.title} onError={(e)=>{e.target.src='/uploads/default.png'}} />
         <div className="pg-detail-info">
-          <h1>{pg.title}</h1>
+          <h1>{capitalize(pg.title)}</h1>
            <div className="card-infoD">
-            <p> {pg.distanceKm}Km from {pg.collegeName}</p>
+            {/* <p> {pg.distanceKm}Km from {pg.collegeName}</p> */}
             <p><span>Rent: </span>₹{pg.rent}/month</p>
           </div>
-          <p className="muted"><span>State: </span>{pg.state}</p>
-          <p className="muted"><span>District: </span>{pg.district}</p>
-          <p className="muted"><span>City: </span>{pg.city}</p>
+          <p className="muted"><span>State: </span>{capitalize(pg.state)}</p>
+          <p className="muted"><span>District: </span>{capitalize(pg.district)}</p>
+          <p className="muted"><span>City: </span>{capitalize(pg.city)}</p>
           <p className="muted"><span>Pincode: </span>{pg.pincode}</p>
-          <p className="muted"><span>Address: </span>{pg.address}</p>
+          <p className="muted"><span>Address: </span>{capitalize(pg.address)}</p>
          
-          <h3>Amenities</h3>
+          {/* <h3>Amenities</h3> */}
           <div className="amenitiesD">
             {Object.entries(pg.amenities || {}).map(([k, v]) => v ? <span key={k} className="amenityDS">{k}</span> : null)}
           </div>
-          <div style={{ marginTop: 16 }}>
+          {/* <div style={{ marginTop: 16 }}>
             <Link to="/">← Back</Link>
-          </div>
+          </div> */}
           
         </div>
         

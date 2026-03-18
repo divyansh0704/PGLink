@@ -78,7 +78,7 @@
 
 .modal-content {
   position: relative;
-  background: var(--card-bg);
+  background: #f0f4f4;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0,0,0,0.2);

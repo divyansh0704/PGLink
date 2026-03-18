@@ -1,24 +1,27 @@
 import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom';
 import "../styles/hero.css"
 
-const Hero = ({onFilter}) => {
-  const [searchText,setSearchText] = useState('')
+const Hero = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchText, setSearchText] = useState(searchParams.get('q') || '');
 
   const handleChange = (e) => {
-    
-     const value = e.target.value;
-    setSearchText(value);
-    onFilter(value); 
+    setSearchText(e.target.value);
+  }
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchParams({ q: searchText });
   }
 
   return (
     <div className='hero-container'>
       <h1 className="hero-title">Find a PG Near Your College</h1>
-      <div className="hero-search-bar">
+      <form className="hero-search-bar" onSubmit={handleSearch}>
         <input type="text" placeholder='Search by College, City, Address, Title...' value={searchText} onChange={handleChange} />
-        {/* <button onClick={() => onFilter(searchText)}>Search</button> */}
-      </div>
+        <button type="submit">Search</button>
+      </form>
     </div>
   )
 }
