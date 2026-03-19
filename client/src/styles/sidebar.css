@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: var(--navbar-bg);
+    background: #024e4e;
     color: var(--primary-bg);
     overflow-x: hidden;
     transition: width 0.3s ease;
