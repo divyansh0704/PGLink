@@ -3,6 +3,7 @@ const { initDB } = require("./models");
 const userRoutes = require("./routes/userRoutes");
 const pgRoutes = require("./routes/pgRoutes")
 const paymentRoutes = require('./routes/paymentRoutes');
+const smsRoutes = require('./routes/smsRoutes');
 const compression = require('compression');
 const cors = require('cors');
 const path = require("path");
@@ -14,13 +15,15 @@ require("dotenv").config();
 app.use(compression());
 
 app.use(express.json())
+
+app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
 initDB();
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/api/users", userRoutes);
 app.use("/api/pgs", pgRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/sms', smsRoutes);
 
 app.use((req,res,next)=>{
     res.status(404).json({error:'not found'})
@@ -37,8 +40,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server started on ${PORT}`)
 })
-
-
-
-
-
