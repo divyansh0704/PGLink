@@ -43,15 +43,7 @@ a {
 
 }
 
-/* #profile{
- 
-} */
-/* .partition2 .profile{
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-} */
 
 .logo {
   font-size: 1.8rem;
@@ -423,7 +415,7 @@ a {
   .pg-card {
     display: flex;
     flex-direction: column;
-    height: 220px;
+    /* height: 220px; */
     width: 100vw;
     max-width: 90%;
     padding: 4px;

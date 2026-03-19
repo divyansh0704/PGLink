@@ -36,21 +36,12 @@ const Sidebar = ({ isOpen, setIsOpen, openDashboard }) => {
 
 
   }
-  //  useEffect(() => {
-  //   const handleResize = () => setIsMobile(window.innerWidth <= 768);
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
+
 
 
   return (
     <div className="sidebar-container">
-      {/* <motion.div
-          initial={{ x: 2 }} // Hidden (showing just 20px edge)
-          animate={{ x: isOpen ? 0 : 40 }} // Slide in/out
-          transition={{ type: "spring", stiffness: 80 }}
-           className=""
-        > */}
+
       {!isOpen && <div
         className="menu-toggleN"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -83,19 +74,7 @@ const Sidebar = ({ isOpen, setIsOpen, openDashboard }) => {
             </>
           )}
           <Link to="/unlocked" className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <Unlock size={18} /> {isOpen && "Unlocked PGs"}</Link>
-
-
-
-          {/* {localStorage.getItem("token") && (
-            <Link className={`sidebar-item log-color ${isOpen ? 'hifted' : ''}`} onClick={handleLogout}>
-              <LogOut size={21.6} />{isOpen && "Logout"}
-            </Link>
-          )} */}
-
         </div>
-
-        {/* </div> */}
-        {/* {isOpen && <div className="overlay" onClick={toggleSidebar}></div>} */}
       </div>
       {/* </motion.div> */}
     </div>
