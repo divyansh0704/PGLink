@@ -1,4 +1,4 @@
-# 🏠 PGLink
+# 🏠 PGLink 
 
 ### Distance-Based & Location-Verified PG Accommodation Discovery System
 
@@ -75,7 +75,7 @@ PGLink solves these problems by:
 
 ### Database
 
-* MySQL / MongoDB
+* MySQL 
 
 ### Additional Technologies
 
@@ -136,7 +136,7 @@ npm start
 ## 🌐 Deployment
 
 * Frontend: Vercel
-* Backend: Render / Railway / AWS
+* Backend: Render 
 
 ---
 
@@ -145,16 +145,13 @@ npm start
 * 🗺️ Google Maps Integration
 * ⭐ Reviews & Ratings System
 * 🤖 AI-based PG Recommendations
-* 💰 Advanced Filters (price, amenities, distance range)
+* 💰 Advanced Filters (amenities, ratings)
 
 ---
 
 ## 👨‍💻 Contributors
 
 * Divyansh
-* Gagandeep
-* Harsh Oberoi
-* Divyam
 
 ---
 
