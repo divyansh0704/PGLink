@@ -50,7 +50,7 @@ exports.getCurrentUser =asyncHandler( async (req, res) => {
                     attributes: [],
                     where: {
                         expiresAt: {
-                            [require('sequelize').Op.gt]: new Date() // Only include non-expired unlocks
+                            [require('sequelize').Op.gt]: new Date() 
                         }
                     }
                 }

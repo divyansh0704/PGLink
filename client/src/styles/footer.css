@@ -123,6 +123,7 @@
   }
   .footer {
     width: 90%;
+    padding-bottom: 60px;
   }
   .footer-section h4 {
     margin-bottom: 0.3rem;
