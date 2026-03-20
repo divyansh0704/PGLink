@@ -371,7 +371,7 @@ a {
   .main-content {
     /* transition: margin-left 0.3s ease; */
     margin-left: 0px;
-
+    padding-bottom: 70px;
   }
 
   .main-content.shifted {

@@ -67,12 +67,12 @@ const Sidebar = ({ isOpen, setIsOpen, openDashboard }) => {
 
 
           <Link to="/" className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <FaHome size={18} /> {isOpen && "Home"}</Link>
-          {user?.role === 'owner' && (
+          {/* {user?.role === 'owner' && ( */}
             <>
               <Link to="/dashboard" className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <FaPlus size={18} /> {isOpen && "Add PG"}</Link>
               <Link to="/my-listings" className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <Building2 size={19} /> {isOpen && "My Listings"}</Link>
             </>
-          )}
+          {/* )} */}
           <Link to="/unlocked" className={`sidebar-item ${isOpen ? 'hifted' : ''}`}> <Unlock size={18} /> {isOpen && "Unlocked PGs"}</Link>
         </div>
       </div>
