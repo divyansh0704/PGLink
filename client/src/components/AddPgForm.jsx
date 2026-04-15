@@ -3,8 +3,10 @@ import { useState } from 'react'
 import "../styles/addPgForm.css"
 import API from '../utils/api'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 // import LocationPicker from './LocationPicker'
 const AddPgForm = () => {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         title: '',
         // collegeName: '',
@@ -49,6 +51,18 @@ const AddPgForm = () => {
 
         try {
             const token = localStorage.getItem('token');
+            if(!token){
+                toast.error("Please login to list PG", {
+                    position: "top-right",
+                    autoClose: 2000,
+                });
+                setTimeout(() => {
+                    // navigate("/login");
+                    navigate("/")
+                    
+                }, 2000);
+                return
+            }
             const contact = `+91-${form.contactNumber}`
 
             const formData = new FormData();

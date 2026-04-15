@@ -16,6 +16,7 @@ const Register = ({ onClose, openLogin }) => {
   const register = async (e) => {
     e.preventDefault();
     try {
+      // console.log(formData);
       const res = await API.post("/users/register", formData);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       localStorage.setItem('token', res.data.token);
@@ -31,7 +32,8 @@ const Register = ({ onClose, openLogin }) => {
 
 
     } catch (err) {
-      toast.error(err.response?.data?.message || "Login failed", {
+      
+      toast.error(err.response?.data?.error || "Login failed", {
         position: "top-center",
       });
     }

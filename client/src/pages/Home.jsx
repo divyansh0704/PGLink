@@ -8,17 +8,25 @@ import PgResults from '../components/PgResults';
 import PGFilter from '../components/PGFilter';
 import Footer from '../components/Footer';
 import AdBanner from '../components/AdBanner';
-
+import Login from './Login';
+import { useNavigate } from 'react-router-dom';
 const Home = ({ setShowLogin }) => {
 
   const [user, setUser] = useState(null);
   const [currentSort, setCurrentSort] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
+    
     const token = localStorage.getItem('token');
+    // console.log(token);
     if (token) {
+      
       API.get('/users/me').then(r => setUser(r.data))
         .catch(e => console.error(e));
+    }else{
+      setShowLogin(true);
+      
     }
   }, []);
 
