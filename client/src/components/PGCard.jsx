@@ -1,10 +1,9 @@
 import React from 'react'
 import "../styles/global.css"
-import { Phone, MessageCircle } from "lucide-react"
+import { Phone, MessageCircle, MapPin, IndianRupee } from "lucide-react"
 import loadRazorpay from '../utils/razorpay'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
 import { capitalize } from '../utils/capitalize'
 
 const PGCard = ({ pg, user, setShowLogin }) => {
@@ -43,8 +42,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
         }
         loadRazorpay('single', pg.id, user.id);
     }
-    // console.log("Amenities Data:", pg.amenities);
-    // console.log("PG Data:", pg);
+  
 
     return (
 
@@ -71,7 +69,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                     </div>
                     <div className="amenities">
 
-                        {Object.entries(pg.amenities).map(([key, value]) => {
+                        {Object.entries(typeof pg.amenities === 'string' ? JSON.parse(pg.amenities) : (pg.amenities || {})).map(([key, value]) => {
                             if (!value) return null;
 
                             const labels = {

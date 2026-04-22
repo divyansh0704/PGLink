@@ -1,22 +1,28 @@
 
 /* Page form container */
 .modals {
-  max-width: 480px;
+  max-width: 90%;
   margin: 3rem auto 4rem auto;
   padding: 2rem 2.5rem;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* Modal content box */
-
-
-/* Heading */
+.modal-contents{
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  width: 60%;
+  /* border: 2px solid red; */
+}
 .modal-contents h2 {
   margin-bottom: 1.5rem;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   color: #333;
   font-weight: 600;
 }
@@ -25,11 +31,14 @@
 .kform {
   display: flex;
   flex-direction: column;
+  /* justify-content:flex-start; */
+  /* align-items: flex-start; */
   gap: 1.2rem;
+  width: 90%;
 }
 
 /* Input fields */
-.kform input[type="password"] {
+.kform input {
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 2px solid #ddd;
@@ -39,7 +48,7 @@
   font-family: inherit;
 }
 
-.kform input[type="password"]:focus {
+.kform input:focus {
   border-color: #4a90e2;
   box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
 }
@@ -54,6 +63,10 @@
   font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: inherit;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;;
 }
 
 
@@ -83,5 +96,11 @@
     padding: 1.5rem 1.8rem;
     width: 70%;
     max-width: 70%;
+  }
+  .modal-contents{
+    width: 100%;
+  }
+  .kform button{
+    width: 40%;
   }
 }

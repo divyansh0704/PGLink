@@ -79,7 +79,18 @@ const Description = () => {
          
           {/* <h3>Amenities</h3> */}
           <div className="amenitiesD">
-            {Object.entries(pg.amenities || {}).map(([k, v]) => v ? <span key={k} className="amenityDS">{k}</span> : null)}
+            {Object.entries(typeof pg.amenities === 'string' ? JSON.parse(pg.amenities) : (pg.amenities || {})).map(([k, v]) => {
+              if (!v) return null;
+              const labels = {
+                wifi: 'WiFi',
+                laundry: 'Laundry',
+                food: 'Food',
+                ac: 'AC',
+                waterCooler: 'Water Cooler',
+                studyTable: 'Study Table',
+              };
+              return <span key={k} className="amenityDS">{labels[k] || k}</span>;
+            })}
           </div>
           {/* <div style={{ marginTop: 16 }}>
             <Link to="/">← Back</Link>

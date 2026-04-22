@@ -6,14 +6,6 @@ const multer = require('multer');
 const path = require("path");
 const { storage } = require("../utils/cloudinary");
 
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads/');
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null,Date.now()+path.extname(file.originalname));
-//     },
-// })
 
 const upload = multer({
     storage,
@@ -30,7 +22,7 @@ router.get('/unlocked', protect, unlockedPG);
 
 router.delete("/:id", protect, deletePG);
 router.get("/:id", protect, getPGById);
-router.put("/:id", protect, updatePG);
+router.put("/:id", protect,upload.single('photo'), updatePG);
 
 
 

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import "../styles/addPgForm.css"
 import API from '../utils/api'
 import { toast } from 'react-toastify'
+import { MapPin, Upload, PlusCircle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 // import LocationPicker from './LocationPicker'
 const AddPgForm = () => {
@@ -15,7 +16,6 @@ const AddPgForm = () => {
         state: '',
         city: '',
         address: '',
-        // distanceKm: '',
         rent: '',
         contactNumber: '',
         amenities: {
@@ -173,153 +173,120 @@ const AddPgForm = () => {
     }
     return (
         <div className="addpg-form-wrapper">
-            <form className="addpg-form addbox-content" onSubmit={handleSubmit}>
-                
-                <h2>List Your PG</h2>
-                <div>
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="PG Title"
-                        value={form.title}
-                        onChange={handleChange}
-                        required
-                    />
-
-                    
-                    <input
-                        type="number"
-                        name="rent"
-                        placeholder="Monthly Rent (₹)"
-                        value={form.rent}
-                        onChange={handleChange}
-                        required
-                    />
-
-
-                    <input
-                        type="text"
-                        name="contactNumber"
-
-                        placeholder="Enter 10-digit number"
-                        maxLength={10}
-                        pattern="[0-9]{10}"
-                        value={form.contactNumber}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="location-group">
-                    <button type="button" onClick={handleFetchLocation} disabled={isFetchingLocation} className="location-btn">
-                        {isFetchingLocation ? 'Fetching...' : ' Use My Current Location'}
-                    </button>
-                    <p className="location-info">
-                        {location.lat ? `Coordinates set: Lat: ${location.lat.toFixed(4)}, Lng: ${location.lng.toFixed(4)}` : 'Or, fill in the address manually below.'}
-                    </p>
-                </div>
-                <div>
-                    <textarea
-                        placeholder="Address"
-                        name="address"
-                        value={form.address}
-                        onChange={handleChange}
-                        rows="3"
-                        required
-                    />
-                    <div id='spl'>
-                        <input
-                            type="text"
-                            name="city"
-                            placeholder="City"
-                            value={form.city}
-                            onChange={handleChange}
-                            required
-                        />
-                        <input
-                            type="number"
-                            name="pincode"
-                            placeholder="e.g:134204"
-                            value={form.pincode}
-                            maxLength={6}
-                            onChange={handleChange}
-                            required
-                        />
-
-
-                    </div>
-                    <div id='spl'>
-                        <input
-                            type="text"
-                            name="district"
-
-                            placeholder="Distt."
-
-                            // pattern="[0-9]{10}"
-                            value={form.district}
-                            onChange={handleChange}
-                            required
-                        />
-                        <input
-                            type="text"
-                            name="state"
-
-                            placeholder="State"
-
-
-                            value={form.state}
-                            onChange={handleChange}
-                            required
-                        />
-
-
-                    </div>
+            <div className="add-pg-container">
+                <div className="add-pg-header">
+                    <h2>List Your PG</h2>
+                    <p>Fill in the details to reach thousands of students</p>
                 </div>
 
-                
-               
-                <div>
-                   
-                    <label>
-                        Upload PG Photo:
-                        <input type="file" accept="image/*" onChange={handlePhotoChange} />
-                    </label>
-                    {photo && (
-                        <div className="preview-container">
-                            <img
-                                src={URL.createObjectURL(photo)}
-                                alt="Preview"
-                                style={{
-                                    width: "80px",
-                                    height: "75px",
-                                    objectFit: "cover",
-                                    marginTop: "10px",
-                                    borderRadius: "10px",
-                                    border: "2px solid #ddd"
-                                }}
-                            />
+                <form className="add-pg-form" onSubmit={handleSubmit}>
+                    {/* Basic Information Section */}
+                    <section className="form-section">
+                        <div className="section-title">Basic Information</div>
+                        <div className="input-grid">
+                            <div className="input-field">
+                                <label>PG Title</label>
+                                <input type="text" name="title" placeholder="e.g. Luxury Stay Boys PG" value={form.title} onChange={handleChange} required />
+                            </div>
+                            <div className="input-field">
+                                <label>Monthly Rent (₹)</label>
+                                <input type="number" name="rent" placeholder="5000" value={form.rent} onChange={handleChange} required />
+                            </div>
+                            <div className="input-field">
+                                <label>Contact Number</label>
+                                <input type="text" name="contactNumber" placeholder="10-digit mobile number" maxLength={10} pattern="[0-9]{10}" value={form.contactNumber} onChange={handleChange} required />
+                            </div>
                         </div>
-                    )}
-                </div>
-                <div>
-                    <fieldset id='amen'>
-                        <legend>Amenities:</legend>
-                        {Object.keys(form.amenities).map((amenity) => (
-                            <label key={amenity}>
-                                <input
-                                    type="checkbox"
-                                    name={amenity}
-                                    checked={form.amenities[amenity]}
-                                    onChange={handleChange}
-                                />
-                                {amenity.toUpperCase()}
-                            </label>
-                        ))}
-                    </fieldset>
-                </div>
+                    </section>
 
+                    {/* Location Section */}
+                    <section className="form-section">
+                        <div className="section-title">Location Details</div>
+                        
+                        <div className="location-helper">
+                            <button type="button" onClick={handleFetchLocation} disabled={isFetchingLocation} className="location-btn">
+                                <MapPin size={18} /> {isFetchingLocation ? 'Fetching...' : 'Use My Current Location'}
+                            </button>
+                            {location.lat && (
+                                <span className="location-status">Coordinates set successfully!</span>
+                            )}
+                        </div>
 
-                <button type="submit"> Submit PG</button>
-            </form>
+                        <div className="input-field full-width">
+                            <label>Full Address</label>
+                            <textarea name="address" rows="2" placeholder="Street, Landmark, Area..." value={form.address} onChange={handleChange} required />
+                        </div>
+                        
+                        <div className="input-grid">
+                            <div className="input-field">
+                                <label>City</label>
+                                <input type="text" name="city" placeholder="City" value={form.city} onChange={handleChange} required />
+                            </div>
+                            <div className="input-field">
+                                <label>Pincode</label>
+                                <input type="number" name="pincode" placeholder="6-digit code" value={form.pincode} onChange={handleChange} required />
+                            </div>
+                            <div className="input-field">
+                                <label>District</label>
+                                <input type="text" name="district" placeholder="District" value={form.district} onChange={handleChange} required />
+                            </div>
+                            <div className="input-field">
+                                <label>State</label>
+                                <input type="text" name="state" placeholder="State" value={form.state} onChange={handleChange} required />
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Amenities Section */}
+                    <section className="form-section">
+                        <div className="section-title">Amenities</div>
+                        <div className="amenities-checkbox-grid">
+                            {Object.keys(form.amenities).map((amenity) => (
+                                <label key={amenity} className="checkbox-item">
+                                    <input
+                                        type="checkbox"
+                                        name={amenity}
+                                        checked={form.amenities[amenity]}
+                                        onChange={handleChange}
+                                    />
+                                    <span>{amenity.toUpperCase()}</span>
+                                </label>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Media Section */}
+                    <section className="form-section">
+                        <div className="section-title">Media</div>
+                        <div className="image-upload-area">
+                            <div className="upload-input">
+                                <label htmlFor="photo-upload" className="custom-upload-btn">
+                                    <Upload size={18} /> Choose PG Photo
+                                </label>
+                                <input id="photo-upload" type="file" accept="image/*" onChange={handlePhotoChange} style={{ display: 'none' }} />
+                                <p className="upload-hint">Supported formats: JPG, PNG. Max size: 5MB.</p>
+                            </div>
+                            
+                            {photo && (
+                                <div className="current-preview">
+                                    <p>Selected Image:</p>
+                                    <img
+                                        src={URL.createObjectURL(photo)}
+                                        alt="Preview"
+                                        className="img-preview-box"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </section>
+
+                    <div className="form-actions">
+                        <button type="submit" className="btn-submit">
+                            <PlusCircle size={20} /> Submit PG Listing
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

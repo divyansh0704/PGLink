@@ -17,6 +17,7 @@ const Terms =lazy(()=>import( "./pages/Terms"));
 const Services =lazy(()=>import( "./pages/Services"));
 const Privacy =lazy(()=>import( "./pages/Privacy"));
 const Contact =lazy(()=>import( "./pages/Contact"));
+const PgEditPage =lazy(()=>import( "./pages/PgEditPage"));
 import Spinner from "./components/Spinner";
 
 
@@ -49,6 +50,7 @@ function App() {
           <Route path="/services" element={<Services/>} />
           <Route path="/privacy" element={<Privacy/>} />
           <Route path="/contact" element={<Contact/>} />
+          <Route path="/edit/:pgId" element={<PgEditPage />} />
           
 
 

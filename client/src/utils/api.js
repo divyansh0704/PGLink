@@ -4,7 +4,8 @@ import {jwtDecode} from "jwt-decode";
 
 const API = axios.create({
   
-  baseURL: "https://pglink-qfwt.onrender.com/api",
+  // baseURL: "https://pglink-qfwt.onrender.com/api",
+  baseURL: "http://localhost:3009/api",
   
 });
 
@@ -26,7 +27,7 @@ API.interceptors.request.use((config) => {
     if (isTokenExpired(token)) {
 
       localStorage.removeItem("token");
-      window.location.href = "/login"; 
+      // window.location.href = "/login"; 
       return Promise.reject(new Error("Token expired"));
     }
     config.headers.Authorization = `Bearer ${token}`;

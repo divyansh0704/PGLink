@@ -69,16 +69,16 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
     const collegeId = req.query.collegeId;
     const sortBy = req.query.sortBy || "createdAt";
     const where = {};
-    
+
     let order;
 
     let targetCollege = null;
 
-    
+
     if (collegeId) {
         targetCollege = await College.findByPk(collegeId);
-    } 
-    
+    }
+
     else if (search) {
         const colleges = await College.findAll({
             where: { name: { [Op.iLike]: `%${search}%` } }
@@ -95,52 +95,52 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
     }
 
     if (targetCollege) {
-            const collegeLocation = targetCollege.location;
+        const collegeLocation = targetCollege.location;
 
-            
-            const collegeWkt = `POINT(${collegeLocation.coordinates[1]} ${collegeLocation.coordinates[0]})`;
 
-            const { count, rows } = await PG.findAndCountAll({
-                attributes: {
-                    include: [
-                        [
-                            sequelize.literal(`ST_DistanceSphere(location, ST_GeomFromText('${collegeWkt}', 4326)) / 1000`),
-                            'distanceKm'
-                        ]
+        const collegeWkt = `POINT(${collegeLocation.coordinates[1]} ${collegeLocation.coordinates[0]})`;
+
+        const { count, rows } = await PG.findAndCountAll({
+            attributes: {
+                include: [
+                    [
+                        sequelize.literal(`ST_DistanceSphere(location, ST_GeomFromText('${collegeWkt}', 4326)) / 1000`),
+                        'distanceKm'
                     ]
-                },
-                where: {
-                    location: { [Op.ne]: null }
-                },
-                limit,
-                offset,
-                order: sequelize.col('distanceKm'),
-                include: {
-                    model: User,
-                    attributes: ['id', 'name', 'email']
-                }
-            })
-            const pgsWithCollege = rows.map(pg => {
-                const pgJson = pg.toJSON();
-                pgJson.collegeName = targetCollege.name;
-                return pgJson;
-            });
+                ]
+            },
+            where: {
+                location: { [Op.ne]: null }
+            },
+            limit,
+            offset,
+            order: sequelize.col('distanceKm'),
+            include: {
+                model: User,
+                attributes: ['id', 'name', 'email']
+            }
+        })
+        const pgsWithCollege = rows.map(pg => {
+            const pgJson = pg.toJSON();
+            pgJson.collegeName = targetCollege.name;
+            return pgJson;
+        });
 
-            return res.json({
-                totalItems: count,
-                totalPages: Math.ceil(count / limit),
-                currentPage: page,
-                pgs: pgsWithCollege
-            });
+        return res.json({
+            totalItems: count,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page,
+            pgs: pgsWithCollege
+        });
     } else if (search) {
-            where[Op.or] = [
-                { title: { [Op.iLike]: `%${search}%` } },
-                { address: { [Op.iLike]: `%${search}%` } },
-                { city: { [Op.iLike]: `%${search}%` } },
-            ];
-        }
+        where[Op.or] = [
+            { title: { [Op.iLike]: `%${search}%` } },
+            { address: { [Op.iLike]: `%${search}%` } },
+            { city: { [Op.iLike]: `%${search}%` } },
+        ];
+    }
 
-    
+
 
     switch (sortBy) {
         case 'rentAsc':
@@ -223,34 +223,43 @@ exports.deletePG = asyncHandler(async (req, res) => {
 })
 
 exports.updatePG = asyncHandler(async (req, res) => {
+    console.log(req.body);
+    console.log(req.file);
 
-    const pgId = req.params.id;
-    const existingPG = await PG.findByPk(pgId);
+    try {
+        const pgId = req.params.id;
+        const existingPG = await PG.findByPk(pgId);
 
-    if (!existingPG) {
+        if (!existingPG) {
+            return res.status(404).json({ message: 'updation failed' });
+        }
+
+
+        if (existingPG.ownerId !== req.user.id) {
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+
+
+        existingPG.title = req.body.title || existingPG.title;
+        existingPG.city = req.body.city || existingPG.city;
+        existingPG.address = req.body.address || existingPG.address;
+        existingPG.rent = req.body.rent || existingPG.rent;
+        existingPG.amenities = req.body.amenities || existingPG.amenities;
+
+
+        if (req.file) {
+            existingPG.imageUrl = req.file.path || existingPG.imageUrl;
+        }
+
+        await existingPG.save();
+
+        res.json(existingPG);
+
+    } catch (err) {
         return res.status(404).json({ message: 'PG not found' });
     }
 
 
-    if (existingPG.ownerId !== req.user.id) {
-        return res.status(403).json({ message: 'Unauthorized' });
-    }
-
-
-    existingPG.title = req.body.title || existingPG.title;
-    existingPG.city = req.body.city || existingPG.city;
-    existingPG.address = req.body.address || existingPG.address;
-    existingPG.rent = req.body.rent || existingPG.rent;
-    existingPG.amenities = req.body.amenities || existingPG.amenities;
-
-
-    if (req.file) {
-        existingPG.imageUrl = `/uploads/${req.file.filename}`;
-    }
-
-    await existingPG.save();
-
-    res.json(existingPG);
 
 });
 

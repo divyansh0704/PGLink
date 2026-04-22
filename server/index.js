@@ -34,7 +34,7 @@ app.use(errorHandler)
 
 
 app.get("/", (req, res) => {
-    res.send("PGLInk backend running 🚀")
+    res.send("PGLInk backend running 🚀");
 })
 
 app.listen(PORT, () => {
