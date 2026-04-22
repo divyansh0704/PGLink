@@ -204,15 +204,16 @@ const PgEditPage = () => {
           <div className="section-title">Media</div>
           <div className="image-upload-area">
             <div className="current-preview">
-              <p>Current Image:</p>
-              {form.imageUrl ? (
+              <p>{photo ? "New Preview:" : "Current Image:"}</p>
+              {photo ? (
+                <img src={URL.createObjectURL(photo)} alt="New Preview" className="img-preview-box" style={{ width: '100px', borderRadius: '8px' }} />
+              ) : form.imageUrl ? (
                 <img src={form.imageUrl} alt="Current" className="img-preview-box" style={{ width: '100px', borderRadius: '8px' }} />
               ) : (
                 <div className="img-placeholder">
                   <span>No Image Selected</span>
                 </div>
               )}
-
             </div>
             <div className="upload-input">
               <label htmlFor="file-upload" className="custom-upload-btn">

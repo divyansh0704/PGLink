@@ -98,20 +98,16 @@ const AddPgForm = () => {
                 autoClose: 2000,
             });
             setTimeout(() => {
-                // navigate('/');
-                // window.location.reload();
                 window.location.href = "/"
             }, 2000);
-            // alert('PG listed successfully!');
+
             setForm({
                 title: '',
-                // collegeName: '',
                 district: '',
                 pincode: '',
                 state: '',
                 city: '',
                 address: '',
-                // distanceKm: '',
                 rent: '',
                 contactNumber: '',
                 amenities: {

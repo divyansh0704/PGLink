@@ -7,7 +7,7 @@ const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dkieieuoi/image/upload/v17
 
 
 exports.createPG = asyncHandler(async (req, res) => {
-
+    // console.log(req.file);
     let imageUrl;
     if (req.file) {
         imageUrl = req.file.path;
@@ -204,7 +204,7 @@ exports.getPGByOwner = asyncHandler(async (req, res) => {
 exports.deletePG = asyncHandler(async (req, res) => {
 
     const pgId = req.params.id;
-    console.log(pgId);
+    // console.log(pgId);
     const pg = await PG.findByPk(pgId);
 
     if (!pg) {
@@ -223,8 +223,8 @@ exports.deletePG = asyncHandler(async (req, res) => {
 })
 
 exports.updatePG = asyncHandler(async (req, res) => {
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
 
     try {
         const pgId = req.params.id;
