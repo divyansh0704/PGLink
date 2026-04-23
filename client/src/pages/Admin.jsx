@@ -56,6 +56,20 @@ const Admin = () => {
         }
 
     }
+    const handleDeleteCollege = async(id)=>{
+        try{
+            const res = await API.delete(`/college/${id}`);
+            toast.success("College deleted successfully!", {
+                position: "top-right",
+                autoClose: 2000,
+            });
+            fetchListings();
+
+        }catch(err){
+            
+            toast.error("Error deleting college");
+        }
+    }
     const fetchListings = async()=>{
             try{
                 const res = await API.get("/college");
@@ -128,7 +142,7 @@ const Admin = () => {
                         {/* Dummy Colleges for UI demonstration */}
                         {colleges.map((item) => (
                             
-                            <div key={item} className="college-item-card">
+                            <div key={item.id} className="college-item-card">
                                 <div className="college-details">
                                     <h3>{item.name}</h3>
                                     <p className="college-loc">{item.city}, {item.district}, {item.state}</p>
@@ -137,7 +151,7 @@ const Admin = () => {
                                     </p> */}
                                     <div className="admin-actions">
                                         <button className="action-btn edit">Edit</button>
-                                        <button className="action-btn delete">Delete</button>
+                                        <button className="action-btn delete" onClick={()=>{handleDeleteCollege(item.id)}}>Delete</button>
                                     </div>
                                 </div>
                             </div>
