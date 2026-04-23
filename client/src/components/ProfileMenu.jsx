@@ -32,8 +32,7 @@ const ProfileMenu = () => {
         });
 
         setTimeout(() => {
-            // navigate("/login");'
-            // window.location.reload("/");
+            
             window.location.href = "/";
 
         }, 2000);
@@ -59,10 +58,11 @@ const ProfileMenu = () => {
                 <div className="dropdown" ref={menuRef}>
                     <p className='name'>{user?.name}</p>
                     <p className='email'>{user?.email}</p>
-                    <button className="logout" onClick={handleLogout}>Logout</button>
-                    {/* <Link to="/setting" > */}
+                    {user.role === 'admin' && <button onClick={() => { navigate("/admin"); setIsOpen(false); }}>Admin</button>}
+                    
                     <button  className="setting" onClick={() => { navigate("/setting"); setIsOpen(false); }}>Settings</button>
-                    {/* </Link> */}
+                    <button className="logout" onClick={handleLogout}>Logout</button>
+                 
                 </div>
             )}
         </div>
