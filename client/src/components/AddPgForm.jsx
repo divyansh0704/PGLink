@@ -144,14 +144,16 @@ const AddPgForm = () => {
             try {
                 const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
                 const data = await response.json();
+                console.log(data);
                 if (data && data.address) {
+                    const fullAddress = [data.address.road,data.address.county,data.address.village].filter(Boolean).join(', ')
                     setForm(prevForm => ({
                         ...prevForm,
-                        address: data.display_name || prevForm.address,
+                        address: fullAddress || prevForm.address,
                         city: data.address.city || data.address.town || prevForm.city,
                         state: data.address.state || prevForm.state,
                         pincode: data.address.postcode || prevForm.pincode,
-                        district: data.address.county || prevForm.district,
+                        district: data.address.state_district || prevForm.district,
                     }));
                     toast.success("Location fetched and address fields populated!");
                 }

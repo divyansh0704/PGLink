@@ -17,16 +17,17 @@ const Home = ({ setShowLogin }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
     
+
     const token = localStorage.getItem('token');
-    // console.log(token);
     if (token) {
-      
+
       API.get('/users/me').then(r => setUser(r.data))
         .catch(e => console.error(e));
-    }else{
+    } else {
       setShowLogin(true);
-      
+
     }
   }, []);
 

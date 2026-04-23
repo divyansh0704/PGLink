@@ -4,6 +4,7 @@ const userRoutes = require("./routes/userRoutes");
 const pgRoutes = require("./routes/pgRoutes")
 const paymentRoutes = require('./routes/paymentRoutes');
 const smsRoutes = require('./routes/smsRoutes');
+const collegeRoutes = require('./routes/collegeRoutes');
 const compression = require('compression');
 const cors = require('cors');
 const path = require("path");
@@ -15,7 +16,6 @@ require("dotenv").config();
 app.use(compression());
 
 app.use(express.json())
-
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
@@ -24,6 +24,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/pgs", pgRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/sms', smsRoutes);
+app.use('/api/college',collegeRoutes)
 
 app.use((req,res,next)=>{
     res.status(404).json({error:'not found'})
