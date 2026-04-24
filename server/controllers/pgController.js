@@ -98,7 +98,7 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
         const collegeLocation = targetCollege.location;
 
 
-        const collegeWkt = `POINT(${collegeLocation.coordinates[1]} ${collegeLocation.coordinates[0]})`;
+        const collegeWkt = `POINT(${collegeLocation.coordinates[0]} ${collegeLocation.coordinates[1]})`;
 
         const { count, rows } = await PG.findAndCountAll({
             attributes: {
