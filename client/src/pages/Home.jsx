@@ -19,12 +19,15 @@ const Home = ({ setShowLogin }) => {
   useEffect(() => {
 
     
-
+    
     const token = localStorage.getItem('token');
     if (token) {
 
       API.get('/users/me').then(r => setUser(r.data))
-        .catch(e => console.error(e));
+        .catch(e => {
+          console.error(e);
+          localStorage.clear();
+        });
     } else {
       setShowLogin(true);
 
