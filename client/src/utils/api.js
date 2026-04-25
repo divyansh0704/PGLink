@@ -25,9 +25,8 @@ API.interceptors.request.use((config) => {
 
   if (token) {
     if (isTokenExpired(token)) {
-
       localStorage.removeItem("token");
-      // window.location.href = "/login"; 
+      window.location.href = "/login"; // Force redirect on local expiration
       return Promise.reject(new Error("Token expired"));
     }
     config.headers.Authorization = `Bearer ${token}`;
@@ -35,5 +34,7 @@ API.interceptors.request.use((config) => {
 
   return config;
 });
+
+
 
 export default API;

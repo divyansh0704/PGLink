@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { getAvatarColor } from '../utils/getcolor';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import profileIMG from "../assets/defaultProfile.png"
+
 
 
 
@@ -12,12 +14,16 @@ const ProfileMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const menuRef = useRef(null);
-   
+
 
     const user = JSON.parse(localStorage.getItem('user'));
+    // console.log(user);
     const bgColor = getAvatarColor(user?.name || "default");
-    const initials = user?.name
-        ? user.name.split(' ').map((word) => word[0].toUpperCase()).join('').slice(0, 2) : 'U'
+
+    const initials = user?.name ? user.name.split(' ').filter(word => word.length > 0).map((word) => word[0].toUpperCase()).join('').slice(0, 2) : 'U';
+
+
+
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -32,7 +38,7 @@ const ProfileMenu = () => {
         });
 
         setTimeout(() => {
-            
+
             window.location.href = "/";
 
         }, 2000);
@@ -52,6 +58,7 @@ const ProfileMenu = () => {
     return (
         <div className="profile-container">
             <div className="avatar" style={{ backgroundColor: bgColor }} onClick={toggleMenu}>
+                
                 <span>{initials}</span>
             </div>
             {isOpen && (
@@ -59,10 +66,10 @@ const ProfileMenu = () => {
                     <p className='name'>{user?.name}</p>
                     <p className='email'>{user?.email}</p>
                     {user.role === 'admin' && <button onClick={() => { navigate("/admin"); setIsOpen(false); }}>Admin</button>}
-                    
-                    <button  className="setting" onClick={() => { navigate("/setting"); setIsOpen(false); }}>Settings</button>
+
+                    <button className="setting" onClick={() => { navigate("/setting"); setIsOpen(false); }}>Settings</button>
                     <button className="logout" onClick={handleLogout}>Logout</button>
-                 
+
                 </div>
             )}
         </div>
