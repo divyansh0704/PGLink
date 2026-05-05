@@ -1,5 +1,6 @@
 import React from 'react'
 import "../styles/global.css"
+// import "../styles/pgcard.css"
 import { Phone, MessageCircle, MapPin, IndianRupee } from "lucide-react"
 import loadRazorpay from '../utils/razorpay'
 import { useNavigate } from 'react-router-dom'
