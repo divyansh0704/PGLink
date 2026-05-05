@@ -5,6 +5,7 @@ const College = require("./College");
 const UserUnlockedPGs = require("./UserUnlockedPGs")
 const Payment =require("./Payment");
 const SmsSession = require("./SmsSession");
+const Request = require("./Request");
 
 
 
@@ -21,4 +22,4 @@ const initDB = async()=>{
     }
 }
 
-module.exports = {initDB,User,PG,College,UserUnlockedPGs,Payment,SmsSession}
+module.exports = {initDB,User,PG,College,UserUnlockedPGs,Payment,SmsSession,Request}
