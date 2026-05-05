@@ -8,6 +8,7 @@ import PgResults from '../components/PgResults';
 import PGFilter from '../components/PGFilter';
 import Footer from '../components/Footer';
 import AdBanner from '../components/AdBanner';
+import PostRequest from '../components/PostRequest';
 import Login from './Login';
 import { useNavigate } from 'react-router-dom';
 const Home = ({ setShowLogin }) => {
@@ -40,7 +41,9 @@ const Home = ({ setShowLogin }) => {
 
   return (
     <>
+      <PostRequest />
       <Hero />
+      
       <PGFilter onFilter={handleFilter} />
       <div className="container">
         <PgResults user={user} setShowLogin={setShowLogin} sortBy={currentSort} />
