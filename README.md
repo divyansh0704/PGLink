@@ -155,9 +155,17 @@ npm start
 
 ---
 
-## 📜 License
+## 📜 Copyright & Intellectual Property
+This project is the original work of the authors. A formal copyright application has been filed with the **Copyright Office, Government of India**.
 
-This project is developed for academic and learning purposes.
+- **Title of Work:** PGLink: Distance-Based PG Accommodation Discovery System
+- **Status:** Copyright Pending (Application filed 2026)
+
+  
+
+## ⚖️ License
+Copyright (c) 2026 DIVYANSH, HARSH OBEROI, GAGANDEEP, DIVYAM PURI. 
+All rights reserved. This software and its documentation are protected under Indian Copyright Law.
 
 ---
 
