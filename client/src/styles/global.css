@@ -180,11 +180,15 @@ a {
 
 
 .pg-card h3 {
-  font-size: 1.88rem;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  font-weight: 600;
-  color: var(--primary-text);
+  /* font-size: 1.88rem; */
+  font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+  /* margin-top: 5px;
+  margin-bottom: 10px; */
+  /* font-weight: 600; */
+  /* color: var(--primary-text); */
+  color: #1a1a1a;
 }
 
 .card-info {
@@ -193,11 +197,20 @@ a {
 }
 
 .pg-card p {
-  font-size: 0.9rem;
-  margin: 4px 0;
-  color: var(--small-text);
+  /* font-size: 0.9rem; */
+  margin:  0;
+  /* color: var(--small-text); */
+
+   color: #636e72;
+    font-size: 0.9rem;
+    line-height: 1.4;
 
 
+}
+.pg-card-content{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .contact {
@@ -224,26 +237,32 @@ a {
   /* flex-wrap: wrap; */
   gap: 6px;
   margin-top: 10px;
-  height: 4rem;
+  height: 2rem;
 
    overflow-x: auto;        
   overflow-y: hidden;      
   white-space: nowrap;     
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 
 }
 
 .pg-card .amenity {
   background-color: var(--blur-bg);
-  color: var(--some-text);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  white-space: nowrap;
+ color: #3f3f3f;
+  /* padding: 4px 10px; */
+  /* border-radius: 20px; */
+  /* font-size: 0.8rem; */
+  /* white-space: nowrap; */
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 1.6rem;
+  /* max-height: 1.6rem; */
+  /* padding: 4px 12px; */
+    border-radius: 20px;
+    /* font-size: 0.75rem; */
+    font-weight: 600;
+    border: 1px solid transparent;
 }
 
 .contact-box {
