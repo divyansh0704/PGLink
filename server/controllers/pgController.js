@@ -77,86 +77,65 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
 
     if (collegeId) {
         targetCollege = await College.findByPk(collegeId);
-    }
-
-    else if (search) {
-        const colleges = await College.findAll({
+    } else if (search) {
+        // Check if search matches a college
+        const matchingColleges = await College.findAll({
             where: { name: { [Op.iLike]: `%${search}%` } }
         });
 
-        if (colleges.length > 1) {
+        if (matchingColleges.length === 0) {
+            const collegesAll = await College.findAll();
+
             return res.json({
                 disambiguation: true,
-                colleges: colleges.map(c => ({ id: c.id, name: c.name, city: c.city, state: c.state }))
+                colleges: collegesAll.map(c => ({ id: c.id, name: c.name, city: c.city, state: c.state }))
             });
-        } else if (colleges.length === 1) {
-            targetCollege = colleges[0];
+        }
+
+        else if (matchingColleges.length > 1) {
+            return res.json({
+                disambiguation: true,
+                colleges: matchingColleges.map(c => ({ id: c.id, name: c.name, city: c.city, state: c.state }))
+            });
+        } else if (matchingColleges.length === 1) {
+            targetCollege = matchingColleges[0];
         }
     }
 
+    const attributes = { include: [] };
+
     if (targetCollege) {
-        const collegeLocation = targetCollege.location;
+        const { coordinates } = targetCollege.location;
+        const collegeWkt = `POINT(${coordinates[0]} ${coordinates[1]})`;
 
+        attributes.include.push([
+            sequelize.literal(`ST_DistanceSphere(location, ST_GeomFromText('${collegeWkt}', 4326)) / 1000 `),
+            'distanceKm'
+        ]);
 
-        const collegeWkt = `POINT(${collegeLocation.coordinates[0]} ${collegeLocation.coordinates[1]})`;
+        // If searching by college, sort by distance. 
+        // PGs without location data will appear at the end.
+        order = [[sequelize.literal('"distanceKm" ASC NULLS LAST')]];
+    } else {
+        // Fallback to text search if no college was found/specified
+        if (search) {
+            where[Op.or] = [
+                { title: { [Op.iLike]: `%${search}%` } },
+                { address: { [Op.iLike]: `%${search}%` } },
+                { city: { [Op.iLike]: `%${search}%` } },
+            ];
+        }
 
-        const { count, rows } = await PG.findAndCountAll({
-            attributes: {
-                include: [
-                    [
-                        sequelize.literal(`ST_DistanceSphere(location, ST_GeomFromText('${collegeWkt}', 4326)) / 1000`),
-                        'distanceKm'
-                    ]
-                ]
-            },
-            where: {
-                location: { [Op.ne]: null }
-            },
-            limit,
-            offset,
-            order: sequelize.col('distanceKm'),
-            include: {
-                model: User,
-                attributes: ['id', 'name', 'email']
-            }
-        })
-        const pgsWithCollege = rows.map(pg => {
-            const pgJson = pg.toJSON();
-            pgJson.collegeName = targetCollege.name;
-            return pgJson;
-        });
-
-        return res.json({
-            totalItems: count,
-            totalPages: Math.ceil(count / limit),
-            currentPage: page,
-            pgs: pgsWithCollege
-        });
-    } else if (search) {
-        where[Op.or] = [
-            { title: { [Op.iLike]: `%${search}%` } },
-            { address: { [Op.iLike]: `%${search}%` } },
-            { city: { [Op.iLike]: `%${search}%` } },
-        ];
+        switch (sortBy) {
+            case 'rentAsc': order = [['rent', 'ASC']]; break;
+            case 'rentDesc': order = [['rent', 'DESC']]; break;
+            case 'city': order = [['city', 'ASC']]; break;
+            default: order = [['createdAt', 'DESC']]; break;
+        }
     }
 
-
-
-    switch (sortBy) {
-        case 'rentAsc':
-            order = [['rent', 'ASC']];
-            break;
-        case 'rentDesc':
-            order = [['rent', 'DESC']];
-            break;
-        case 'city':
-            order = [['city', 'ASC']];
-            break;
-        default:
-            order = [['createdAt', 'DESC']];
-            break;
-    }
     const { count, rows } = await PG.findAndCountAll({
+        attributes,
         where,
         limit,
         offset,
@@ -164,14 +143,22 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
         include: {
             model: User,
             attributes: ['id', 'name', 'email']
-        }
-    })
+        },
+        distinct: true
+    });
+
+    const pgs = rows.map(pg => {
+        const pgJson = pg.toJSON();
+        if (targetCollege) pgJson.collegeName = targetCollege.name;
+        return pgJson;
+    });
+
     res.json({
         totalItems: count,
         totalPages: Math.ceil(count / limit),
         currentPage: page,
-        pgs: rows
-    })
+        pgs
+    });
 
 
 

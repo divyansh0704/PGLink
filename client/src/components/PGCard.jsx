@@ -60,8 +60,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                     <h3>{capitalize(pg.title)}</h3>
                     <p>{capitalize(pg.address)},{capitalize(pg.city)}</p>
                     <div className="card-info">
-                        {/* <p>{pg.collegeName} ({pg.distanceKm} Km)</p>
-                        <p> ₹{pg.rent}/month</p> */}
+                        
                         {pg.collegeName && pg.distanceKm != null ? (
                             <p>{capitalize(pg.collegeName)} ({Number(pg.distanceKm).toFixed(1)} Km)</p>
                         ) : null}
@@ -87,20 +86,22 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                         })}
                     </div>
                     <div className="contact-box">
-                        {isUnlocked ? (
+                        {/* for now contact details are not hidden , we will implement it later */}
+                        {/* {isUnlocked ? (
                             <p className="contact">  <Phone color="black" size={16} style={{ marginRight: '6px' }} /> {pg.contactNumber}</p>
                         ) : (
                             <>
                                 <p className="contact blurred"><Phone color="black" size={16} style={{ marginRight: '6px' }} /> +91-XXXXXXX</p>
 
                             </>
-                        )}
+                        )} */}
+                        <p className="contact">  <Phone color="black" size={16} style={{ marginRight: '6px' }} /> {pg.contactNumber}</p>
                     </div>
                 </div>
             </div>
             <div className="updated-box2">
-                {/* <button className="unlock-btn" onClick={handleUnlock}>Unlock ₹1</button> */}
-                {isUnlocked ? (
+                 {/* for now contact details are not hidden , we will implement it later */}
+                {/* {isUnlocked ? (
                     <div className="unlock-actions fade-in-split">
                         <button
 
@@ -125,7 +126,27 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                     <button className="unlock-btn fade-in" onClick={handleUnlock}>
                         Unlock ₹1
                     </button>
-                )}
+                )} */}
+                     <div className="unlock-actions fade-in-split">
+                        <button
+
+                            onClick={() => window.open(`https://wa.me/${sanitizedNumber}`, '_blank')}
+                            className="half-button whatsapp"
+                            type='button'
+                        >
+                            <MessageCircle size={20} />
+                            WhatsApp
+                        </button>
+                        <button
+
+                            onClick={() => { window.location.href = `tel:${sanitizedNumber}`; }}
+                            className="half-button call"
+                            type='button'
+                        >
+                            <Phone size={20} />
+                            Call
+                        </button>
+                    </div>
 
             </div>
 
