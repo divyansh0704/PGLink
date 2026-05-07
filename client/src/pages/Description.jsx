@@ -101,7 +101,8 @@ const Description = () => {
       </div>
       
     </div>
-    <SubscriptionBanner/>
+    {/* for now contact details are not hidden , we will implement it later */}
+    {/* <SubscriptionBanner/> */}
     {/* <Footer/> */}
     </>
   );

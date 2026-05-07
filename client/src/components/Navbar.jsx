@@ -39,10 +39,10 @@ const Navbar = ({ isSidebarOpen,openLogin,setIsOpen,openSetting }) => {
             <div className="partition2">
             
             <nav className={`nav-links ${menuOpen ? 'open' : ''}`}>
-
-                {isLoggedIn && !isSubscribe && (<button id='subscribeBtn' onClick={() => loadRazorpay('subscription', null, user.id)}>
+                 {/* for now contact details are not hidden , we will implement it later */}
+                {/* {isLoggedIn && !isSubscribe && (<button id='subscribeBtn' onClick={() => loadRazorpay('subscription', null, user.id)}>
                     Subscribe ₹10
-                </button>)}
+                </button>)} */}
 
                 {/* <div id="profile"> */}
                 {!isLoggedIn && <Link onClick={openLogin} >Login</Link>}

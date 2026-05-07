@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import API from '../utils/api';
 import PGCard from './PGCard';
 import ShimmerCard from './ShimmerCard';
@@ -97,17 +97,24 @@ const PgResults = ({ user, setShowLogin, sortBy }) => {
    
     if (disambiguation.needed) {
         return (
-            <div className="disambiguation-box">
-                <h3>Did you mean?</h3>
-                <ul>
+            <div className="disambiguation-container">
+                <h2 className="disambiguation-title">Multiple colleges found. Please select yours:</h2>
+                <div className="college-selection-grid">
                     {disambiguation.colleges.map(college => (
-                        <li key={college.id}>
-                            <button onClick={() => handleDisambiguationSelect(college)}>
-                                {college.name} ({college.city}, {college.state})
-                            </button>
-                        </li>
+                        <div key={college.id} className="college-select-card" onClick={() => handleDisambiguationSelect(college)}>
+                            <div className="college-select-details">
+                                <h3>{college.name}</h3>
+                                <p className="college-select-loc">{college.city}, {college.district}, {college.state}</p>
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
+                <div className="disambiguation-request-section">
+                    <p>Can't find your college in the list?</p>
+                    <Link to="/request" className="request-add-btn">
+                        Request to Add Institution
+                    </Link>
+                </div>
             </div>
         );
     }
