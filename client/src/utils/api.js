@@ -26,7 +26,7 @@ API.interceptors.request.use((config) => {
   if (token) {
     if (isTokenExpired(token)) {
       localStorage.removeItem("token");
-      window.location.href = "/login"; // Force redirect on local expiration
+      // window.location.href = "/login"; 
       return Promise.reject(new Error("Token expired"));
     }
     config.headers.Authorization = `Bearer ${token}`;
