@@ -15,6 +15,18 @@ const User = sequelize.define("User",{
     isSubscribed:{
         type:DataTypes.BOOLEAN,
         defaultValue:false
+    },
+    otp: {
+        type: DataTypes.STRING
+    },
+
+    otpExpiry: {
+        type: DataTypes.BIGINT
+    },
+
+    isVerified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 
 },{timestamps:true});

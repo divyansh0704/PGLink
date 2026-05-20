@@ -1,0 +1,42 @@
+.ad-banner {
+  background: linear-gradient(135deg, teal, #444);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  /* border-radius: 0 0 12px 12px ; */
+  /* margin-top: 3rem; */
+  margin-bottom: 1rem;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+  /* width: 90%; */
+}
+
+.ad-banner h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.ad-banner p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.ad-banner button {
+  background: #ffcc00;
+  color: #333;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ad-banner button:hover {
+  background: #ffaa00;
+}
+
+@media (max-width: 767px){
+    
+
+    
+}

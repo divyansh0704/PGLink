@@ -4,7 +4,8 @@ const User = require('./User');
 
 const PG = sequelize.define('PG', {
     title: DataTypes.STRING,
-    city: {
+    description: DataTypes.TEXT,
+    city:{
         type: DataTypes.STRING(100),
         allowNull: true
     },
@@ -24,9 +25,11 @@ const PG = sequelize.define('PG', {
         type: DataTypes.TEXT,
         allowNull: true
     },
-
-    collegeName: DataTypes.STRING,
-    distanceKm: DataTypes.FLOAT,
+    location:{
+        type:DataTypes.GEOMETRY('POINT'),
+        allowNull:true
+    },
+   
     rent: DataTypes.FLOAT,
     amenities: DataTypes.JSON,
     imageUrl: DataTypes.STRING,
@@ -39,7 +42,14 @@ const PG = sequelize.define('PG', {
             key: 'id'
         }
     }
-}, { timestamps: true });
+}, { timestamps: true,
+    indexes:[
+        {fields:['city']},      
+        {fields:['rent']},
+        {fields:['ownerId']},
+        {fields:['createdAt']}
+    ]
+ });
 
 
 PG.belongsTo(User, { foreignKey: 'ownerId' }); 

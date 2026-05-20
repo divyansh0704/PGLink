@@ -2,10 +2,12 @@ import React from 'react'
 import API from '../utils/api';
 import { useState, useEffect } from 'react';
 import PGCard from '../components/PGCard';
+import ShimmerCard from '../components/ShimmerCard';
 
 const UnlockedPGs = () => {
     const [pgs, setPgs] = useState([]);
     const [user,setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUnlockedPGs = async () => {
@@ -20,6 +22,8 @@ const UnlockedPGs = () => {
 
             } catch (err) {
                 console.error("Failed to load unlocked PGs", err);
+            }finally{
+                setLoading(false);
             }
         };
 
@@ -28,8 +32,15 @@ const UnlockedPGs = () => {
     return (
         // <div>UnlockedPGs</div>
         <div className="container">
+            <h2 id='UH'>Unlocked PGs</h2>
             <div className="pg-grid">
-                {pgs.length > 0 ? (
+                {loading ?(
+                    <>
+                     <ShimmerCard/>
+                     <ShimmerCard/>
+                     <ShimmerCard/>
+                    </>
+                ): pgs.length > 0 ? (
                     pgs.map(pg => (
                         <PGCard key={pg.id} pg={pg} user={user}  />
                     ))

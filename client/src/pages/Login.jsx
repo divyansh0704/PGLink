@@ -24,7 +24,8 @@ const Login = ({onClose,openRegister}) => {
             });
             setTimeout(() => {
                 // navigate('/');
-                 window.location.reload();
+                //  window.location.reload();
+                window.location.href = "/";
             }, 2000);
 
 

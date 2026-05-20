@@ -1,0 +1,165 @@
+.request-page-wrapper {
+    background-color: var(--primary-bg);
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+.request-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.request-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.request-box h2 {
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.request-box p {
+    color: var(--small-text);
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensures padding doesn't increase width */
+}
+
+.submit-button {
+    background-color: var(--accenter-color);
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* History Section Styles */
+.requests-history {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.history-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.history-header h2 {
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.history-header p {
+    color: var(--small-text);
+}
+
+.no-requests {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    color: var(--small-text);
+    border: 1px dashed #ccc;
+}
+
+.requests-table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.requests-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.requests-table th, .requests-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.requests-table th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.approved {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.submit-button:hover {
+    background-color: #0D615B;
+}
+
+@media (max-width: 768px) {
+    .request-box {
+        padding: 30px 20px;
+    }
+
+    .request-box h2 {
+        font-size: 1.7rem;
+    }
+}

@@ -1,14 +1,9 @@
-/* sidebar.css */
-.sidebar-container {
-    /* position: relative; */
-}
-
 .sidebar {
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    background: var(--navbar-bg);
+    background: #024e4e;
     color: var(--primary-bg);
     overflow-x: hidden;
     transition: width 0.3s ease;
@@ -48,23 +43,120 @@
 
 .toggle-icon.shifted {
     left: 160px;
-    /* Just a bit more than sidebar width */
+
+}
+
+.sidebar-item {
+
+
+
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 15.4px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.menu-toggleN{
+    display: none;
+}
+
+.hifted {
+
+
+    justify-content: flex-start;
+    padding-left: 18px;
+    gap: 12px;
+
+}
+
+.log-color {
+    color: #d23827;
+}
+.menu-toggleN{
+    display: none;
+}.menu-toggleN{
+    display: none;
 }
 
 .sidebar-item {
     padding: 11px 6px;
     display: flex;
     align-items: center;
-    /* gap: 10px; */
     justify-content: center;
 }
-.hifted{
-     padding: 11px 16px;
-    gap: 10px;
-    justify-content:left;
 
+.hifted {
+    padding: 11px 16px;
+    gap: 10px;
+    justify-content: left;
 }
 
-.log-color{
-    color:#d23827;
+.log-color {
+    color: #d23827;
+}
+
+@media (max-width: 768px) {
+    .sidebar,
+    .sidebar.open,
+    .sidebar.collapsed {
+        transform: none !important;
+        height: 60px;
+        width: 100%;
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        border-radius: 0;
+        border-right: none;
+        border-top: 1px solid var(--border-color);
+        background-color: #024e4e;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-top: 0;
+        z-index: 1000;
+        overscroll-behavior: none;
+        touch-action: none;
+        position: fixed;
+    }
+
+    .menu-toggleN, .toggle-icon {
+        display: none !important;
+    }
+
+    .opt {
+        padding-top: 0;
+        display: flex;
+        flex-direction: row;
+        border-top: 1px solid white;
+        width: 100%;
+        height: 100%;
+        justify-content: space-evenly;
+        align-items: center;
+        touch-action: none;
+        overflow: hidden;
+    }
+
+    .sidebar-item {
+        padding: 0;
+        flex-direction: column;
+        font-size: 0 !important; /* Hide label text */
+        height: 100%;
+        flex: 1;
+    }
+
+    .sidebar-item svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .hifted {
+        padding: 0;
+        justify-content: center;
+    }
 }

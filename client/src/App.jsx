@@ -1,48 +1,67 @@
 import { Routes, Route } from "react-router-dom"
-import { useState } from "react"
+import { useState,lazy,Suspense } from "react"
 import Navbar from "./components/Navbar"
-import Home from "./pages/Home"
-import Register from "./pages/Register"
-import Login from "./pages/Login"
+const Home =lazy(()=>import( "./pages/Home"));
+const Register =lazy(()=>import( "./pages/Register"));
+const Login =lazy(()=>import( "./pages/Login"));
 import "./styles/variable.css"
-import Dashboard from "./pages/Dashboard"
+const Dashboard =lazy(()=>import( "./pages/Dashboard"));
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
 import Sidebar from "./components/Sidebar"
-import MyListings from "./pages/MyListings"
-import UnlockedPGs from "./pages/UnlockedPGs"
-import PGDescription from "./pages/PGDescription"
+const MyListings =lazy(()=>import( "./pages/MyListings"));
+const UnlockedPGs =lazy(()=>import( "./pages/UnlockedPGs"));
+const Description =lazy(()=>import( "./pages/Description"));
+const SettingsForm =lazy(()=>import( "./pages/SettingForm"));
+const Terms =lazy(()=>import( "./pages/Terms"));
+const Services =lazy(()=>import( "./pages/Services"));
+const Privacy =lazy(()=>import( "./pages/Privacy"));
+const Contact =lazy(()=>import( "./pages/Contact"));
+const PgEditPage =lazy(()=>import( "./pages/PgEditPage"));
+const Admin =lazy(()=>import( "./pages/Admin"));
+const Request =lazy(()=>import( "./pages/Request"));
+const OtpVerification = lazy(() => import("./pages/OtpVerification"));
+import Spinner from "./components/Spinner";
+
 
 
 function App() {
   const [isSidebarOpen, setIsSidebaropen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const [showDashboard, setShowDashboard] = useState(false);
-  // const [showEdit,setShowEdit]=useState(false)
+  // const [showSettings, setShowSettings] = useState(false);
+
+
 
 
   return (
     <div className="app-layout">
-      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebaropen}
-        openDashboard={() => {
-          setShowDashboard(true);
-        }} />
+      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebaropen} />
       <div className={`main-content ${isSidebarOpen ? 'shifted' : ''}`}>
-        <Navbar isSidebarOpen={isSidebarOpen} openLogin={() => setShowLogin(true)} />
+        <Navbar isSidebarOpen={isSidebarOpen} openLogin={() => setShowLogin(true)} setIsOpen={setIsSidebaropen} 
+           />
+          <Suspense fallback={<Spinner />}>
+          
         <Routes>
-          <Route path="/" element={<Home setShowLogin={() => setShowLogin(true)} />} />
-          <Route path="/my-listings" element={<MyListings
-           openDashboard={() => {setShowDashboard(true);}} />} />
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-          {/* <Route path="/edit/:id" element={<Dashboard   />} /> */}
-           <Route path="/unlocked" element={<UnlockedPGs/>} />
-           <Route path="/pg/:id" element={<PGDescription />}/>
+          <Route path="/" element={<Home setShowLogin={() => setShowLogin(true)} isSidebarOpen={isSidebarOpen} />} />
+          <Route path="/my-listings"  element={<MyListings />} />
+          <Route path="/dashboard"   element={<Dashboard />} />
+          <Route path="/pg/:id" element={ <Description/> } />
+          <Route path="/unlocked" element={<UnlockedPGs />} />
+          <Route path="/setting" element={<SettingsForm/>} />
+          <Route path="/terms" element={<Terms/>} />
+          <Route path="/services" element={<Services/>} />
+          <Route path="/privacy" element={<Privacy/>} />
+          <Route path="/contact" element={<Contact/>} />
+          <Route path="/edit/:pgId" element={<PgEditPage />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/request" element={<Request/>} />
+          <Route path="/verify-otp" element={<OtpVerification />} />
           
 
+
         </Routes>
+        </Suspense>
         {showRegister && (
           <Register
             onClose={() => setShowRegister(false)}
@@ -53,18 +72,8 @@ function App() {
 
           />
         )}
-        {showDashboard && (
-          <Dashboard
-            onClosePg={() => setShowDashboard(false)}
-
-
-
-          />
-
-        )
-
-
-        }
+    
+        
         {showLogin && (
           <Login
             onClose={() => setShowLogin(false)}

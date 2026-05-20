@@ -3,27 +3,23 @@ const { User } = require("../models");
 const { UserUnlockedPGs } = require("../models")
 const { Payment } = require("../models")
 const {Op} = require("sequelize");
+const asyncHandler = require("../utils/asyncHandler");
 
 
-exports.createOrder = async (req, res) => {
+exports.createOrder =asyncHandler( async (req, res) => {
 
     const { type } = req.body;
     const amount = type === "single" ? 100 : 1000;
 
 
 
-    try {
+   
         const order = await razorpay.orders.create({
             amount: amount,
             currency: "INR",
             receipt: `rcpt_${Math.random()}`,
         })
-        // console.log("🧾 Payment values:");
-        // console.log("🔐 razorpayOrderId:", order.id);
-        // console.log("👤 userId:", req.user?.id);
-        // console.log("💰 amount:", order.amount);
-        // console.log("📦 type:", type);
-        // console.log("🏠 pgId:", type === 'single' ? req.body.pgId : null);
+
         await Payment.create({
             razorpayOrderId: order.id,
             userId: req.user.id,
@@ -34,16 +30,14 @@ exports.createOrder = async (req, res) => {
         res.status(201).json({ orderId: order.id, amount: order.amount });
 
 
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to create Razorpay order' });
-    }
-}
+   
+})
 
-exports.verifyPaymentAndUnlock = async (req, res) => {
+exports.verifyPaymentAndUnlock =asyncHandler( async (req, res) => {
     const {  pgId, type } = req.body;
     const userId = req.user.id;
 
-    try {
+    
         const user = await User.findByPk(userId);
         const payment = await Payment.findOne({
             where: {
@@ -65,14 +59,13 @@ exports.verifyPaymentAndUnlock = async (req, res) => {
         } else if (type === 'single') {
             const alreadyUnlocked = await UserUnlockedPGs.findOne({ where: { userId, pgId } })
             if (!alreadyUnlocked) {
-                await UserUnlockedPGs.create({ userId, pgId });
-
+                // Set expiration date to 30 days from now
+                const expiresAt = new Date();
+                expiresAt.setDate(expiresAt.getDate() + 30);
+                await UserUnlockedPGs.create({ userId, pgId, expiresAt });
             }
         }
         res.json({ success: true })
 
-    } catch (err) {
-        // res.status(500).json({ error: 'Failed to verify payment' });
-        res.status(500).json({ error: 'Failed to verify payment', message: err.message });
-    }
-}
+    
+})
