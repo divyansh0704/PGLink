@@ -71,6 +71,17 @@ const SettingsForm = () => {
 
   }
 
+  const handleVerifyEmail = async () => {
+    try {
+      await API.post("/users/send-otp");
+      toast.success("Verification code sent to your email!");
+      navigate("/verify-otp");
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.message || "Failed to send verification code");
+    }
+  };
+
   return (
     <div className="modals">
       <div className="modal-contents">
@@ -93,7 +104,15 @@ const SettingsForm = () => {
             onChange={handleProfile}
           // required
           />
-          <button id="s-button" type="submit">Save</button>
+          <div className="button-box">
+            <button id="s-button" type="submit">Save</button>
+          {!user?.isVerified && (
+            <button id="v-button" type="button" onClick={handleVerifyEmail} >
+              Verify Email
+            </button>
+          )}
+          </div>
+          
           {/* <button id="s-button1"type="button" onClick={() => navigate("/")}>
             Cancel
           </button> */}

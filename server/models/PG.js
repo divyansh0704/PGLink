@@ -4,7 +4,8 @@ const User = require('./User');
 
 const PG = sequelize.define('PG', {
     title: DataTypes.STRING,
-    city: {
+    description: DataTypes.TEXT,
+    city:{
         type: DataTypes.STRING(100),
         allowNull: true
     },
