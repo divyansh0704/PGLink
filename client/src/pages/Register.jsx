@@ -25,9 +25,8 @@ const Register = ({ onClose, openLogin }) => {
         autoClose: 2000,
       });
       setTimeout(() => {
-        // navigate('/');
-        //  window.location.reload();
-        window.location.href = "/";
+        onClose();
+        navigate("/verify-otp");
       }, 2000);
 
 

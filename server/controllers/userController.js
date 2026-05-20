@@ -2,6 +2,7 @@ const { User, PG } = require("../models");
 const generateToken = require("../utils/generateToken");
 const bcrypt = require('bcrypt');
 const asyncHandler = require("../utils/asyncHandler");
+const sendOtp = require("../utils/sendOtp")
 
 
 
@@ -15,6 +16,8 @@ exports.register = asyncHandler(async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashedPassword, role });
     const token = generateToken(user.id);
+
+    await sendOtp(user);
     res.status(201).json({ message: "User created successfully", user, token });
 
 })
@@ -112,3 +115,86 @@ exports.updateProfile = asyncHandler(async (req, res) => {
 
 })
 
+exports.verifyOtp = async (req, res) => {
+
+    try {
+
+        const {  otp } = req.body;
+        const user = await User.findByPk(req.user.id);
+        
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // check otp exists
+        if (!user.otp) {
+            return res.status(400).json({
+                message: "No OTP found"
+            });
+        }
+
+
+        if (Date.now() > user.otpExpiry) {
+
+            return res.status(400).json({
+                message: "OTP expired"
+            });
+        }
+
+
+        const isMatch = await bcrypt.compare(
+            otp,
+            user.otp
+        );
+
+        if (!isMatch) {
+            return res.status(400).json({
+                message: "Invalid OTP"
+            });
+        }
+
+
+        user.isVerified = true;
+
+
+        user.otp = null;
+        user.otpExpiry = null;
+
+        await user.save();
+
+        res.status(200).json({
+            message: "OTP verified successfully"
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            message: "Server Error"
+        });
+    }
+}
+
+exports.resendOtp = asyncHandler(async (req, res) => {
+    const user = await User.findByPk(req.user.id);
+
+    if (!user) {
+        return res.status(404).json({
+            message: "User not found"
+        });
+    }
+
+    if (user.isVerified) {
+        return res.status(400).json({
+            message: "User already verified"
+        });
+    }
+
+    await sendOtp(user);
+
+    res.status(200).json({
+        message: "New OTP sent"
+    });
+});

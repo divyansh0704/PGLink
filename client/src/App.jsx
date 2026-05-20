@@ -20,6 +20,7 @@ const Contact =lazy(()=>import( "./pages/Contact"));
 const PgEditPage =lazy(()=>import( "./pages/PgEditPage"));
 const Admin =lazy(()=>import( "./pages/Admin"));
 const Request =lazy(()=>import( "./pages/Request"));
+const OtpVerification = lazy(() => import("./pages/OtpVerification"));
 import Spinner from "./components/Spinner";
 
 
@@ -55,6 +56,7 @@ function App() {
           <Route path="/edit/:pgId" element={<PgEditPage />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/request" element={<Request/>} />
+          <Route path="/verify-otp" element={<OtpVerification />} />
           
 
 
