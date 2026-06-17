@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../styles/OtpVerification.css';
+import '../styles/otpVerification.css';
 import API from '../utils/api';
 
 const OTP_RESEND_DELAY = 5 * 60; 
