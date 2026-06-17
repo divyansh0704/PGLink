@@ -6,13 +6,21 @@ import loadRazorpay from '../utils/razorpay'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { capitalize } from '../utils/capitalize'
+import defaultImage from '../assets/default.png'
 
 const PGCard = ({ pg, user, setShowLogin }) => {
     const sanitizedNumber = pg.contactNumber.replace(/[^\d]/g, '');
     const isUnlocked = user?.isSubscribed || user?.unlockedPGs?.includes(pg.id);
     const navigate = useNavigate();
 
+    // Safe parse imageUrls in case it comes as a string from the DB
+    const parsedImageUrls = typeof pg.imageUrls === 'string' 
+        ? JSON.parse(pg.imageUrls) 
+        : (pg.imageUrls || []);
 
+    const displayImage = parsedImageUrls.length > 0 
+        ? parsedImageUrls[0] 
+        : (pg.imageUrl || "/uploads/default.png");
 
     const handleCardClick = () => {
         if (!user) {
@@ -50,10 +58,8 @@ const PGCard = ({ pg, user, setShowLogin }) => {
         <div className="pg-card" >
 
             <div className="updated-box" onClick={handleCardClick}>
-
-                <img src={`${pg.imageUrl}`} alt="noimage"
-                // onError={(e) => {e.target.src = '/uploads/default.png'}}
-                />
+                {/* <img src={displayImage} alt={pg.title} onError={(e) => e.target.src = "/uploads/default.png"} /> */}
+                {pg.imageUrls === null ? <img src={defaultImage} alt="Default Image" /> : <img src={displayImage} alt={pg.title} />}
 
                 <div className="pg-card-content">
 

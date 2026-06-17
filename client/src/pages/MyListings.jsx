@@ -80,8 +80,19 @@ const MyListings = () => {
                 ) : (
                     listings.map(pg => (
                         <div key={pg.id} className="pg-card2">
-                            <img src={`${pg.imageUrl}`} alt="noimage"
-                            />
+                            {/* <img src={`${pg.imageUrl}`} alt="noimage" */}
+                            {/* /> */}
+                            {(() => {
+                                const urls = typeof pg.imageUrls === 'string' ? JSON.parse(pg.imageUrls) : pg.imageUrls;
+                                const src = (urls && urls.length > 0) ? urls[0] : (pg.imageUrl || "/uploads/default.png");
+                                return (
+                                    <img 
+                                        src={src} 
+                                        alt={pg.title} 
+                                        onError={(e) => e.target.src = "/uploads/default.png"} 
+                                    />
+                                );
+                            })()}
                             <h3>{pg.title}</h3>
                             <p className="location">{pg.city}</p>
                             <p className="address">{pg.address}</p>

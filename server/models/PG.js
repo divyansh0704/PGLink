@@ -32,7 +32,7 @@ const PG = sequelize.define('PG', {
    
     rent: DataTypes.FLOAT,
     amenities: DataTypes.JSON,
-    imageUrl: DataTypes.STRING,
+    imageUrls: DataTypes.JSON,
     contactNumber: DataTypes.STRING,
     ownerId: {
         type: DataTypes.INTEGER,

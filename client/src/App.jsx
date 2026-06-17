@@ -22,6 +22,7 @@ const Admin =lazy(()=>import( "./pages/Admin"));
 const Request =lazy(()=>import( "./pages/Request"));
 const OtpVerification = lazy(() => import("./pages/OtpVerification"));
 import Spinner from "./components/Spinner";
+import PropertyDetails from "./pages/PgDetails";
 
 
 
@@ -46,7 +47,8 @@ function App() {
           <Route path="/" element={<Home setShowLogin={() => setShowLogin(true)} isSidebarOpen={isSidebarOpen} />} />
           <Route path="/my-listings"  element={<MyListings />} />
           <Route path="/dashboard"   element={<Dashboard />} />
-          <Route path="/pg/:id" element={ <Description/> } />
+          {/* <Description/> */}
+          <Route path="/pg/:id" element={ <PropertyDetails/>  } />
           <Route path="/unlocked" element={<UnlockedPGs />} />
           <Route path="/setting" element={<SettingsForm/>} />
           <Route path="/terms" element={<Terms/>} />

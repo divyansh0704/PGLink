@@ -9,6 +9,7 @@ const PgEditPage = () => {
   const { pgId } = useParams();
   const [form, setForm] = useState({
     title: '',
+    description: '',
     district: '',
     pincode: '',
     state: '',
@@ -33,17 +34,18 @@ const PgEditPage = () => {
       try {
         const res = await API.get(`/pgs/${pgId}`);
         const data = res.data;
+        console.log("Raw PG Object:", res.data);
 
-        console.log("Fetched PG Object:", data); 
+        console.log("Fetched PG Object:", data);
 
         if (data) {
-          
+
           let parsedAmenities = data.amenities;
           if (typeof data.amenities === 'string') {
             parsedAmenities = JSON.parse(data.amenities);
           }
 
-         
+
           const displayContact = data.contactNumber?.includes('-')
             ? data.contactNumber.split('-')[1]
             : data.contactNumber;
@@ -90,6 +92,7 @@ const PgEditPage = () => {
       const formData = new FormData();
 
       formData.append('title', form.title);
+      formData.append('description', form.description);
       formData.append('district', form.district);
       formData.append('pincode', form.pincode);
       formData.append('state', form.state);
@@ -106,12 +109,12 @@ const PgEditPage = () => {
         formData.append('photo', photo);
       }
 
-    
+
       // console.log("FormData contents:");
       // for (let [key, value] of formData.entries()) {
       //   console.log(`${key}:`, value);
       // }
-      
+
 
       await API.put(`/pgs/${pgId}`, formData);
       toast.success("PG updated successfully!", {
@@ -119,9 +122,9 @@ const PgEditPage = () => {
         autoClose: 2000,
       });
       setTimeout(() => {
-        
+
         window.location.href = "/my-listings";
-        
+
       }, 2000);
 
     } catch (err) {
@@ -155,6 +158,11 @@ const PgEditPage = () => {
               <label>Contact Number</label>
               <input type="text" name='contactNumber' value={form.contactNumber} onChange={handleChange} placeholder="10-digit mobile number" required />
             </div>
+          </div>
+          <div className="input-field">
+            <label>Description</label>
+            {/* <input type="text" name="pincode" placeholder="123456" pattern="[0-9]{6}" value={form.pincode} onChange={handleChange} required /> */}
+            <textarea name="description" placeholder="Describe your PG..." value={form.description} onChange={handleChange} required rows="4" id=""></textarea>
           </div>
         </section>
 
@@ -200,7 +208,7 @@ const PgEditPage = () => {
         </section>
 
         {/* Media Section */}
-        <section className="form-section">
+        {/* <section className="form-section">
           <div className="section-title">Media</div>
           <div className="image-upload-area">
             <div className="current-preview">
@@ -223,7 +231,7 @@ const PgEditPage = () => {
               <p className="upload-hint">Upload high-quality images to attract more views.</p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Actions */}
         <div className="form-actions">
