@@ -11,6 +11,7 @@ const AddPgForm = () => {
     const [form, setForm] = useState({
         title: '',
         // collegeName: '',
+        description: '',
         district: '',
         pincode: '',
         state: '',
@@ -28,7 +29,7 @@ const AddPgForm = () => {
         },
     })
     const [location, setLocation] = useState({ lat: null, lng: null });
-    const [photo, setPhoto] = useState(null)
+    const [photos, setPhotos] = useState(null)
     const [isFetchingLocation, setIsFetchingLocation] = useState(false);
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -43,15 +44,23 @@ const AddPgForm = () => {
 
     }
     const handlePhotoChange = e => {
-        setPhoto(e.target.files[0]);
+        // setPhotos(e.target.files);
+        const newFiles = Array.from(e.target.files);
+
+        setPhotos((prev) => {
+
+            if (!prev) return newFiles;
+
+            return [...prev, ...newFiles];
+        });
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-       
+
 
         try {
             const token = localStorage.getItem('token');
-            if(!token){
+            if (!token) {
                 toast.error("Please login to list PG", {
                     position: "top-right",
                     autoClose: 2000,
@@ -59,7 +68,7 @@ const AddPgForm = () => {
                 setTimeout(() => {
                     // navigate("/login");
                     navigate("/")
-                    
+
                 }, 2000);
                 return
             }
@@ -69,6 +78,8 @@ const AddPgForm = () => {
 
             formData.append('title', form.title);
             // formData.append('collegeName', form.collegeName);
+            formData.append('description', form.description);
+
             formData.append('district', form.district);
             formData.append('pincode', form.pincode);
             formData.append('state', form.state);
@@ -88,8 +99,10 @@ const AddPgForm = () => {
             formData.append('amenities', JSON.stringify(form.amenities));
 
 
-            if (photo) {
-                formData.append('photo', photo);
+            if (photos) {
+                for (let i = 0; i < photos.length; i++) {
+                    formData.append("photos", photos[i]);
+                }
             }
             await API.post('/pgs', formData);
 
@@ -103,7 +116,9 @@ const AddPgForm = () => {
 
             setForm({
                 title: '',
+                description: '',
                 district: '',
+                
                 pincode: '',
                 state: '',
                 city: '',
@@ -119,7 +134,7 @@ const AddPgForm = () => {
                     studyTable: false,
                 },
             });
-            setPhoto(null);
+            setPhotos(null);
             setLocation({ lat: null, lng: null });
         } catch (err) {
             console.error(err);
@@ -146,7 +161,7 @@ const AddPgForm = () => {
                 const data = await response.json();
                 console.log(data);
                 if (data && data.address) {
-                    const fullAddress = [data.address.road,data.address.county,data.address.village].filter(Boolean).join(', ')
+                    const fullAddress = [data.address.road, data.address.county, data.address.village].filter(Boolean).join(', ')
                     setForm(prevForm => ({
                         ...prevForm,
                         address: fullAddress || prevForm.address,
@@ -195,12 +210,17 @@ const AddPgForm = () => {
                                 <input type="text" name="contactNumber" placeholder="10-digit mobile number" maxLength={10} pattern="[0-9]{10}" value={form.contactNumber} onChange={handleChange} required />
                             </div>
                         </div>
+                        <div className="input-field">
+                            <label>Description</label>
+                            {/* <input type="text" name="pincode" placeholder="123456" pattern="[0-9]{6}" value={form.pincode} onChange={handleChange} required /> */}
+                            <textarea name="description" placeholder="Describe your PG..." value={form.description} onChange={handleChange} required rows="4" id=""></textarea>
+                        </div>
                     </section>
 
                     {/* Location Section */}
                     <section className="form-section">
                         <div className="section-title">Location Details</div>
-                        
+
                         <div className="location-helper">
                             <button type="button" onClick={handleFetchLocation} disabled={isFetchingLocation} className="location-btn">
                                 <MapPin size={18} /> {isFetchingLocation ? 'Fetching...' : 'Use My Current Location'}
@@ -214,7 +234,7 @@ const AddPgForm = () => {
                             <label>Full Address</label>
                             <textarea name="address" rows="2" placeholder="Street, Landmark, Area..." value={form.address} onChange={handleChange} required />
                         </div>
-                        
+
                         <div className="input-grid">
                             <div className="input-field">
                                 <label>City</label>
@@ -261,18 +281,30 @@ const AddPgForm = () => {
                                 <label htmlFor="photo-upload" className="custom-upload-btn">
                                     <Upload size={18} /> Choose PG Photo
                                 </label>
-                                <input id="photo-upload" type="file" accept="image/*" onChange={handlePhotoChange} style={{ display: 'none' }} />
+                                <input id="photo-upload" type="file" accept="image/*" multiple onChange={handlePhotoChange} style={{ display: 'none' }} />
                                 <p className="upload-hint">Supported formats: JPG, PNG. Max size: 5MB.</p>
                             </div>
-                            
-                            {photo && (
-                                <div className="current-preview">
-                                    <p>Selected Image:</p>
-                                    <img
+
+                            {photos && (
+                                <div className="preview-grid">
+                                    {/* <p>Selected Images:</p> */}
+                                    {/* <img
                                         src={URL.createObjectURL(photo)}
                                         alt="Preview"
                                         className="img-preview-box"
-                                    />
+                                    /> */}
+                                    {
+                                        Array.from(photos).map((photo, index) => (
+
+                                            <img
+                                                key={index}
+                                                src={URL.createObjectURL(photo)}
+                                                alt="Preview"
+                                                className="img-preview-box"
+                                            />
+
+                                        ))
+                                    }
                                 </div>
                             )}
                         </div>

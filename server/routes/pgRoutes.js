@@ -12,7 +12,7 @@ const upload = multer({
     limits: { fileSize: 15 * 1024 * 1024 }
 });
 
-router.post("/", protect, upload.single('photo'), createPG);
+router.post("/", protect, upload.array('photos',5), createPG);
 router.get("/", getAllPGs);
 router.get("/my-pgs", protect, getPGByOwner);
 router.get('/unlocked', protect, unlockedPG);

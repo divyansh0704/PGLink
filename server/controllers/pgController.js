@@ -8,11 +8,16 @@ const DEFAULT_IMAGE_URL = "https://res.cloudinary.com/dkieieuoi/image/upload/v17
 
 exports.createPG = asyncHandler(async (req, res) => {
     // console.log(req.file);
-    let imageUrl;
-    if (req.file) {
-        imageUrl = req.file.path;
+    let imageUrls = [];
+    if (req.files && req.files.length > 0) {
+
+        imageUrls = req.files.map(
+            file => file.path
+        );
+
     } else {
-        imageUrl = DEFAULT_IMAGE_URL;
+
+        imageUrls = [DEFAULT_IMAGE_URL];
     }
     let amenities = req.body.amenities;
     if (typeof amenities === 'string') {
@@ -54,7 +59,7 @@ exports.createPG = asyncHandler(async (req, res) => {
         ...req.body,
         amenities,
         ownerId: req.user.id,
-        imageUrl,
+        imageUrls,
         location
     });
     res.status(201).json({ message: "PG created successfully", pg });
@@ -228,6 +233,10 @@ exports.updatePG = asyncHandler(async (req, res) => {
 
 
         existingPG.title = req.body.title || existingPG.title;
+        existingPG.description = req.body.description || existingPG.description;
+        existingPG.district = req.body.district || existingPG.district;
+        existingPG.pincode = req.body.pincode || existingPG.pincode;
+        existingPG.state = req.body.state || existingPG.state;
         existingPG.city = req.body.city || existingPG.city;
         existingPG.address = req.body.address || existingPG.address;
         existingPG.rent = req.body.rent || existingPG.rent;

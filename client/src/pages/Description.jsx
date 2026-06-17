@@ -4,14 +4,16 @@ import { useParams, Link } from "react-router-dom";
 import API from "../utils/api";
 import "../styles/pgDescription.css";
 import SubscriptionBanner from "../components/SubscriptionBanner";
-import { capitalize } from "../utils/capitalize";
+import { capitalize } from "../utils/capitalize"; // Keep this import
 import Footer from "../components/Footer";
+import { ChevronLeft, ChevronRight, Wifi, Shirt, Utensils, AirVent, Snowflake, BookOpen } from "lucide-react"; // Import new icons
 
 const Description = () => {
   const { id } = useParams();
   const [pg, setPg] = useState(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     let mounted = true;
@@ -21,6 +23,7 @@ const Description = () => {
         const res = await API.get(`/pgs/${id}`);
         if (!mounted) return;
         setPg(res.data);
+        setCurrentImageIndex(0); // Reset slider when new PG loads
         setErr(null);
       } catch (error) {
         setErr(error.response?.data?.message || error.message || "Failed to load");
@@ -59,12 +62,44 @@ const Description = () => {
     );
   }
 
+  // Safe parse imageUrls in case it comes as a string from the DB
+  const parsedImageUrls = typeof pg.imageUrls === 'string'
+    ? JSON.parse(pg.imageUrls)
+    : (pg.imageUrls || []);
+
+  // Combine old imageUrl and new imageUrls for the slider
+  const images = [...parsedImageUrls];
+  if (pg.imageUrl && !images.includes(pg.imageUrl)) {
+    images.unshift(pg.imageUrl);
+  }
+
+  // Fallback to placeholder if no images found
+  const finalImages = images.length > 0 ? images : ["/uploads/default.png"];
+
+  const nextImage = (e) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % finalImages.length);
+  };
+
+  const prevImage = (e) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + finalImages.length) % finalImages.length);
+  };
+
   return (
     <>
-    
     <div className="pg-descD containerD">
       <div className="pg-detailD">
-        <img className="pg-detail-image" src={pg.imageUrl} alt={pg.title} onError={(e)=>{e.target.src='/uploads/default.png'}} />
+        <div className="image-slider-container">
+          <img className="pg-detail-image" src={finalImages[currentImageIndex]} alt={pg.title} onError={(e) => { e.target.src = '/uploads/default.png' }} />
+          {finalImages.length > 1 && (
+            <>
+              <button className="slider-btn prev" onClick={prevImage}><ChevronLeft size={24} /></button>
+              <button className="slider-btn next" onClick={nextImage}><ChevronRight size={24} /></button>
+              <div className="image-counter">{currentImageIndex + 1} / {finalImages.length}</div>
+            </>
+          )}
+        </div>
         <div className="pg-detail-info">
           <h1>{capitalize(pg.title)}</h1>
            <div className="card-infoD">

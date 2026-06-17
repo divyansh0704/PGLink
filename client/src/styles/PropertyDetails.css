@@ -1,0 +1,599 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap');
+
+/* ==========================================================================
+   1. GLOBAL & MOBILE-FIRST STYLES (Default Viewport < 768px)
+   ========================================================================== */
+:root {
+    --primary-teal: #003F3F;
+    --secondary-bg: #F4F1EA;
+    --tertiary-accent: #D97706;
+    --neutral-gray: #4B5563;
+}
+
+.app-container {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--neutral-gray);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hide Desktop components by default on Mobile layout */
+.desktop-nav,
+.desktop-actions,
+/* .gallery-sub,  */
+/* .view-all-overlay,  */
+.sidebar-booking-col,
+.desktop-footer,
+.desktop-only,
+.desktop-loc {
+    display: none !important;
+}
+
+/* Mobile Header */
+.mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-header h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    color: var(--primary-teal);
+    margin: 0;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--neutral-gray);
+}
+
+/* Layout Content Wrapper */
+.content-wrapper {
+    padding: 16px;
+    flex: 1;
+    padding-bottom: 100px;
+    /* Space for sticky bottom buttons */
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.title-row h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 22px;
+    color: var(--primary-teal);
+    margin: 0 0 4px 0;
+}
+
+.location-text {
+    font-size: 20px;
+    margin: 0;
+}
+
+.mobile-rating {
+    background: var(--tertiary-accent);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* Responsive Image Gallery */
+.gallery-grid {
+    /* border: 2px solid red; */
+    position: relative;
+    width: 100%;
+    height: 240px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.gallery-main {
+    border: 2px solid green;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+.image-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.mobile-gallery-indicator {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+/* Mobile Pricing Block */
+.mobile-price-tag {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4px;
+}
+
+.price-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+.price-amount {
+    font-family: 'Manrope', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary-teal);
+}
+
+.section-divider {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    margin: 16px 0;
+}
+
+.details-section h3 {
+    font-family: 'Manrope', sans-serif;
+    color: var(--primary-teal);
+    font-size: 16px;
+    margin: 0 0 12px 0;
+}
+
+.description-p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Amenities Dynamic List */
+.amenities-container-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.amenity-card {
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+}
+
+/* Rules list layout */
+.ethics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ethics-item {
+    display: flex;
+    gap: 10px;
+}
+
+.check-icon {
+    color: var(--primary-teal);
+    font-weight: bold;
+}
+
+.ethics-item strong {
+    display: block;
+    font-size: 14px;
+    color: var(--primary-teal);
+    margin-bottom: 2px;
+}
+
+.ethics-item p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Neighborhood / Map block */
+.map-view-box {
+    height: 150px;
+    background: #e5e7eb;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: var(--neutral-gray);
+    margin-bottom: 12px;
+}
+.address-box{
+    margin-bottom: 4px;
+}
+.address-box strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.address-box p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* Sticky Mobile Action Buttons */
+.mobile-actions-footer {
+    /* position: fixed; */
+    /* bottom: 0;
+    left: 0; */
+    margin-top: 6px;
+    width: 100%;
+    background-color: #F0F4F4;
+    padding: 16px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 12px;
+    box-sizing: border-box;
+    z-index: 999;
+}
+
+.mobile-btn-primary,
+.mobile-btn-secondary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.mobile-btn-primary {
+    background: var(--primary-teal);
+    color: #ffffff;
+}
+
+.mobile-btn-secondary {
+    background: transparent;
+    color: var(--primary-teal);
+    border: 1px solid var(--primary-teal);
+}
+
+
+/* ==========================================================================
+   2. DESKTOP MEDIA QUERIES (Viewport >= 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+
+    /* Reverse Display Toggles */
+    .desktop-nav,
+    .desktop-actions,
+    /* .gallery-sub,  */
+    /* .view-all-overlay,  */
+    .sidebar-booking-col,
+    .desktop-footer,
+    .desktop-only,
+    .desktop-loc {
+        display: block !important;
+    }
+
+    /* Hide Mobile UI Layers */
+    .mobile-header,
+    .mobile-rating,
+    .mobile-gallery-indicator,
+    .mobile-price-tag,
+    .mobile-actions-footer,
+    .mobile-only,
+    .mobile-loc {
+        display: none !important;
+    }
+
+    /* Structural Content Alignment */
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    /* Desktop Top Navigation Bar */
+    .desktop-nav {
+        background-color: #ffffff;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 8%;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav-logo {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 800;
+        font-size: 24px;
+        color: var(--primary-teal);
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--neutral-gray);
+        margin: 0 16px;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .nav-auth button {
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn-login {
+        background: transparent;
+        color: var(--primary-teal);
+    }
+
+    .btn-signup {
+        background: var(--primary-teal);
+        color: #ffffff;
+    }
+
+    /* Clean Title Alignment */
+    .title-row {
+        margin-bottom: 24px;
+        align-items: center;
+    }
+
+    .title-row h1 {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+
+    .action-btn {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        padding: 8px 16px;
+        border-radius: 6px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+    /* Complex Desktop Multi-image Layout Grid */
+    .gallery-grid {
+        /* display: grid; */
+        /* grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+        gap: 12px;
+        height: 400px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+    }
+    .gallery-grid img{
+        width: 60%;
+        height: 90%;
+        border-radius: 8px;
+    }
+
+    .gallery-main {
+        /* grid-row: span 2; */
+    }
+
+    .view-all-overlay {
+        /* position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer; */
+    }
+
+    /* Modern Split Grid Matrix Columns */
+    .two-column-layout {
+        display: grid;
+        grid-template-columns: 7fr 4fr;
+        gap: 48px;
+        align-items: start;
+    }
+
+    .main-details-col h2 {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
+    .details-section h3 {
+        font-size: 20px;
+    }
+
+    .description-p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .section-divider {
+        margin: 32px 0;
+        border-top: 1px solid #d1d5db;
+    }
+
+    .amenities-container-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        /* 3 Columns on Desktop */
+        gap: 16px;
+    }
+
+    .amenity-card {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 15px;
+    }
+
+    .amenity-icon {
+        margin-right: 8px;
+    }
+
+    /* Neighborhood Details Layout overrides */
+    .map-view-box {
+        height: 200px;
+    }
+
+    .map-link-desktop {
+        font-weight: 600;
+        color: var(--primary-teal);
+        cursor: pointer;
+        margin: 12px 0;
+    }
+
+    .neighborhood-specs div {
+        margin-top: 8px;
+        font-weight: 500;
+    }
+
+    .neighborhood-specs span {
+        color: #6b7280;
+        font-weight: 400;
+    }
+
+    /* Sticky Reservation Deck Module */
+    .booking-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 24px;
+        position: sticky;
+        top: 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .booking-price h3 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 28px;
+        color: var(--primary-teal);
+        margin: 0 0 20px 0;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
+    }
+
+    .form-group label {
+        font-size: 11px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+    }
+
+    .form-group select,
+    .form-group input {
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .reserve-btn,
+    .visit-btn {
+        width: 100%;
+        padding: 14px;
+        border-radius: 8px;
+        font-family: 'Manrope', sans-serif;
+        font-weight: 700;
+        margin-top: 12px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .reserve-btn {
+        background: var(--primary-teal);
+        color: white;
+    }
+
+    .visit-btn {
+        background: transparent;
+        color: var(--primary-teal);
+        border: 1px solid var(--primary-teal);
+    }
+
+    .brokerage-note {
+        font-size: 11px;
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .verified-badge {
+        display: flex;
+        gap: 10px;
+        background: #f9fafb;
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    /* Footer Section Base Structure */
+    .desktop-footer {
+        background: #ffffff;
+        margin-top: 80px;
+        padding: 40px 8%;
+        border-top: 1px solid #e5e7eb;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-top p {
+        font-size: 13px;
+        margin: 4px 0 0 0;
+    }
+
+    .footer-links a {
+        text-decoration: none;
+        color: var(--neutral-gray);
+        margin-left: 20px;
+        font-size: 13px;
+    }
+}
