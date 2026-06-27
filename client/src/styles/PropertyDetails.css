@@ -19,6 +19,8 @@
     flex-direction: column;
 }
 
+
+
 /* Hide Desktop components by default on Mobile layout */
 .desktop-nav,
 .desktop-actions,

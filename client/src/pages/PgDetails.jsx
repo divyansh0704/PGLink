@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import '../styles/PropertyDetails.css';
-import { ChevronLeft, ChevronRight,Phone,MessageCircle, Wifi, Shirt, Utensils, AirVent, Snowflake, BookOpen } from "lucide-react";
+import { ChevronLeft, ChevronRight, Phone, MessageCircle, Wifi, Shirt, Utensils, AirVent, Snowflake, BookOpen } from "lucide-react";
 import API from '../utils/api';
 import defaultImage from '../assets/default.png';
 import { capitalize } from '../utils/capitalize'
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import L from 'leaflet';
 
 export default function PropertyDetails() {
     const { id } = useParams();
@@ -228,14 +229,38 @@ export default function PropertyDetails() {
                             <h3 className="section-title">The Neighborhood</h3>
                             <div className="map-view-box">
                                 {pgLat && pgLng ? (
-                                    <MapContainer 
-                                        center={[pgLat, pgLng]} 
-                                        zoom={15} 
-                                        scrollWheelZoom={false} 
+                                    <MapContainer
+                                        center={[pgLat, pgLng]}
+                                        zoom={15}
+                                        scrollWheelZoom={false}
                                         style={{ height: '100%', width: '100%', zIndex: 0 }}
                                     >
                                         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                                        <Marker position={[pgLat, pgLng]} />
+                                        {/* <Marker position={[pgLat, pgLng]} /> */}
+                                        <Marker
+                                            position={[pgLat, pgLng]}
+                                            icon={
+                                                L.divIcon({
+                                                    className: "custom-pg-marker",
+                                                    html: `
+        <div style="
+          transform: translate(-50%, -100%);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21s-6-4.35-6-10a6 6 0 0 1 12 0c0 5.65-6 10-6 10z"></path>
+            <circle cx="12" cy="11" r="2.5"></circle>
+          </svg>
+        </div>
+      `,
+                                                    iconSize: [88, 88],
+                                                    iconAnchor: [14, 28],
+                                                })
+                                            }
+                                        />
+
                                     </MapContainer>
                                 ) : (
                                     <div className="no-map"><span className="map-pin">📍</span> Map View Not Available</div>
@@ -251,13 +276,13 @@ export default function PropertyDetails() {
                                 {/* <div>🚇 Metro Station <span>• 5 mins walk</span></div>
                                 <div>🛒 Supermarket <span>• 2 mins walk</span></div> */}
                                 <div className="address-box ">
-                                <strong>Address</strong>
-                                <p>{pg.address}</p>
-                            </div>
-                            <div className="address-box ">
-                                <strong>Pincode</strong>
-                                <p>{pg.pincode}</p>
-                            </div>
+                                    <strong>Address</strong>
+                                    <p>{pg.address}</p>
+                                </div>
+                                <div className="address-box ">
+                                    <strong>Pincode</strong>
+                                    <p>{pg.pincode}</p>
+                                </div>
                             </div>
 
                             <div className="address-box mobile-only">
@@ -269,8 +294,8 @@ export default function PropertyDetails() {
                                 <p>{pg.pincode}</p>
                             </div>
                             <footer className="mobile-actions-footer">
-                                <button className="mobile-btn-secondary" onClick={() => window.open(`https://wa.me/${sanitizedNumber}`, '_blank')}><span><MessageCircle size={24}/></span>Whatsapp</button>
-                                <button className="mobile-btn-primary" onClick={() => { window.location.href = `tel:${sanitizedNumber}`; }}><span><Phone size={24}/></span>Call</button>
+                                <button className="mobile-btn-secondary" onClick={() => window.open(`https://wa.me/${sanitizedNumber}`, '_blank')}><span><MessageCircle size={24} /></span>Whatsapp</button>
+                                <button className="mobile-btn-primary" onClick={() => { window.location.href = `tel:${sanitizedNumber}`; }}><span><Phone size={24} /></span>Call</button>
                             </footer>
                         </section>
                     </div>
