@@ -16,27 +16,29 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: center;
 
 }
 
 .password-input {
   /* display: block; */
-  width: 90%;
+  /* width: 30%; */
   padding: 8px;
   margin-bottom: 1rem;
   border: 1px solid var(--border-color);
   border-radius: 5px;
 }
 
+
 .auth-form input,
 .auth-form select {
   display: block;
-  width: 90%;
+  width: 92%;
   padding: 8px;
   margin-bottom: 1rem;
   border: 1px solid var(--border-color);
   border-radius: 5px;
+  
 }
 
 .auth-form select {
@@ -106,3 +108,4 @@
   border: none;
   cursor: pointer;
 }
+

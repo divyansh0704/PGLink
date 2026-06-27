@@ -52,18 +52,19 @@ const Register = ({ onClose, openLogin }) => {
       <div className="modal-content auth-form">
         <div className="close-btn" onClick={onClose}>×</div>
         <h2>Register</h2>
-        <form onSubmit={register} >
+        <form onSubmit={register} style={{ border: "2px solid red" }}>
           <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
           <input type="text" name="email" placeholder='Email' onChange={handleChange} required />
           {/* <input type="text" name="password" placeholder='Password' onChange={handleChange} required /> */}
-          <div style={{ position: 'relative',width: '84%'}} >
+          <div style={{ position: 'relative',width: '100%',border: '1px solid black'}} >
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Password"
               onChange={handleChange}
               required
-              style={{ paddingRight: '2.5rem' }}
+              style={{ paddingRight: '2.5rem',width:"78%" }}
+              className="password-input"
             />
 
             <button
@@ -72,7 +73,7 @@ const Register = ({ onClose, openLogin }) => {
               aria-label={showPassword ? 'Hide password' : 'Show password'}
               style={{
                 position: 'absolute',
-                right: '-20px',
+                right: '4px',
                 top: '36%',
                 transform: 'translateY(-50%)',
                 background: 'transparent',

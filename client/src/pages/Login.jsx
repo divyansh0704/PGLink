@@ -52,10 +52,10 @@ const Login = ({ onClose, openRegister }) => {
                 <div className="close-btn" onClick={onClose}>×</div>
 
                 <h2>Login</h2>
-                <form onSubmit={login}>
+                <form onSubmit={login} >
                     <input type="text" name='email' placeholder='Email' onChange={handleChange} required />
                     {/* <input type="text" type={showPassword ? 'text' : 'password'} name='password' placeholder='Password' onChange={handleChange} required /> */}
-                    <div style={{ position: 'relative' }} >
+                    <div style={{ position: 'relative',width:"100%",display:"flex",justifyContent:"center"}} >
                         <input
                             type={showPassword ? 'text' : 'password'}
                             name="password"
@@ -63,6 +63,7 @@ const Login = ({ onClose, openRegister }) => {
                             onChange={handleChange}
                             required
                             style={{ paddingRight: '2.5rem' }}
+                            className="password-input"
                         />
 
                         <button
@@ -71,7 +72,7 @@ const Login = ({ onClose, openRegister }) => {
                             aria-label={showPassword ? 'Hide password' : 'Show password'}
                             style={{
                                 position: 'absolute',
-                                right: '-20px',
+                                right: '4px',
                                 top: '36%',
                                 transform: 'translateY(-50%)',
                                 background: 'transparent',
