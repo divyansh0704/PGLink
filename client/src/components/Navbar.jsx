@@ -45,7 +45,8 @@ const Navbar = ({ isSidebarOpen,openLogin,setIsOpen,openSetting }) => {
                 </button>)} */}
 
                 {/* <div id="profile"> */}
-                {!isLoggedIn && <Link onClick={openLogin} >Login</Link>}
+                {!isLoggedIn && <Link onClick={openLogin} style={{"font-weight": "600", "font-size": "16px"}}>Login</Link>}
+  
                 {isLoggedIn && <ProfileMenu openSetting={openSetting} />}
                 {/* </div> */}
                

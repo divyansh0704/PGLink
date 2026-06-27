@@ -6,6 +6,7 @@ import "../styles/pgEditPage.css";
 import API from '../utils/api';
 
 const PgEditPage = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { pgId } = useParams();
   const [form, setForm] = useState({
     title: '',
@@ -85,7 +86,9 @@ const PgEditPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    // console.log(form);
     try {
       const contact = `+91-${form.contactNumber}`
 
@@ -129,6 +132,8 @@ const PgEditPage = () => {
 
     } catch (err) {
       console.error("Update failed", err);
+    }finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -236,8 +241,16 @@ const PgEditPage = () => {
         {/* Actions */}
         <div className="form-actions">
           {/* <button type="button" className="btn-cancel">Cancel</button> */}
-          <button type="submit" className="btn-save">
-            <Save size={18} /> Update Listing
+          <button type="submit" disabled={isSubmitting} className="btn-save">
+            {isSubmitting ? (
+              <>
+                <Save size={18} /> Updating...
+              </>
+            ) : (
+              <>
+                <Save size={18} /> Update Listing
+              </>
+            )}
           </button>
         </div>
       </form>
