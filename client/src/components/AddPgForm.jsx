@@ -7,6 +7,7 @@ import { MapPin, Upload, PlusCircle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 // import LocationPicker from './LocationPicker'
 const AddPgForm = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
     const [form, setForm] = useState({
         title: '',
@@ -56,6 +57,8 @@ const AddPgForm = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (isSubmitting) return;
+        setIsSubmitting(true);
 
 
         try {
@@ -139,6 +142,8 @@ const AddPgForm = () => {
         } catch (err) {
             console.error(err);
             alert('Error listing PG');
+        } finally {
+            setIsSubmitting(false);
         }
     };
     // const handleLocationChange = (loc) => {
@@ -311,8 +316,16 @@ const AddPgForm = () => {
                     </section>
 
                     <div className="form-actions">
-                        <button type="submit" className="btn-submit">
-                            <PlusCircle size={20} /> Submit PG Listing
+                        <button type="submit" disabled={isSubmitting} className="btn-submit">
+                            {isSubmitting ? (
+                                <>
+                                    <PlusCircle size={20} /> Submitting...
+                                </>
+                            ) : (
+                                <>
+                                    <PlusCircle size={20} /> Submit PG Listing
+                                </>
+                            )}
                         </button>
                     </div>
                 </form>
