@@ -97,7 +97,7 @@ const MyListings = () => {
                             <p className="location">{pg.city}</p>
                             <p className="address">{pg.address}</p>
                             <p className="rent">Rent: ₹{pg.rent}/month</p>
-                            <div className="amenities">
+                            <div className="amenitiesL">
 
                                 {Object.entries(typeof pg.amenities === 'string' ? JSON.parse(pg.amenities) : (pg.amenities || {})).map(([key, value]) => {
                                     if (!value) return null;
@@ -109,6 +109,9 @@ const MyListings = () => {
                                         ac: 'AC',
                                         waterCooler: 'Water Cooler',
                                         studyTable: 'Study Table',
+                                        airCooler: 'Air Cooler',
+                                        waterHeater: 'Water Heater',
+                                        gym: 'Gym',
                                     };
 
 

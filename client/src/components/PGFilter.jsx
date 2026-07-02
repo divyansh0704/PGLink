@@ -4,8 +4,8 @@ import "../styles/filter.css"
 
 const PGFilter = ({ onFilter }) => {
 
-   
     const [sortBy, setSortBy] = useState('college');
+    // const [stateFilter, setStateFilter] = useState('');
 
     const handleApplyFilters = () => {
         onFilter({sortBy });

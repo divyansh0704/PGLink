@@ -59,16 +59,20 @@
   color: #555;
   margin: 3px 0;
 }
-.pg-card2 .amenities{
-  height: 40px;
+.pg-card2 .amenitiesL{
+  height: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
 }
-.amenities span {
+.amenitiesL span {
   background-color: #e0f7f7;
   padding: 3px 6px;
   margin-right: 4px;
   font-size: 12px;
   border-radius: 4px;
   color: teal;
+  max-height: 16px;
 }
 
 .actions {

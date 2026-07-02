@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import '../styles/PropertyDetails.css';
-import { ChevronLeft, ChevronRight, Phone, MessageCircle, Wifi, Shirt, Utensils, AirVent, Snowflake, BookOpen } from "lucide-react";
+import { ChevronLeft,Fan,Flame,Dumbbell, ChevronRight, Phone, MessageCircle, Wifi, Shirt, Utensils, AirVent, Snowflake, BookOpen } from "lucide-react";
 import API from '../utils/api';
 import defaultImage from '../assets/default.png';
 import { capitalize } from '../utils/capitalize'
@@ -178,6 +178,10 @@ export default function PropertyDetails() {
                                         ac: 'AC',
                                         waterCooler: 'Water Cooler',
                                         studyTable: 'Study Table',
+                                        airCooler: 'Air Cooler',
+                                        waterHeater: 'Water Heater',
+                                        gym: 'Gym',
+                                        
                                     };
                                     const icons = {
                                         wifi: <Wifi size={18} />,
@@ -186,6 +190,10 @@ export default function PropertyDetails() {
                                         ac: <AirVent size={18} />,
                                         waterCooler: <Snowflake size={18} />,
                                         studyTable: <BookOpen size={18} />,
+                                        airCooler: <Fan size={18} />,
+                                        waterHeater: <Flame size={18} />,
+                                        gym: <Dumbbell size={18} />,
+
                                     };
                                     return <div className="amenity-card" key={k} ><span className="amenity-icon">{icons[k]}</span>{labels[k] || k}</div>;
                                 })}
