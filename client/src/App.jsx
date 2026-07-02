@@ -11,7 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from "./components/Sidebar"
 const MyListings =lazy(()=>import( "./pages/MyListings"));
 const UnlockedPGs =lazy(()=>import( "./pages/UnlockedPGs"));
-const Description =lazy(()=>import( "./pages/Description"));
 const SettingsForm =lazy(()=>import( "./pages/SettingForm"));
 const Terms =lazy(()=>import( "./pages/Terms"));
 const Services =lazy(()=>import( "./pages/Services"));
