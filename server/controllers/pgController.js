@@ -90,7 +90,7 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
 
         // if (matchingColleges.length === 0) {
         //     const collegesAll = await College.findAll();
-            
+
 
         //     return res.json({
         //         disambiguation: true,
@@ -101,13 +101,13 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
         if (matchingColleges.length > 1) {
             return res.json({
                 disambiguation: true,
-                colleges:matchingColleges.map(c => ({ id: c.id, name: c.name,district: c.district, city: c.city, state: c.state }))
+                colleges: matchingColleges.map(c => ({ id: c.id, name: c.name, district: c.district, city: c.city, state: c.state }))
             });
         } else if (matchingColleges.length === 1) {
             targetCollege = matchingColleges[0];
             return res.json({
                 disambiguation: true,
-                colleges: matchingColleges.map(c => ({ id: c.id, name: c.name,district: c.district, city: c.city, state: c.state }))
+                colleges: matchingColleges.map(c => ({ id: c.id, name: c.name, district: c.district, city: c.city, state: c.state }))
             });
         }
     }
@@ -122,6 +122,11 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
             sequelize.literal(`ST_DistanceSphere(location, ST_GeomFromText('${collegeWkt}', 4326)) / 1000 `),
             'distanceKm'
         ]);
+        where[Op.and] = [
+            sequelize.literal(
+                `ST_DistanceSphere(location, ST_GeomFromText('${collegeWkt}', 4326)) / 1000 <= 30`
+            )
+        ];
 
         // If searching by college, sort by distance. 
         // PGs without location data will appear at the end.

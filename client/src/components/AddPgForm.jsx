@@ -27,6 +27,10 @@ const AddPgForm = () => {
             ac: false,
             waterCooler: false,
             studyTable: false,
+            airCooler:false,
+            waterHeater:false,
+            gym:false
+
         },
     })
     const [location, setLocation] = useState({ lat: null, lng: null });

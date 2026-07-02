@@ -150,7 +150,7 @@ const Hero = () => {
       >
         <input
           type="text"
-          placeholder="Search by College or Organization"
+          placeholder="Search by college,company,city,state..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />

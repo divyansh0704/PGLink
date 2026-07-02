@@ -85,6 +85,9 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                                 ac: 'AC',
                                 waterCooler: 'Water Cooler',
                                 studyTable: 'Study Table',
+                                airCooler: 'Air Cooler',
+                                waterHeater: 'Water Heater',
+                                gym: 'Gym',
                             };
 
 
