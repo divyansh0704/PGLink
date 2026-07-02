@@ -64,7 +64,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                 <div className="pg-card-content">
 
                     <h3>{capitalize(pg.title)}</h3>
-                    <p>{capitalize(pg.address)},{capitalize(pg.city)}</p>
+                    <p>{capitalize(pg.city)},{capitalize(pg.district)}, {capitalize(pg.state)}</p>
                     <div className="card-info">
 
                         {pg.collegeName && pg.distanceKm != null ? (
