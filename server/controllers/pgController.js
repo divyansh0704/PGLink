@@ -88,22 +88,27 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
             where: { name: { [Op.iLike]: `%${search}%` } }
         });
 
-        if (matchingColleges.length === 0) {
-            const collegesAll = await College.findAll();
+        // if (matchingColleges.length === 0) {
+        //     const collegesAll = await College.findAll();
+            
 
+        //     return res.json({
+        //         disambiguation: true,
+        //         colleges: collegesAll.map(c => ({ id: c.id, name: c.name, city: c.city, district: c.district, state: c.state }))
+        //     });
+        // }
+
+        if (matchingColleges.length > 1) {
             return res.json({
                 disambiguation: true,
-                colleges: collegesAll.map(c => ({ id: c.id, name: c.name, city: c.city, state: c.state }))
-            });
-        }
-
-        else if (matchingColleges.length > 1) {
-            return res.json({
-                disambiguation: true,
-                colleges: matchingColleges.map(c => ({ id: c.id, name: c.name, city: c.city, state: c.state }))
+                colleges:matchingColleges.map(c => ({ id: c.id, name: c.name,district: c.district, city: c.city, state: c.state }))
             });
         } else if (matchingColleges.length === 1) {
             targetCollege = matchingColleges[0];
+            return res.json({
+                disambiguation: true,
+                colleges: matchingColleges.map(c => ({ id: c.id, name: c.name,district: c.district, city: c.city, state: c.state }))
+            });
         }
     }
 
@@ -128,6 +133,9 @@ exports.getAllPGs = asyncHandler(async (req, res) => {
                 { title: { [Op.iLike]: `%${search}%` } },
                 { address: { [Op.iLike]: `%${search}%` } },
                 { city: { [Op.iLike]: `%${search}%` } },
+                { district: { [Op.iLike]: `%${search}%` } },
+                { state: { [Op.iLike]: `%${search}%` } },
+                { pincode: { [Op.iLike]: `%${search}%` } }
             ];
         }
 

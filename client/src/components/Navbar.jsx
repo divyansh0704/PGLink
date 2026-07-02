@@ -4,7 +4,9 @@ import "../styles/global.css"
 import { Link } from 'react-router-dom';
 import {Menu } from 'lucide-react';
 import ProfileMenu from './ProfileMenu';
-
+// import logo from "../assets/pglinklogo1.png"
+// import logo from "../assets/pglogo.jpg"
+import logo from "../assets/pglogo2.png"
 import loadRazorpay from '../utils/razorpay';
 import "../styles/logout.css"
 
@@ -25,14 +27,10 @@ const Navbar = ({ isSidebarOpen,openLogin,setIsOpen,openSetting }) => {
     return (
         <div className={`navbar ${isSidebarOpen ? 'shifted' : ''}`}>
             <div className="partition1">
-            {/* <div
-                className="menu-toggle"
-                onClick={() => setIsOpen((prev) => !prev)}
-            >
-                <Menu size={22} />
-            </div> */}
-
+            
+            <img style={{paddingBottom: '3px'}} width={32} src={logo} alt="logo" />
             <h1 className='logo'>PGLink</h1>
+            
 
             </div>
 

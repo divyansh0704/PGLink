@@ -14,12 +14,12 @@ const PGCard = ({ pg, user, setShowLogin }) => {
     const navigate = useNavigate();
 
     // Safe parse imageUrls in case it comes as a string from the DB
-    const parsedImageUrls = typeof pg.imageUrls === 'string' 
-        ? JSON.parse(pg.imageUrls) 
+    const parsedImageUrls = typeof pg.imageUrls === 'string'
+        ? JSON.parse(pg.imageUrls)
         : (pg.imageUrls || []);
 
-    const displayImage = parsedImageUrls.length > 0 
-        ? parsedImageUrls[0] 
+    const displayImage = parsedImageUrls.length > 0
+        ? parsedImageUrls[0]
         : (pg.imageUrl || "/uploads/default.png");
 
     const handleCardClick = () => {
@@ -51,7 +51,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
         }
         loadRazorpay('single', pg.id, user.id);
     }
-  
+
 
     return (
 
@@ -66,7 +66,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                     <h3>{capitalize(pg.title)}</h3>
                     <p>{capitalize(pg.address)},{capitalize(pg.city)}</p>
                     <div className="card-info">
-                        
+
                         {pg.collegeName && pg.distanceKm != null ? (
                             <p>{capitalize(pg.collegeName)} ({Number(pg.distanceKm).toFixed(1)} Km)</p>
                         ) : null}
@@ -106,7 +106,7 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                 </div>
             </div>
             <div className="updated-box2">
-                 {/* for now contact details are not hidden , we will implement it later */}
+                {/* for now contact details are not hidden , we will implement it later */}
                 {/* {isUnlocked ? (
                     <div className="unlock-actions fade-in-split">
                         <button
@@ -133,26 +133,26 @@ const PGCard = ({ pg, user, setShowLogin }) => {
                         Unlock ₹1
                     </button>
                 )} */}
-                     <div className="unlock-actions fade-in-split">
-                        <button
+                <div className="unlock-actions fade-in-split">
+                    <button
 
-                            onClick={() => window.open(`https://wa.me/${sanitizedNumber}`, '_blank')}
-                            className="half-button whatsapp"
-                            type='button'
-                        >
-                            <MessageCircle size={20} />
-                            WhatsApp
-                        </button>
-                        <button
+                        onClick={() => window.open(`https://wa.me/${sanitizedNumber}`, '_blank')}
+                        className="half-button whatsapp"
+                        type='button'
+                    >
+                        <MessageCircle size={20} />
+                        WhatsApp
+                    </button>
+                    <button
 
-                            onClick={() => { window.location.href = `tel:${sanitizedNumber}`; }}
-                            className="half-button call"
-                            type='button'
-                        >
-                            <Phone size={20} />
-                            Call
-                        </button>
-                    </div>
+                        onClick={() => { window.location.href = `tel:${sanitizedNumber}`; }}
+                        className="half-button call"
+                        type='button'
+                    >
+                        <Phone size={20} />
+                        Call
+                    </button>
+                </div>
 
             </div>
 
