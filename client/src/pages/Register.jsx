@@ -31,7 +31,7 @@ const Register = ({ onClose, openLogin }) => {
       });
       setTimeout(() => {
         onClose();
-        navigate("/verify-otp");
+        // navigate("/verify-otp");
       }, 2000);
 
 
