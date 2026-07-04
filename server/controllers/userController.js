@@ -17,7 +17,7 @@ exports.register = asyncHandler(async (req, res) => {
     const user = await User.create({ name, email, password: hashedPassword, role });
     const token = generateToken(user.id);
 
-    await sendOtp(user);
+    // await sendOtp(user);
     res.status(201).json({ message: "User created successfully", user, token });
 
 })
