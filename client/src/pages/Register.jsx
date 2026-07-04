@@ -31,7 +31,7 @@ const Register = ({ onClose, openLogin }) => {
       });
       setTimeout(() => {
         onClose();
-        navigate("/verify-otp");
+        // navigate("/verify-otp");
       }, 2000);
 
 
@@ -52,11 +52,11 @@ const Register = ({ onClose, openLogin }) => {
       <div className="modal-content auth-form">
         <div className="close-btn" onClick={onClose}>×</div>
         <h2>Register</h2>
-        <form onSubmit={register} style={{ border: "2px solid red" }}>
+        <form onSubmit={register} >
           <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
           <input type="text" name="email" placeholder='Email' onChange={handleChange} required />
           {/* <input type="text" name="password" placeholder='Password' onChange={handleChange} required /> */}
-          <div style={{ position: 'relative',width: '100%',border: '1px solid black'}} >
+          <div style={{ position: 'relative',width: '100%'}} >
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
