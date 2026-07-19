@@ -12,7 +12,7 @@ const Register = ({ onClose, openLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'viewer' })
+  const [formData, setFormData] = useState({ name: '', email: '', password: '',phone: '', role: 'viewer' })
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -55,6 +55,7 @@ const Register = ({ onClose, openLogin }) => {
         <form onSubmit={register} >
           <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
           <input type="text" name="email" placeholder='Email' onChange={handleChange} required />
+          <input type="text" name="phone" placeholder='Phone' onChange={handleChange} required />
           {/* <input type="text" name="password" placeholder='Password' onChange={handleChange} required /> */}
           <div style={{ position: 'relative',width: '100%'}} >
             <input
