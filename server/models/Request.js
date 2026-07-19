@@ -32,10 +32,7 @@ const Request = sequelize.define('Request',{
     }
 },{timestamps:true,
     indexes:[
-        {fields:['name']},
-        {fields:['location'],
-            using:'gist'
-        }
+        {fields:['name']}
     ]
 });
 
