@@ -6,6 +6,7 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const smsRoutes = require('./routes/smsRoutes');
 const collegeRoutes = require('./routes/collegeRoutes');
 const requestRoutes = require('./routes/requestRoutes');
+const commentRoutes = require("./routes/commentRoutes");
 const compression = require('compression');
 const cors = require('cors');
 const path = require("path");
@@ -27,6 +28,7 @@ app.use('/api/payment', paymentRoutes);
 app.use('/api/sms', smsRoutes);
 app.use('/api/college',collegeRoutes)
 app.use("/api/request",requestRoutes);
+app.use("/api/comments", commentRoutes);
 
 app.use((req,res,next)=>{
     res.status(404).json({error:'not found'})
