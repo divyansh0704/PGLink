@@ -17,12 +17,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap:6px;
 
 }
 
 .password-input {
-  /* display: block; */
-  /* width: 30%; */
+  
   padding: 8px;
   margin-bottom: 1rem;
   border: 1px solid var(--border-color);
@@ -35,9 +35,10 @@
   display: block;
   width: 92%;
   padding: 8px;
-  margin-bottom: 1rem;
-  border: 1px solid var(--border-color);
+  /* margin-bottom: 1rem; */
+  border: 1px solid aliceblue;
   border-radius: 5px;
+  outline: none;
   
 }
 
@@ -108,4 +109,6 @@
   border: none;
   cursor: pointer;
 }
+
+
 

@@ -51,7 +51,7 @@ const Login = ({ onClose, openRegister }) => {
             <div className="modal-content auth-form">
                 <div className="close-btn" onClick={onClose}>×</div>
 
-                <h2>Login</h2>
+                <h2>Login </h2>
                 <form onSubmit={login} >
                     <input type="text" name='email' placeholder='Email' onChange={handleChange} required />
                     {/* <input type="text" type={showPassword ? 'text' : 'password'} name='password' placeholder='Password' onChange={handleChange} required /> */}
