@@ -92,15 +92,18 @@
   }
   .hero-container{
     min-height: 516px;
-    /* align-items: center; */
+    border-radius: 0px;
+    margin:0px 0px;
   }
   .hero-content{
     padding-bottom:0px;
-    /* border:2px solid red */
+    /* border:2px solid red; */
+    width:100%;
     
     
   }
   .hero-search-bar{
+    /* border:2px solid green; */
     background-color: white;
     width:92%;
     height:120px;
