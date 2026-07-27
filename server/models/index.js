@@ -6,7 +6,7 @@ const UserUnlockedPGs = require("./UserUnlockedPGs")
 const Payment =require("./Payment");
 const SmsSession = require("./SmsSession");
 const Request = require("./Request");
-
+const Comment = require("./Comment");
 
 
 const initDB = async()=>{
@@ -15,11 +15,12 @@ const initDB = async()=>{
         console.log("Database connected ✅")
 
         await sequelize.query('CREATE EXTENSION IF NOT EXISTS postgis;');
-        await sequelize.sync({ alter: true });
+        // await sequelize.sync({ alter: true });
+        await sequelize.sync();
         console.log("Models synced ✅")
     }catch(err){
         console.error("DB error ❌",err)
     }
 }
 
-module.exports = {initDB,User,PG,College,UserUnlockedPGs,Payment,SmsSession,Request}
+module.exports = {initDB,User,PG,College,UserUnlockedPGs,Payment,SmsSession,Request,Comment}
