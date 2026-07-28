@@ -7,6 +7,7 @@ import defaultImage from '../assets/default.png';
 import { capitalize } from '../utils/capitalize'
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
+import CommentSection from '../components/CommentSection';
 
 export default function PropertyDetails() {
     const { id } = useParams();
@@ -352,6 +353,8 @@ export default function PropertyDetails() {
                 <button className="mobile-btn-secondary">Schedule Visit</button>
                 <button className="mobile-btn-primary">Book Now</button>
             </footer> */}
+
+            {pg && <CommentSection pgId={pg.id} />}
 
 
 
