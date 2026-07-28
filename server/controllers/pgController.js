@@ -68,7 +68,7 @@ exports.createPG = asyncHandler(async (req, res) => {
 // {include:User}
 exports.getAllPGs = asyncHandler(async (req, res) => {
     const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 9;
+    const limit = parseInt(req.query.limit, 10) || 6;
     const offset = (page - 1) * limit;
     const search = req.query.q;
     const collegeId = req.query.collegeId;

@@ -62,7 +62,7 @@
 .content-wrapper {
     padding: 16px;
     flex: 1;
-    padding-bottom: 100px;
+    /* padding-bottom: 100px; */
     /* Space for sticky bottom buttons */
 }
 

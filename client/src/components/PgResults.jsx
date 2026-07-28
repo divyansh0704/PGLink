@@ -10,7 +10,7 @@ const PgResults = ({ user, setShowLogin, sortBy }) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const limit = 9;
+    const limit = 6;
     const [disambiguation, setDisambiguation] = useState({
         needed: false,
         colleges: []
