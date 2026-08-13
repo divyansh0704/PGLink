@@ -410,8 +410,8 @@
         margin-bottom: 40px;
     }
     .gallery-grid img{
-        width: 60%;
-        height: 90%;
+        width: 80%;
+        /* height: 100%; */
         border-radius: 8px;
     }
 
