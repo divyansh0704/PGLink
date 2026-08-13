@@ -5,8 +5,9 @@ import { ChevronLeft,Fan,Flame,Dumbbell, ChevronRight, Phone, MessageCircle, Wif
 import API from '../utils/api';
 import defaultImage from '../assets/default.png';
 import { capitalize } from '../utils/capitalize'
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer,Marker } from 'react-leaflet';
 import L from 'leaflet';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import CommentSection from '../components/CommentSection';
 
 export default function PropertyDetails() {
@@ -203,34 +204,6 @@ export default function PropertyDetails() {
 
                         <hr className="section-divider" />
 
-                        {/* Rules / Ethics Section */}
-                        {/* <section className="details-section">
-                            <h3 className="section-title">House Rules & Ethics</h3>
-                            <div className="ethics-list">
-                                <div className="ethics-item">
-                                    <span className="check-icon">✓</span>
-                                    <div>
-                                        <strong>Professional Decorum / Gate Closing:</strong>
-                                        <p>We maintain a quiet environment between 10 PM and 7 AM. Main entrance closes strictly at 11:00 PM.</p>
-                                    </div>
-                                </div>
-                                <div className="ethics-item">
-                                    <span className="check-icon">✓</span>
-                                    <div>
-                                        <strong>Guest Policy:</strong>
-                                        <p>Daytime guests are welcome in common areas until 8:00 PM; overnight stays require prior notice.</p>
-                                    </div>
-                                </div>
-                                <div className="ethics-item">
-                                    <span className="check-icon">✓</span>
-                                    <div>
-                                        <strong>No Smoking & Sustainability:</strong>
-                                        <p>Smoking is strictly prohibited inside the premises. We encourage mindful power saving.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section> */}
-
                         <hr className="section-divider" />
 
                         {/* Location Section */}
@@ -245,8 +218,8 @@ export default function PropertyDetails() {
                                         style={{ height: '100%', width: '100%', zIndex: 0 }}
                                     >
                                         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                                        {/* <Marker position={[pgLat, pgLng]} /> */}
-                                        <Marker
+                                        <Marker position={[pgLat, pgLng]} />
+                                        {/* <Marker
                                             position={[pgLat, pgLng]}
                                             icon={
                                                 L.divIcon({
@@ -268,7 +241,7 @@ export default function PropertyDetails() {
                                                     iconAnchor: [14, 28],
                                                 })
                                             }
-                                        />
+                                        /> */}
 
                                     </MapContainer>
                                 ) : (
